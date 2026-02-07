@@ -128,7 +128,7 @@ class SkillaxAPITester:
 
     def test_get_course_by_slug(self):
         """Test getting specific course by slug"""
-        return self.run_test("Get Course by Slug", "GET", "courses/digital-marketing-foundation", 200)
+        return self.run_test("Get Course by Slug", "GET", "courses/professional-digital-marketing", 200)
 
     def test_get_blogs(self):
         """Test getting blog posts"""
