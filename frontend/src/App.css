@@ -1,34 +1,97 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+/* Skillax Academy - Custom Styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+/* Logo animation */
+.logo-animation {
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
-.App-link {
-    color: #61dafb;
+/* Custom gradient backgrounds */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #2B2D9C 0%, #4F46E5 100%);
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.bg-gradient-accent {
+  background: linear-gradient(135deg, #F59E0B 0%, #F97316 100%);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hover effects */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Custom focus states */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(43, 45, 156, 0.3);
+}
+
+/* Marquee animation pause on hover */
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* Selection highlight */
+::selection {
+  background-color: rgba(43, 45, 156, 0.2);
+  color: #2B2D9C;
+}
+
+/* Dark mode selection */
+.dark ::selection {
+  background-color: rgba(99, 102, 241, 0.3);
+  color: #A5B4FC;
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img[data-loaded="false"] {
+  opacity: 0;
+}
+
+img[data-loaded="true"] {
+  opacity: 1;
 }
