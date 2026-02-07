@@ -7,12 +7,10 @@ import axios from 'axios';
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const interests = [
-  'Digital Marketing Foundation',
-  'Advanced SEO & Performance',
-  'Social Media & Ads Mastery',
-  'AI-Powered Digital Marketing',
-  'Web, App & QA Marketing',
-  'Freelancing & Agency Building',
+  'Professional Digital Marketing (4 Months)',
+  'Advanced AI-Powered Marketing (2 Months)',
+  'Free Career Counseling',
+  'Corporate Training',
   'General Enquiry',
 ];
 
