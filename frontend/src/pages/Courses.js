@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Clock, Award, ArrowRight, ChevronRight, CheckCircle,
+  Clock, Award, ArrowRight, CheckCircle,
   BookOpen, Brain, Building, Users, Rocket, Sparkles,
-  Target, Briefcase, Laptop, Calendar
+  Target, Briefcase, Laptop, Calendar, ChevronDown,
+  Globe, TrendingUp, Zap, BadgeCheck, Play
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
-// Only 2 courses
+// Two courses with full details
 const courses = [
   {
     id: 'professional',
@@ -21,27 +22,32 @@ const courses = [
     description: 'Complete A-Z digital marketing mastery program with AI tools integration, live projects, and guaranteed internship at Infopark IT company.',
     price: 'Contact for Pricing',
     highlights: [
-      'SEO, SEM, SMM, Email Marketing',
-      'AI Tools: ChatGPT, Midjourney, Canva AI',
-      'Google Ads & Meta Ads Mastery',
+      'SEO, AEO, GEO - Complete Optimization',
+      'Google Ads & Meta Ads Certification',
+      'ChatGPT Ads - The Next Big Trend!',
+      'AI Tools: ChatGPT, Perplexity, Gemini, Copilot, Grok',
+      'Reddit & Quora Marketing',
       'Content Marketing & Copywriting',
-      'Analytics & Data-Driven Marketing',
-      'Live Client Projects',
+      'Email Marketing Automation',
       'Guaranteed Internship at Infopark',
       '100% Placement Assistance',
     ],
-    certifications: ['Google Ads', 'Google Analytics', 'Meta Blueprint', 'HubSpot', 'SEMrush', 'Skillax Pro'],
-    modules: [
-      { title: 'Digital Marketing Fundamentals', weeks: '2 weeks' },
-      { title: 'Search Engine Optimization (SEO)', weeks: '3 weeks' },
-      { title: 'Search Engine Marketing (SEM)', weeks: '2 weeks' },
-      { title: 'Social Media Marketing', weeks: '3 weeks' },
-      { title: 'Content & Email Marketing', weeks: '2 weeks' },
-      { title: 'AI Tools & Automation', weeks: '2 weeks' },
-      { title: 'Analytics & Reporting', weeks: '1 week' },
-      { title: 'Internship at Infopark', weeks: '4 weeks' },
+    certifications: [
+      'Google Ads Search', 'Google Ads Display', 'Google Analytics 4',
+      'Meta Blueprint', 'HubSpot Inbound', 'HubSpot Content',
+      'SEMrush SEO', 'Skillax Professional'
     ],
-    suitable: ['Freshers & Students', 'Career Changers', 'Business Owners', 'Marketing Professionals'],
+    modules: [
+      { title: 'Digital Marketing Fundamentals', weeks: '2 weeks', topics: ['Marketing Basics', 'Customer Journey', 'Digital Channels', 'Analytics Setup'] },
+      { title: 'Search Engine Optimization (SEO)', weeks: '3 weeks', topics: ['On-Page SEO', 'Technical SEO', 'Link Building', 'Local SEO', 'SEO Tools'] },
+      { title: 'Answer Engine Optimization (AEO)', weeks: '2 weeks', topics: ['AI Search Optimization', 'ChatGPT Visibility', 'Perplexity Optimization', 'Structured Data'] },
+      { title: 'Search Engine Marketing (SEM)', weeks: '2 weeks', topics: ['Google Ads', 'Campaign Setup', 'Bidding Strategies', 'Ad Copywriting', 'Optimization'] },
+      { title: 'Social Media Marketing', weeks: '3 weeks', topics: ['Facebook & Instagram', 'LinkedIn Marketing', 'Reddit & Quora', 'Content Strategy', 'Community Building'] },
+      { title: 'AI Tools & Automation', weeks: '2 weeks', topics: ['ChatGPT Mastery', 'Perplexity, Gemini, Grok', 'AI Content Creation', 'Marketing Automation'] },
+      { title: 'Analytics & Reporting', weeks: '1 week', topics: ['GA4 Deep Dive', 'Data Studio', 'ROI Tracking', 'Client Reporting'] },
+      { title: 'Internship at Infopark', weeks: '4 weeks', topics: ['Live Projects', 'Client Work', 'Portfolio Building', 'Job Preparation'] },
+    ],
+    suitable: ['Students & Freshers (18-25)', 'Career Changers', 'Business Owners', 'Marketing Professionals'],
     featured: true,
   },
   {
@@ -55,27 +61,42 @@ const courses = [
     description: 'Master cutting-edge AI marketing tools and automation. Perfect for working professionals wanting to upskill with future-ready skills.',
     price: 'Contact for Pricing',
     highlights: [
-      'ChatGPT for Marketing',
-      'AI Content Generation',
-      'AI Image & Video Creation',
-      'Marketing Automation',
+      'ChatGPT, Perplexity, Copilot, Gemini, Grok',
+      'AI Content & Image Generation',
+      'Answer Engine Optimization (AEO)',
+      'Generative Engine Optimization (GEO)',
+      'Marketing Automation with AI',
       'Prompt Engineering Mastery',
       'AI Analytics & Insights',
       'Weekend Batches Available',
-      'Certificate of Completion',
     ],
-    certifications: ['Skillax AI Expert', 'HubSpot Automation', 'AI Marketing Specialist'],
+    certifications: [
+      'Skillax AI Expert', 'HubSpot Automation', 
+      'Google AI Marketing', 'AI Content Specialist', 'Prompt Engineering'
+    ],
     modules: [
-      { title: 'AI Fundamentals for Marketers', weeks: '1 week' },
-      { title: 'ChatGPT & Content Creation', weeks: '2 weeks' },
-      { title: 'AI Image & Video Generation', weeks: '1 week' },
-      { title: 'Marketing Automation Tools', weeks: '2 weeks' },
-      { title: 'Prompt Engineering', weeks: '1 week' },
-      { title: 'AI-Powered Analytics', weeks: '1 week' },
+      { title: 'AI Fundamentals for Marketers', weeks: '1 week', topics: ['Understanding AI', 'AI in Marketing', 'Ethics & Best Practices'] },
+      { title: 'ChatGPT & Content Creation', weeks: '2 weeks', topics: ['Prompt Engineering', 'Content Writing', 'Ad Copy', 'Blogs & Articles'] },
+      { title: 'Multi-AI Platform Mastery', weeks: '2 weeks', topics: ['Perplexity', 'Google Gemini', 'Microsoft Copilot', 'X Grok', 'Claude'] },
+      { title: 'AI Image & Video Generation', weeks: '1 week', topics: ['Midjourney', 'DALL-E', 'Canva AI', 'Video Tools'] },
+      { title: 'Marketing Automation', weeks: '1 week', topics: ['HubSpot AI', 'Email Automation', 'Social Scheduling', 'Lead Scoring'] },
+      { title: 'AI-Powered Analytics', weeks: '1 week', topics: ['Predictive Analytics', 'AI Reporting', 'Data Insights', 'Performance Optimization'] },
     ],
-    suitable: ['Working Professionals', 'Digital Marketers', 'Content Creators', 'Entrepreneurs'],
+    suitable: ['Working Professionals', 'Digital Marketers', 'Content Creators', 'Entrepreneurs', 'Freelancers'],
     featured: false,
   },
+];
+
+// Features
+const features = [
+  { icon: Building, title: 'Infopark Internship', desc: 'Real-world experience at top IT companies', color: 'text-blue-600 bg-blue-500/10' },
+  { icon: Brain, title: 'AI-First Curriculum', desc: 'Master ChatGPT, Perplexity, Gemini & more', color: 'text-purple-600 bg-purple-500/10' },
+  { icon: Award, title: '25+ Certifications', desc: 'Industry-recognized credentials', color: 'text-amber-600 bg-amber-500/10' },
+  { icon: Users, title: 'Small Batches', desc: 'Max 15 students for personal attention', color: 'text-green-600 bg-green-500/10' },
+  { icon: Laptop, title: 'Live Projects', desc: 'Work on real client campaigns', color: 'text-pink-600 bg-pink-500/10' },
+  { icon: Calendar, title: 'Flexible Timings', desc: 'Morning, evening & weekend options', color: 'text-cyan-600 bg-cyan-500/10' },
+  { icon: Target, title: '100% Practical', desc: 'Learn by doing, not just theory', color: 'text-orange-600 bg-orange-500/10' },
+  { icon: Briefcase, title: 'Placement Support', desc: 'Lifetime career assistance', color: 'text-indigo-600 bg-indigo-500/10' },
 ];
 
 function AnimatedSection({ children, className = '', delay = 0 }) {
@@ -83,12 +104,70 @@ function AnimatedSection({ children, className = '', delay = 0 }) {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, delay }}
       className={className}
     >
       {children}
     </motion.div>
+  );
+}
+
+// Module Accordion
+function ModuleAccordion({ modules }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <div className="space-y-3">
+      {modules.map((module, index) => (
+        <motion.div
+          key={index}
+          initial={false}
+          className="border border-border rounded-xl overflow-hidden"
+        >
+          <button
+            onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+            className={`w-full flex items-center justify-between p-4 text-left transition-colors ${
+              openIndex === index ? 'bg-primary/5' : 'bg-card hover:bg-muted/50'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <span className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold ${
+                openIndex === index ? 'bg-primary text-white' : 'bg-muted'
+              }`}>
+                {index + 1}
+              </span>
+              <div>
+                <span className="font-semibold">{module.title}</span>
+                <span className="text-xs text-muted-foreground ml-2">({module.weeks})</span>
+              </div>
+            </div>
+            <ChevronDown className={`h-5 w-5 transition-transform ${openIndex === index ? 'rotate-180' : ''}`} />
+          </button>
+          <AnimatePresence>
+            {openIndex === index && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="p-4 pt-0 bg-card">
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border mt-2">
+                    {module.topics.map((topic, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <CheckCircle className="h-3 w-3 text-brand-success" />
+                        {topic}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
   );
 }
 
@@ -108,16 +187,33 @@ export default function Courses() {
           <AnimatedSection className="text-center max-w-4xl mx-auto">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
-              Transform Your Career
+              March 2025 Batch - Enrolling Now!
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="courses-page-title">
-              Choose Your Path to{' '}
-              <span className="text-brand-amber">Digital Success</span>
+              Master Digital Marketing{' '}
+              <span className="text-brand-amber">& AI Tools</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl mx-auto">
-              Two carefully crafted programs designed to make you industry-ready with 
-              AI-powered skills and guaranteed internship at Infopark.
+              Two comprehensive programs covering SEO, AEO, GEO, Google Ads, Meta Ads, ChatGPT Ads, 
+              and all major AI tools. 25+ certifications included!
             </p>
+          </AnimatedSection>
+
+          {/* Quick Stats */}
+          <AnimatedSection delay={0.2} className="mt-12">
+            <div className="flex flex-wrap justify-center gap-8">
+              {[
+                { value: '25+', label: 'Certifications' },
+                { value: '6', label: 'AI Tools' },
+                { value: '100%', label: 'Practical' },
+                { value: 'March', label: 'Next Batch' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="font-heading font-bold text-3xl">{stat.value}</div>
+                  <div className="text-sm text-white/70">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
 
@@ -131,139 +227,95 @@ export default function Courses() {
       {/* Course Cards */}
       <section className="section-padding -mt-12">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="space-y-12">
             {courses.map((course, index) => {
               const Icon = course.icon;
               return (
                 <AnimatedSection key={course.id} delay={index * 0.15}>
-                  <div className={`card-base h-full bg-gradient-to-br ${course.bgGradient} border-2 hover:border-primary/30 transition-all relative overflow-hidden`}>
+                  <div className={`card-base ${course.bgGradient} border-2 overflow-hidden`}>
                     {course.featured && (
-                      <div className="absolute top-4 right-4 px-3 py-1 bg-brand-amber text-white text-xs font-bold rounded-full">
-                        MOST POPULAR
+                      <div className="bg-brand-amber text-white text-center py-2 text-sm font-bold -mx-6 -mt-6 mb-6">
+                        🔥 MOST POPULAR - RECOMMENDED FOR BEGINNERS
                       </div>
                     )}
 
-                    {/* Header */}
-                    <div className="flex items-start gap-4 mb-6">
-                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${course.gradient} shrink-0`}>
-                        <Icon className="h-8 w-8 text-white" />
-                      </div>
+                    <div className="grid lg:grid-cols-2 gap-8">
+                      {/* Left Side - Info */}
                       <div>
-                        <h2 className="font-heading font-bold text-2xl mb-1">{course.title}</h2>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {course.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Award className="h-4 w-4" />
-                            {course.certifications.length} Certifications
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground mb-6">{course.description}</p>
-
-                    {/* Highlights */}
-                    <div className="grid grid-cols-2 gap-3 mb-6">
-                      {course.highlights.slice(0, 6).map((highlight, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-brand-success shrink-0" />
-                          <span className="text-sm">{highlight}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Certifications Preview */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold mb-2">Certifications Included:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {course.certifications.map((cert, i) => (
-                          <span key={i} className="px-3 py-1 bg-card border border-border rounded-full text-xs font-medium">
-                            {cert}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Suitable For */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold mb-2">Perfect For:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {course.suitable.map((item, i) => (
-                          <span key={i} className="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-medium">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA */}
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link to="/contact" className="flex-1">
-                        <Button className={`w-full bg-gradient-to-r ${course.gradient} text-white rounded-full py-6 font-semibold`}>
-                          Enroll Now <ArrowRight className="ml-2 h-5 w-5" />
-                        </Button>
-                      </Link>
-                      <Button variant="outline" className="rounded-full py-6">
-                        Download Syllabus
-                      </Button>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Curriculum Overview */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Detailed Curriculum
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              What You'll Learn
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our curriculum is designed with input from industry experts and updated regularly.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            {courses.map((course, courseIndex) => {
-              const Icon = course.icon;
-              return (
-                <AnimatedSection key={course.id} delay={courseIndex * 0.1}>
-                  <div className="card-base">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${course.gradient}`}>
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-heading font-bold text-lg">{course.title}</h3>
-                        <p className="text-sm text-muted-foreground">{course.duration}</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-3">
-                      {course.modules.map((module, i) => (
-                        <div key={i} className="flex items-center justify-between p-3 bg-muted/50 rounded-xl">
-                          <div className="flex items-center gap-3">
-                            <span className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary rounded-lg text-sm font-semibold">
-                              {i + 1}
-                            </span>
-                            <span className="font-medium text-sm">{module.title}</span>
+                        <div className="flex items-start gap-4 mb-6">
+                          <div className={`p-4 rounded-2xl bg-gradient-to-br ${course.gradient} shrink-0`}>
+                            <Icon className="h-8 w-8 text-white" />
                           </div>
-                          <span className="text-xs text-muted-foreground bg-card px-2 py-1 rounded-full">
-                            {module.weeks}
-                          </span>
+                          <div>
+                            <h2 className="font-heading font-bold text-2xl md:text-3xl">{course.title}</h2>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-4 w-4" />
+                                {course.duration}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Award className="h-4 w-4" />
+                                {course.certifications.length} Certifications
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      ))}
+
+                        <p className="text-muted-foreground mb-6">{course.description}</p>
+
+                        {/* Highlights */}
+                        <div className="space-y-2 mb-6">
+                          {course.highlights.map((highlight, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-brand-success shrink-0" />
+                              <span className="text-sm">{highlight}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Certifications */}
+                        <div className="mb-6">
+                          <h4 className="text-sm font-semibold mb-3">Certifications Included:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {course.certifications.map((cert, i) => (
+                              <span key={i} className="px-3 py-1 bg-card border border-border rounded-full text-xs font-medium flex items-center gap-1">
+                                <BadgeCheck className="h-3 w-3 text-brand-success" />
+                                {cert}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Suitable For */}
+                        <div className="mb-6">
+                          <h4 className="text-sm font-semibold mb-3">Perfect For:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {course.suitable.map((item, i) => (
+                              <span key={i} className="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-medium">
+                                {item}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* CTA */}
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <Link to="/contact" className="flex-1">
+                            <Button className={`w-full bg-gradient-to-r ${course.gradient} text-white rounded-full py-6 font-semibold`}>
+                              Enroll Now <ArrowRight className="ml-2 h-5 w-5" />
+                            </Button>
+                          </Link>
+                          <Button variant="outline" className="rounded-full py-6">
+                            Download Syllabus
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Right Side - Curriculum */}
+                      <div>
+                        <h4 className="font-semibold mb-4">Course Curriculum</h4>
+                        <ModuleAccordion modules={course.modules} />
+                      </div>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -273,8 +325,8 @@ export default function Courses() {
         </div>
       </section>
 
-      {/* Why Choose Our Courses */}
-      <section className="section-padding">
+      {/* Features Grid */}
+      <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
@@ -286,22 +338,13 @@ export default function Courses() {
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Building, title: 'Infopark Internship', desc: 'Real-world experience at top IT companies' },
-              { icon: Brain, title: 'AI-Powered Learning', desc: 'Master ChatGPT, Midjourney & more' },
-              { icon: Award, title: '15+ Certifications', desc: 'Industry-recognized credentials' },
-              { icon: Users, title: 'Small Batches', desc: 'Maximum 15 students for personalized attention' },
-              { icon: Laptop, title: 'Live Projects', desc: 'Work on real client campaigns' },
-              { icon: Calendar, title: 'Flexible Timings', desc: 'Morning, evening & weekend options' },
-              { icon: Target, title: '100% Practical', desc: 'Learn by doing, not just theory' },
-              { icon: Briefcase, title: 'Placement Support', desc: 'Lifetime career assistance' },
-            ].map((feature, index) => {
+            {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <AnimatedSection key={index} delay={index * 0.1}>
-                  <div className="card-base text-center h-full hover-lift">
-                    <div className="inline-flex p-4 bg-primary/10 rounded-2xl mb-4">
-                      <Icon className="h-7 w-7 text-primary" />
+                <AnimatedSection key={index} delay={index * 0.05}>
+                  <div className="card-base text-center h-full hover-lift group">
+                    <div className={`inline-flex p-4 rounded-2xl ${feature.color} mb-4 group-hover:scale-110 transition-transform`}>
+                      <Icon className="h-7 w-7" />
                     </div>
                     <h3 className="font-heading font-semibold text-lg mb-2">{feature.title}</h3>
                     <p className="text-sm text-muted-foreground">{feature.desc}</p>
@@ -313,14 +356,42 @@ export default function Courses() {
         </div>
       </section>
 
+      {/* AI Tools Section */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 bg-purple-500/10 text-purple-600 rounded-full text-sm font-medium mb-4">
+              AI-First Learning
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              Master All Major AI Tools
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            {[
+              'ChatGPT', 'Perplexity', 'Gemini', 'Copilot', 'Grok', 'Claude',
+              'Midjourney', 'DALL-E', 'Canva AI', 'Jasper', 'Copy.ai', 'Buffer AI'
+            ].map((tool, i) => (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <div className="card-base text-center py-4 hover-lift">
+                  <Brain className="h-6 w-6 text-purple-600 mx-auto mb-2" />
+                  <span className="text-sm font-medium">{tool}</span>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="section-padding bg-primary text-primary-foreground">
+      <section className="section-padding bg-gradient-to-br from-primary via-primary to-brand-indigo text-white">
         <div className="container-custom text-center">
           <AnimatedSection>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Not Sure Which Course to Choose?
             </h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
+            <p className="text-white/80 max-w-2xl mx-auto mb-8">
               Get a free career assessment and personalized course recommendation from our experts.
             </p>
             <Link to="/contact">
