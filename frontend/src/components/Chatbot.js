@@ -1,51 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles, ChevronRight } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, User, Sparkles, CheckCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import axios from 'axios';
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 // Predefined Q&A for instant responses
 const predefinedQA = {
   courses: {
     question: "What courses do you offer?",
-    answer: "We offer 2 comprehensive programs:\n\n**1. Professional Digital Marketing (4 Months)**\n- Complete A-Z digital marketing\n- SEO, SEM, SMM, Email Marketing\n- AI Tools: ChatGPT, Midjourney\n- Guaranteed Internship at Infopark\n- 15+ Certifications\n\n**2. Advanced AI-Powered Marketing (2 Months)**\n- AI Content Generation\n- Marketing Automation\n- Prompt Engineering\n- Weekend Batches Available\n\nWould you like to know more about any specific course?"
+    answer: "We offer 2 comprehensive programs:\n\n**1. Professional Digital Marketing (4 Months)**\n- SEO, AEO, GEO Optimization\n- Google Ads, Meta Ads & ChatGPT Ads\n- AI Tools: ChatGPT, Perplexity, Gemini, Copilot, Grok\n- Reddit & Quora Marketing\n- Guaranteed Internship at Infopark\n- 8+ Certifications\n\n**2. Advanced AI-Powered Marketing (2 Months)**\n- All major AI tools mastery\n- AEO & GEO Optimization\n- Marketing Automation\n- Weekend Batches Available\n- 5 Certifications\n\nWhich one interests you more?"
   },
   fees: {
     question: "What are the course fees?",
-    answer: "Our course fees are designed to be affordable with flexible options:\n\n💰 **Payment Options:**\n- One-time payment (Special discount)\n- EMI starting from ₹2,999/month\n- No-cost EMI available\n\n🎁 **Current Offers:**\n- Early bird discount for January batch\n- Group enrollment discounts\n- Scholarship for deserving candidates\n\nFor exact pricing, please share your contact details and our counselor will provide personalized quotes."
+    answer: "💰 **Flexible Payment Options:**\n\n- One-time payment (Special discount!)\n- EMI starting from ₹2,999/month\n- No-cost EMI available\n\n🎁 **March 2025 Batch Offers:**\n- Early bird discount: 15% OFF\n- Group enrollment discounts\n- Scholarship for deserving candidates\n\n👉 Share your details and our counselor will provide personalized pricing!"
   },
   duration: {
     question: "How long is the course?",
-    answer: "**Course Duration:**\n\n📚 Professional Digital Marketing: **4 Months**\n- Classes: 3-4 days/week\n- 2-3 hours per session\n- Includes 1-month internship\n\n🤖 Advanced AI Marketing: **2 Months**\n- Weekend batches available\n- Intensive hands-on training\n\nBoth courses include lifetime access to course materials and placement support!"
+    answer: "**Course Duration:**\n\n📚 **Professional Digital Marketing:** 4 Months\n- Classes: 3-4 days/week\n- 2-3 hours per session\n- Includes 1-month Infopark internship\n\n🤖 **Advanced AI Marketing:** 2 Months\n- Weekend batches available\n- Intensive hands-on training\n\n**March 2025 batch** enrolling now! Limited seats."
   },
   internship: {
     question: "Tell me about the internship",
-    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery student gets:\n- Real work experience at IT companies\n- Live project portfolio\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 Location: Infopark, Kochi - Kerala's premier IT hub with 400+ companies\n\nThis internship sets us apart from any other academy in Kerala!"
+    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery Professional course student gets:\n- Real work experience at IT companies\n- Live project portfolio building\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 **Infopark, Kochi** - Kerala's premier IT hub with 400+ companies!\n\nThis is what makes Skillax different from others!"
   },
   certifications: {
     question: "What certifications will I get?",
-    answer: "🏆 **15+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n\n**Plus:**\n- Skill India Certificate\n- Skillax Pro Certificate\n- AI Marketing Specialist\n\nAll certifications are globally recognized!"
+    answer: "🏆 **25+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics 4\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n- Mailchimp\n\n**AI & More:**\n- Skillax AI Expert\n- Skill India Certificate\n\nAll globally recognized!"
   },
   placement: {
-    question: "Do you provide placement assistance?",
-    answer: "✅ **100% Placement Assistance**\n\n**What we offer:**\n- Dedicated placement cell\n- Resume building workshops\n- Mock interview sessions\n- Direct company referrals\n- Lifetime job support\n\n**Our Students Work At:**\n- Infopark IT Companies\n- Digital Marketing Agencies\n- E-commerce Companies\n- Startups & MNCs\n- Freelancing Platforms\n\nMany students get placed even before completing the course!"
+    question: "Do you provide placement support?",
+    answer: "✅ **100% Placement Assistance**\n\n**What we offer:**\n- Dedicated placement cell\n- Resume building workshops\n- Mock interview sessions\n- Direct company referrals\n- Lifetime job support\n\n**Career Options After Course:**\n- Digital Marketing Manager (₹40K-80K/month)\n- SEO Specialist\n- Social Media Manager\n- Freelancer (Earn in USD!)\n- Start your own agency\n\nMany get placed during internship itself!"
   },
   location: {
     question: "Where is the academy located?",
-    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Contact:**\n📧 contact@skillax.in\n📱 Click WhatsApp button for instant chat!\n\nWe also have online batch options for those who can't travel."
+    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@skillax.in"
   },
   ai: {
     question: "What AI tools will I learn?",
-    answer: "🤖 **AI Tools Covered:**\n\n**Content Creation:**\n- ChatGPT for copywriting\n- Jasper AI\n- Copy.ai\n\n**Image Generation:**\n- Midjourney\n- DALL-E\n- Canva AI\n\n**Marketing Automation:**\n- AI Email Writers\n- Social Media Schedulers\n- AI Analytics Tools\n\n**Prompt Engineering:**\n- Master the art of AI prompts\n- Create viral content\n- Automate repetitive tasks\n\nBe future-ready with cutting-edge AI skills!"
+    answer: "🤖 **ALL Major AI Tools:**\n\n**Conversational AI:**\n- ChatGPT (OpenAI)\n- Perplexity\n- Google Gemini\n- Microsoft Copilot\n- X/Twitter Grok\n- Claude (Anthropic)\n\n**Image Generation:**\n- Midjourney\n- DALL-E\n- Canva AI\n\n**Marketing AI:**\n- Jasper AI\n- Copy.ai\n- Buffer AI\n\n**Plus:** Prompt Engineering, AEO, GEO optimization!\n\nBe future-ready with cutting-edge AI skills!"
+  },
+  batch: {
+    question: "When is the next batch?",
+    answer: "📅 **March 2025 Batch**\n\n**Batch Timings Available:**\n- Morning: 9 AM - 12 PM\n- Afternoon: 2 PM - 5 PM\n- Evening: 6 PM - 9 PM\n- Weekend: Saturday & Sunday\n\n⚡ **Limited Seats!** Only 15 students per batch.\n\n🎁 Early bird discount available for March batch!\n\nShare your contact for priority enrollment."
   }
 };
 
 const quickQuestions = [
-  { id: 'courses', label: '📚 Courses', icon: '📚' },
-  { id: 'fees', label: '💰 Fees', icon: '💰' },
-  { id: 'internship', label: '🏢 Internship', icon: '🏢' },
-  { id: 'certifications', label: '🏆 Certifications', icon: '🏆' },
-  { id: 'placement', label: '💼 Placement', icon: '💼' },
-  { id: 'ai', label: '🤖 AI Tools', icon: '🤖' },
+  { id: 'courses', label: '📚 Courses' },
+  { id: 'fees', label: '💰 Fees' },
+  { id: 'internship', label: '🏢 Internship' },
+  { id: 'certifications', label: '🏆 25+ Certs' },
+  { id: 'ai', label: '🤖 AI Tools' },
+  { id: 'batch', label: '📅 Next Batch' },
 ];
 
 export default function Chatbot() {
@@ -53,11 +60,14 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "👋 Hi! I'm Skillax AI Assistant.\n\nI can help you with:\n• Course details & fees\n• Certifications info\n• Internship at Infopark\n• Placement support\n\nTap a quick question below or type your query!",
+      content: "👋 Hi! I'm Skillax AI Assistant.\n\n**March 2025 batch** enrolling now!\n\nI can help you with:\n• Course details (2 programs)\n• 25+ Certifications\n• Infopark Internship\n• AI Tools (ChatGPT, Perplexity, etc.)\n\nTap a quick question or type below!",
     },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [leadData, setLeadData] = useState({ name: '', phone: '', email: '' });
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -67,13 +77,27 @@ export default function Chatbot() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, showLeadForm]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isOpen]);
+
+  // Show lead form after 3 messages
+  useEffect(() => {
+    const userMessages = messages.filter(m => m.role === 'user').length;
+    if (userMessages >= 2 && !leadSubmitted && !showLeadForm) {
+      setTimeout(() => {
+        setShowLeadForm(true);
+        setMessages(prev => [...prev, {
+          role: 'assistant',
+          content: "I'd love to help you further! 📞\n\nShare your details and our counselor will:\n- Provide exact fee details\n- Answer specific questions\n- Help with enrollment\n\n👇 Fill the form below:"
+        }]);
+      }, 1000);
+    }
+  }, [messages, leadSubmitted, showLeadForm]);
 
   const handleQuickQuestion = (id) => {
     const qa = predefinedQA[id];
@@ -82,11 +106,34 @@ export default function Chatbot() {
     setMessages(prev => [...prev, { role: 'user', content: qa.question }]);
     setIsTyping(true);
 
-    // Simulate typing delay for natural feel
     setTimeout(() => {
       setMessages(prev => [...prev, { role: 'assistant', content: qa.answer }]);
       setIsTyping(false);
     }, 500);
+  };
+
+  const submitLead = async () => {
+    if (!leadData.name || !leadData.phone) return;
+
+    try {
+      await axios.post(`${API}/leads`, {
+        name: leadData.name,
+        email: leadData.email || `${leadData.phone}@chatbot.skillax.in`,
+        phone: leadData.phone,
+        interest: 'Course Inquiry',
+        source: 'chatbot',
+        message: 'Lead captured via chatbot'
+      });
+
+      setLeadSubmitted(true);
+      setShowLeadForm(false);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `Thanks ${leadData.name}! 🎉\n\nYour details have been saved. Our counselor will call you within 24 hours.\n\n**What you'll get:**\n- Exact course fees\n- Scholarship options\n- March 2025 batch details\n\nAnything else I can help with?`
+      }]);
+    } catch (error) {
+      console.error('Lead submission error:', error);
+    }
   };
 
   const sendMessage = async (e) => {
@@ -98,31 +145,35 @@ export default function Chatbot() {
     setMessages(prev => [...prev, { role: 'user', content: input.trim() }]);
     setIsTyping(true);
 
-    // Smart keyword matching for predefined answers
+    // Smart keyword matching
     let response = null;
     
     if (userMessage.includes('course') || userMessage.includes('program') || userMessage.includes('learn')) {
       response = predefinedQA.courses.answer;
     } else if (userMessage.includes('fee') || userMessage.includes('cost') || userMessage.includes('price') || userMessage.includes('pay')) {
       response = predefinedQA.fees.answer;
-    } else if (userMessage.includes('duration') || userMessage.includes('long') || userMessage.includes('time') || userMessage.includes('month')) {
+    } else if (userMessage.includes('duration') || userMessage.includes('long') || userMessage.includes('month')) {
       response = predefinedQA.duration.answer;
     } else if (userMessage.includes('intern') || userMessage.includes('infopark') || userMessage.includes('job')) {
       response = predefinedQA.internship.answer;
     } else if (userMessage.includes('certif') || userMessage.includes('google') || userMessage.includes('hubspot')) {
       response = predefinedQA.certifications.answer;
-    } else if (userMessage.includes('place') || userMessage.includes('hire') || userMessage.includes('career')) {
+    } else if (userMessage.includes('place') || userMessage.includes('hire') || userMessage.includes('career') || userMessage.includes('salary')) {
       response = predefinedQA.placement.answer;
     } else if (userMessage.includes('where') || userMessage.includes('location') || userMessage.includes('address') || userMessage.includes('wayanad')) {
       response = predefinedQA.location.answer;
-    } else if (userMessage.includes('ai') || userMessage.includes('chatgpt') || userMessage.includes('artificial')) {
+    } else if (userMessage.includes('ai') || userMessage.includes('chatgpt') || userMessage.includes('perplexity') || userMessage.includes('gemini') || userMessage.includes('grok')) {
       response = predefinedQA.ai.answer;
+    } else if (userMessage.includes('batch') || userMessage.includes('start') || userMessage.includes('when') || userMessage.includes('timing')) {
+      response = predefinedQA.batch.answer;
     } else if (userMessage.includes('hi') || userMessage.includes('hello') || userMessage.includes('hey')) {
-      response = "Hello! 👋 Welcome to Skillax Academy!\n\nHow can I help you today? You can ask about:\n- Our courses\n- Fees & payment options\n- Internship at Infopark\n- Certifications\n- Placement support\n\nOr tap any quick question below!";
+      response = "Hello! 👋 Welcome to Skillax Academy!\n\n**March 2025 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 25+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
     } else if (userMessage.includes('thank')) {
-      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask. Or you can:\n\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@skillax.in\n\nWe're here to help you start your digital marketing journey!";
+      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@skillax.in\n\nGood luck with your digital marketing journey!";
+    } else if (userMessage.includes('seo') || userMessage.includes('aeo') || userMessage.includes('geo')) {
+      response = "We cover ALL three optimization types:\n\n**SEO** - Search Engine Optimization\n- Google, Bing rankings\n\n**AEO** - Answer Engine Optimization\n- ChatGPT, Perplexity visibility\n\n**GEO** - Generative Engine Optimization\n- AI-generated search results\n\nThis is the future of search! We're one of the few academies teaching this.";
     } else {
-      response = "Thanks for your question! 🤔\n\nFor detailed information about this, I'd recommend speaking with our counselor.\n\n**Quick Actions:**\n- 📞 Request callback: Share your number\n- 💬 WhatsApp: Click the green button\n- 📧 Email: contact@skillax.in\n\nOr try asking about courses, fees, internship, or certifications!";
+      response = "Great question! 🤔\n\nFor detailed info about this, I'd recommend speaking with our counselor.\n\nOr try asking about:\n- Our courses\n- 25+ certifications\n- Infopark internship\n- AI tools (ChatGPT, etc.)\n- Next batch dates\n\nI'm here to help!";
     }
 
     setTimeout(() => {
@@ -135,16 +186,16 @@ export default function Chatbot() {
   const formatMessage = (content) => {
     return content.split('\n').map((line, i) => {
       if (line.startsWith('**') && line.endsWith('**')) {
-        return <strong key={i} className="block font-semibold">{line.replace(/\*\*/g, '')}</strong>;
+        return <strong key={i} className="block font-semibold text-primary">{line.replace(/\*\*/g, '')}</strong>;
       }
       if (line.startsWith('- ') || line.startsWith('• ')) {
-        return <div key={i} className="flex items-start gap-2"><span>•</span><span>{line.slice(2)}</span></div>;
+        return <div key={i} className="flex items-start gap-2 ml-2"><span className="text-primary">•</span><span>{line.slice(2)}</span></div>;
       }
       if (line.includes('**')) {
         const parts = line.split('**');
         return (
           <div key={i}>
-            {parts.map((part, j) => j % 2 === 1 ? <strong key={j}>{part}</strong> : part)}
+            {parts.map((part, j) => j % 2 === 1 ? <strong key={j} className="text-primary">{part}</strong> : part)}
           </div>
         );
       }
@@ -154,7 +205,7 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Chat Button with Pulse */}
+      {/* Chat Button */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -168,9 +219,9 @@ export default function Chatbot() {
         aria-label="Open chat"
       >
         <MessageCircle className="h-6 w-6" />
-        <span className="absolute -top-1 -right-1 flex h-4 w-4">
+        <span className="absolute -top-1 -right-1 flex h-5 w-5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-amber opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-brand-amber"></span>
+          <span className="relative inline-flex rounded-full h-5 w-5 bg-brand-amber text-[10px] font-bold items-center justify-center">1</span>
         </span>
       </motion.button>
 
@@ -199,14 +250,13 @@ export default function Chatbot() {
                     Skillax AI
                     <Sparkles className="h-4 w-4" />
                   </h3>
-                  <p className="text-xs text-white/80">Always online • Instant replies</p>
+                  <p className="text-xs text-white/80">Online • Instant replies</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 data-testid="chatbot-close"
                 className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                aria-label="Close chat"
               >
                 <X className="h-5 w-5 text-white" />
               </button>
@@ -250,6 +300,54 @@ export default function Chatbot() {
                 </motion.div>
               ))}
               
+              {/* Lead Form */}
+              {showLeadForm && !leadSubmitted && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-card border-2 border-primary/20 rounded-2xl p-4 space-y-3"
+                >
+                  <input
+                    type="text"
+                    placeholder="Your Name *"
+                    value={leadData.name}
+                    onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
+                    className="w-full px-4 py-2 bg-muted rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                    data-testid="chatbot-lead-name"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number *"
+                    value={leadData.phone}
+                    onChange={(e) => setLeadData({ ...leadData, phone: e.target.value })}
+                    className="w-full px-4 py-2 bg-muted rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                    data-testid="chatbot-lead-phone"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email (optional)"
+                    value={leadData.email}
+                    onChange={(e) => setLeadData({ ...leadData, email: e.target.value })}
+                    className="w-full px-4 py-2 bg-muted rounded-lg text-sm outline-none focus:ring-2 focus:ring-primary/20"
+                  />
+                  <Button
+                    onClick={submitLead}
+                    className="w-full bg-primary hover:bg-primary/90 rounded-full"
+                    disabled={!leadData.name || !leadData.phone}
+                    data-testid="chatbot-lead-submit"
+                  >
+                    <CheckCircle className="h-4 w-4 mr-2" />
+                    Get Callback
+                  </Button>
+                  <button
+                    onClick={() => setShowLeadForm(false)}
+                    className="w-full text-xs text-muted-foreground hover:text-foreground"
+                  >
+                    Skip for now
+                  </button>
+                </motion.div>
+              )}
+              
               {isTyping && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -258,9 +356,9 @@ export default function Chatbot() {
                 >
                   <div className="flex items-center gap-2 bg-card border border-border p-3 rounded-2xl rounded-tl-sm shadow-sm">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 </motion.div>
@@ -270,12 +368,12 @@ export default function Chatbot() {
 
             {/* Quick Questions */}
             <div className="p-3 border-t border-border bg-card/50">
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                 {quickQuestions.map((q) => (
                   <button
                     key={q.id}
                     onClick={() => handleQuickQuestion(q.id)}
-                    className="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-full text-xs font-medium whitespace-nowrap transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-full text-xs font-medium whitespace-nowrap transition-colors"
                   >
                     {q.label}
                   </button>
