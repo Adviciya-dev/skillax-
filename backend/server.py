@@ -480,54 +480,61 @@ async def seed_data():
         }
         await db.admins.insert_one(admin)
     
-    # Seed courses if none exist
-    courses_count = await db.courses.count_documents({})
-    if courses_count == 0:
-        courses = [
-            {
-                "id": str(uuid.uuid4()),
-                "title": "Digital Marketing Foundation",
-                "slug": "digital-marketing-foundation",
-                "short_description": "Master the fundamentals of digital marketing from scratch",
-                "description": "A comprehensive 3-month program covering all aspects of digital marketing. Perfect for beginners looking to start their career in digital marketing.",
-                "duration": "3 Months",
-                "modules": [
-                    {"title": "Introduction to Digital Marketing", "topics": ["What is Digital Marketing", "Digital Marketing Channels", "Marketing Funnel"]},
-                    {"title": "Website & Landing Pages", "topics": ["WordPress Basics", "Landing Page Optimization", "User Experience"]},
-                    {"title": "Content Marketing", "topics": ["Content Strategy", "Blog Writing", "Visual Content"]},
-                    {"title": "Email Marketing", "topics": ["Email List Building", "Campaign Creation", "Automation"]},
-                    {"title": "SEO Basics", "topics": ["On-Page SEO", "Keyword Research", "Google Analytics"]}
-                ],
-                "highlights": ["100% Practical Training", "Real Projects", "Internship Certificate", "Placement Assistance"],
-                "certification": "Skillax Foundation Certificate + Google Analytics Certification",
-                "price": "Contact for pricing",
-                "featured_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-                "active": True,
-                "created_at": datetime.now(timezone.utc).isoformat()
-            },
-            {
-                "id": str(uuid.uuid4()),
-                "title": "Advanced SEO & Performance",
-                "slug": "advanced-seo-performance",
-                "short_description": "Become an SEO expert with advanced techniques and strategies",
-                "description": "Deep dive into SEO with technical optimization, link building, and performance marketing. For professionals looking to specialize in search engine optimization.",
-                "duration": "2 Months",
-                "modules": [
-                    {"title": "Technical SEO", "topics": ["Site Architecture", "Core Web Vitals", "Schema Markup"]},
-                    {"title": "Advanced Keyword Research", "topics": ["Competitor Analysis", "Long-tail Keywords", "Search Intent"]},
-                    {"title": "Link Building", "topics": ["Backlink Strategies", "Outreach", "Guest Posting"]},
-                    {"title": "Local SEO", "topics": ["Google Business Profile", "Local Citations", "Reviews Management"]},
-                    {"title": "SEO Analytics", "topics": ["Google Search Console", "Advanced GA4", "SEO Reporting"]}
-                ],
-                "highlights": ["Advanced Tools Training", "Live Projects", "Agency Experience", "SEO Certification"],
-                "certification": "Google Ads & Analytics Certification",
-                "price": "Contact for pricing",
-                "featured_image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-                "active": True,
-                "created_at": datetime.now(timezone.utc).isoformat()
-            },
-            {
-                "id": str(uuid.uuid4()),
+    # Clear and reseed courses
+    await db.courses.delete_many({})
+    courses = [
+        {
+            "id": str(uuid.uuid4()),
+            "title": "Professional Digital Marketing",
+            "slug": "professional-digital-marketing",
+            "short_description": "Complete A-Z digital marketing mastery with AI tools, live projects & guaranteed internship at Infopark IT company.",
+            "description": "Our flagship 4-month comprehensive digital marketing program covering everything from SEO to AI tools. Get hands-on experience with live projects and a guaranteed internship at top IT companies in Infopark, Kochi.",
+            "duration": "4 Months",
+            "modules": [
+                {"title": "Digital Marketing Fundamentals", "topics": ["Marketing Basics", "Digital Channels", "Customer Journey"]},
+                {"title": "Search Engine Optimization (SEO)", "topics": ["On-Page SEO", "Technical SEO", "Link Building", "Local SEO"]},
+                {"title": "Search Engine Marketing (SEM)", "topics": ["Google Ads", "Campaign Setup", "Bidding Strategies", "Optimization"]},
+                {"title": "Social Media Marketing", "topics": ["Facebook", "Instagram", "LinkedIn", "Content Strategy"]},
+                {"title": "Content & Email Marketing", "topics": ["Content Strategy", "Copywriting", "Email Campaigns", "Automation"]},
+                {"title": "AI Tools & Automation", "topics": ["ChatGPT", "Midjourney", "Canva AI", "Marketing Automation"]},
+                {"title": "Analytics & Reporting", "topics": ["Google Analytics", "Data Studio", "ROI Tracking"]},
+                {"title": "Internship at Infopark", "topics": ["Live Projects", "Client Work", "Portfolio Building"]}
+            ],
+            "highlights": ["SEO, SEM, SMM, Email Marketing", "AI Tools: ChatGPT, Midjourney, Canva AI", "Google Ads & Meta Ads Certification", "Live Client Projects", "Guaranteed Internship at Infopark", "100% Placement Assistance"],
+            "certification": "Google Ads + Google Analytics + Meta Blueprint + HubSpot + SEMrush + Skillax Pro Certificate",
+            "price": "Contact for pricing",
+            "featured_image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
+            "active": True,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        },
+        {
+            "id": str(uuid.uuid4()),
+            "title": "Advanced AI-Powered Marketing",
+            "slug": "ai-powered-marketing",
+            "short_description": "Master cutting-edge AI marketing tools and automation. Perfect for working professionals wanting to upskill.",
+            "description": "Our intensive 2-month program focused on AI-powered marketing tools. Learn to leverage ChatGPT, AI content generators, and marketing automation to stay ahead of the competition. Weekend batches available.",
+            "duration": "2 Months",
+            "modules": [
+                {"title": "AI Fundamentals for Marketers", "topics": ["Understanding AI", "AI in Marketing", "Ethics & Best Practices"]},
+                {"title": "ChatGPT & Content Creation", "topics": ["Prompt Engineering", "Content Writing", "Ad Copy", "Blogs"]},
+                {"title": "AI Image & Video Generation", "topics": ["Midjourney", "DALL-E", "Canva AI", "Video Tools"]},
+                {"title": "Marketing Automation Tools", "topics": ["HubSpot", "Mailchimp AI", "Social Schedulers"]},
+                {"title": "Prompt Engineering Mastery", "topics": ["Advanced Prompts", "Chain Prompting", "Custom GPTs"]},
+                {"title": "AI-Powered Analytics", "topics": ["Predictive Analytics", "AI Reporting", "Data Insights"]}
+            ],
+            "highlights": ["ChatGPT for Marketing", "AI Content Generation", "AI Image & Video Creation", "Marketing Automation", "Prompt Engineering Mastery", "Weekend Batches Available"],
+            "certification": "Skillax AI Expert + HubSpot Automation Certificate",
+            "price": "Contact for pricing",
+            "featured_image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
+            "active": True,
+            "created_at": datetime.now(timezone.utc).isoformat()
+        }
+    ]
+    await db.courses.insert_many(courses)
+    
+    # Don't add extra courses - only 2 courses as per requirement
+    extra_course = {
+        "id": str(uuid.uuid4()),
                 "title": "Social Media & Ads Mastery",
                 "slug": "social-media-ads-mastery",
                 "short_description": "Master social media marketing and paid advertising",
