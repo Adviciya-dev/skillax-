@@ -1,0 +1,173 @@
+{
+  "identity": {
+    "persona": "E1",
+    "mission": "Create an Ultra-Premium Digital Marketing Academy website that feels like a luxury tech product.",
+    "principles": [
+      "Fusion over Imitation: Mix Education Authority with SaaS Precision.",
+      "Emotion First: Trust, Ambition, and Future-Proofing.",
+      "Content is King: Every pixel must sell the 'Skillax' dream.",
+      "Zoom in: Focus on details (faces, screens, data).",
+      "Negative Space: Luxurious breathing room.",
+      "Contrast: High contrast for readability and impact."
+    ]
+  },
+  "theme_strategy": {
+    "default_mode": "light",
+    "modes": {
+      "light": {
+        "name": "Professional Trust",
+        "background": "#F8FAFC",
+        "foreground": "#0F172A",
+        "card": "#FFFFFF",
+        "border": "#E2E8F0",
+        "primary": "#2B2D9C",
+        "primary_foreground": "#FFFFFF",
+        "accent": "#F59E0B",
+        "accent_foreground": "#FFFFFF"
+      },
+      "dark": {
+        "name": "Luxury Night",
+        "background": "#020617",
+        "foreground": "#F1F5F9",
+        "card": "#0F172A",
+        "border": "#1E293B",
+        "primary": "#6366F1",
+        "primary_foreground": "#FFFFFF",
+        "accent": "#F59E0B",
+        "accent_foreground": "#FFFFFF"
+      }
+    },
+    "toggle_behavior": "User-controlled toggle in navbar. Persist preference in local storage."
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Outfit, sans-serif",
+      "weights": ["500", "600", "700"],
+      "usage": "All headings (h1-h6), hero text, stats numbers.",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Plus Jakarta Sans, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, navigation, buttons, labels.",
+      "letter_spacing": "tracking-normal"
+    },
+    "import_url": "https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+  },
+  "colors": {
+    "brand": {
+      "royal_blue": "#2B2D9C",
+      "electric_indigo": "#4F46E5",
+      "amber_glow": "#F59E0B",
+      "success_green": "#10B981"
+    },
+    "functional": {
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#3B82F6"
+    }
+  },
+  "layout_strategies": {
+    "hero_section": {
+      "type": "Tetris Grid",
+      "structure": "Grid with 12 columns. Left 7 cols for Headline/CTA. Right 5 cols for 3D/Parallax Image.",
+      "motion": "Staggered reveal of text. Parallax effect on image scroll."
+    },
+    "courses_section": {
+      "type": "Bento Grid",
+      "structure": "Asymmetric grid. Featured course takes 2x2. Standard courses 1x1.",
+      "interaction": "Hover: Scale up 1.02, shadow-xl, border-primary/50."
+    },
+    "stats_section": {
+      "type": "Glass Row",
+      "structure": "Flex row with glassmorphism cards.",
+      "motion": "Counterup animation on view."
+    },
+    "certifications_section": {
+      "type": "Infinite Marquee",
+      "structure": "Horizontal scrolling logos. Greyscale by default, color on hover."
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-white rounded-full px-8 py-3 hover:shadow-lg hover:scale-105 transition-all duration-300 font-semibold",
+      "secondary": "bg-transparent border-2 border-primary text-primary rounded-full px-8 py-3 hover:bg-primary/5 transition-all duration-300 font-semibold",
+      "ghost": "text-foreground hover:text-primary transition-colors font-medium"
+    },
+    "cards": {
+      "base": "bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300",
+      "glass": "bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6"
+    },
+    "inputs": {
+      "base": "bg-background border border-input rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
+    }
+  },
+  "motion_guidelines": {
+    "library": "framer-motion",
+    "default_transition": {
+      "type": "spring",
+      "stiffness": 100,
+      "damping": 20
+    },
+    "scroll_reveal": "Fade in up (y: 20 -> 0, opacity: 0 -> 1)",
+    "hover_effects": "Scale 1.02 or 1.05. Never rotate unless iconic."
+  },
+  "image_assets": {
+    "hero_main": {
+      "url": "https://images.unsplash.com/photo-1569653402334-2e98fbaa80ee?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxpbmRpYW4lMjBzdHVkZW50cyUyMGRpZ2l0YWwlMjBtYXJrZXRpbmclMjBjbGFzc3Jvb20lMjBtb2Rlcm58ZW58MHx8fHwxNzcwNDkzOTkxfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Modern Digital Marketing Classroom",
+      "usage": "Hero section right side"
+    },
+    "student_man": {
+      "url": "https://images.unsplash.com/photo-1604177091072-b7b677a077f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGluZGlhbiUyMHN0dWRlbnQlMjB3aXRoJTIwbGFwdG9wfGVufDB8fHx8MTc3MDQ5Mzk5Nnww&ixlib=rb-4.1.0&q=85",
+      "alt": "Happy Indian Student with Laptop",
+      "usage": "Testimonials or Student Success section"
+    },
+    "student_woman": {
+      "url": "https://images.unsplash.com/photo-1675664533677-2f3479b85c20?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGluZGlhbiUyMHN0dWRlbnQlMjB3aXRoJTIwbGFwdG9wfGVufDB8fHx8MTc3MDQ5Mzk5Nnww&ixlib=rb-4.1.0&q=85",
+      "alt": "Focused Student Learning",
+      "usage": "Course details or CTA section"
+    },
+    "seo_dashboard": {
+      "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwxfHxTRU8lMjBhbmFseXRpY3MlMjBkYXNoYm9hcmQlMjBzY3JlZW58ZW58MHx8fHwxNzcwNDk0MDM0fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "SEO Analytics Dashboard",
+      "usage": "Course card for SEO/Analytics"
+    },
+    "social_media_mobile": {
+      "url": "https://images.unsplash.com/photo-1770368787714-4e5a5ea557fd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwyfHxzb2NpYWwlMjBtZWRpYSUyMG1hcmtldGluZyUyMG1vYmlsZSUyMHBob25lJTIwY29udGVudHxlbnwwfHx8fDE3NzA0OTQwMDN8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Social Media Marketing on Mobile",
+      "usage": "Course card for SMM"
+    },
+    "team_meeting": {
+      "url": "https://images.unsplash.com/photo-1636645096936-fc8704bc8083?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwbWFya2V0aW5nJTIwYWdlbmN5JTIwdGVhbSUyMG1lZXRpbmd8ZW58MHx8fHwxNzcwNDk0MDM4fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Digital Marketing Team Meeting",
+      "usage": "About Us section"
+    },
+    "team_man": {
+      "url": "https://images.unsplash.com/photo-1659355894117-0ae6f8f28d0b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBpbmRpYW4lMjBjb3Jwb3JhdGUlMjBtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NzA0OTQwMDh8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Faculty Member - Man",
+      "usage": "Faculty section"
+    },
+    "team_woman": {
+      "url": "https://images.unsplash.com/photo-1705164454513-d8274719fdf5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBpbmRpYW4lMjBjb3Jwb3JhdGUlMjB3b21hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc3MDQ5NDAyMHww&ixlib=rb-4.1.0&q=85",
+      "alt": "Faculty Member - Woman",
+      "usage": "Faculty section"
+    },
+    "location_wayanad": {
+      "url": "https://images.unsplash.com/photo-1619020905969-ba8d47f8c7cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwxfHxXYXlhbmFkJTIwdGVhJTIwZ2FyZGVuJTIwc2NlbmljfGVufDB8fHx8MTc3MDQ5NDAyNnww&ixlib=rb-4.1.0&q=85",
+      "alt": "Wayanad Scenery",
+      "usage": "Contact page or Footer background (subtle)"
+    }
+  },
+  "universal_guidelines": [
+    "Mobile-First: Always design for mobile, then scale up.",
+    "Accessibility: Ensure text contrast ratio > 4.5:1.",
+    "No Gradients on Text: Keep text solid for readability.",
+    "Interactive Elements: All buttons/links must have hover/active states.",
+    "Data-TestID: Add data-testid to all interactive elements.",
+    "Spacing: Use generous padding (py-20, py-24) for sections.",
+    "Borders: Use subtle borders (border-border) instead of heavy shadows."
+  ],
+  "instructions_to_main_agent": "1. Install 'lucide-react', 'framer-motion', 'clsx', 'tailwind-merge'. 2. Update tailwind.config.js with the colors and fonts. 3. Create a 'Layout' component that handles the Navbar and Footer. 4. Implement the Theme Toggle immediately. 5. Use the provided image URLs strictly. 6. Build the 'Home' page first with the Hero, Stats, and Courses sections."
+}
