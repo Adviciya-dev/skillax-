@@ -1,32 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
-  Clock, Users, Award, ArrowRight, ChevronRight,
-  BookOpen, TrendingUp, Cpu, PenTool, Briefcase, Loader2
+  Clock, Award, ArrowRight, ChevronRight, CheckCircle,
+  BookOpen, Brain, Building, Users, Rocket, Sparkles,
+  Target, Briefcase, Laptop, Calendar
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
-import axios from 'axios';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
-
-const iconMap = {
-  'digital-marketing-foundation': BookOpen,
-  'advanced-seo-performance': TrendingUp,
-  'social-media-ads-mastery': Users,
-  'ai-powered-digital-marketing': Cpu,
-  'web-app-qa-marketing': PenTool,
-  'freelancing-agency-building': Briefcase,
-};
-
-const colorMap = {
-  'digital-marketing-foundation': 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
-  'advanced-seo-performance': 'bg-green-500/10 text-green-600 dark:text-green-400',
-  'social-media-ads-mastery': 'bg-pink-500/10 text-pink-600 dark:text-pink-400',
-  'ai-powered-digital-marketing': 'bg-purple-500/10 text-purple-600 dark:text-purple-400',
-  'web-app-qa-marketing': 'bg-orange-500/10 text-orange-600 dark:text-orange-400',
-  'freelancing-agency-building': 'bg-teal-500/10 text-teal-600 dark:text-teal-400',
-};
+// Only 2 courses
+const courses = [
+  {
+    id: 'professional',
+    slug: 'professional-digital-marketing',
+    title: 'Professional Digital Marketing',
+    duration: '4 Months',
+    icon: Rocket,
+    gradient: 'from-blue-600 to-indigo-600',
+    bgGradient: 'from-blue-500/10 to-indigo-500/10',
+    description: 'Complete A-Z digital marketing mastery program with AI tools integration, live projects, and guaranteed internship at Infopark IT company.',
+    price: 'Contact for Pricing',
+    highlights: [
+      'SEO, SEM, SMM, Email Marketing',
+      'AI Tools: ChatGPT, Midjourney, Canva AI',
+      'Google Ads & Meta Ads Mastery',
+      'Content Marketing & Copywriting',
+      'Analytics & Data-Driven Marketing',
+      'Live Client Projects',
+      'Guaranteed Internship at Infopark',
+      '100% Placement Assistance',
+    ],
+    certifications: ['Google Ads', 'Google Analytics', 'Meta Blueprint', 'HubSpot', 'SEMrush', 'Skillax Pro'],
+    modules: [
+      { title: 'Digital Marketing Fundamentals', weeks: '2 weeks' },
+      { title: 'Search Engine Optimization (SEO)', weeks: '3 weeks' },
+      { title: 'Search Engine Marketing (SEM)', weeks: '2 weeks' },
+      { title: 'Social Media Marketing', weeks: '3 weeks' },
+      { title: 'Content & Email Marketing', weeks: '2 weeks' },
+      { title: 'AI Tools & Automation', weeks: '2 weeks' },
+      { title: 'Analytics & Reporting', weeks: '1 week' },
+      { title: 'Internship at Infopark', weeks: '4 weeks' },
+    ],
+    suitable: ['Freshers & Students', 'Career Changers', 'Business Owners', 'Marketing Professionals'],
+    featured: true,
+  },
+  {
+    id: 'ai-marketing',
+    slug: 'ai-powered-marketing',
+    title: 'Advanced AI-Powered Marketing',
+    duration: '2 Months',
+    icon: Brain,
+    gradient: 'from-purple-600 to-pink-600',
+    bgGradient: 'from-purple-500/10 to-pink-500/10',
+    description: 'Master cutting-edge AI marketing tools and automation. Perfect for working professionals wanting to upskill with future-ready skills.',
+    price: 'Contact for Pricing',
+    highlights: [
+      'ChatGPT for Marketing',
+      'AI Content Generation',
+      'AI Image & Video Creation',
+      'Marketing Automation',
+      'Prompt Engineering Mastery',
+      'AI Analytics & Insights',
+      'Weekend Batches Available',
+      'Certificate of Completion',
+    ],
+    certifications: ['Skillax AI Expert', 'HubSpot Automation', 'AI Marketing Specialist'],
+    modules: [
+      { title: 'AI Fundamentals for Marketers', weeks: '1 week' },
+      { title: 'ChatGPT & Content Creation', weeks: '2 weeks' },
+      { title: 'AI Image & Video Generation', weeks: '1 week' },
+      { title: 'Marketing Automation Tools', weeks: '2 weeks' },
+      { title: 'Prompt Engineering', weeks: '1 week' },
+      { title: 'AI-Powered Analytics', weeks: '1 week' },
+    ],
+    suitable: ['Working Professionals', 'Digital Marketers', 'Content Creators', 'Entrepreneurs'],
+    featured: false,
+  },
+];
 
 function AnimatedSection({ children, className = '', delay = 0 }) {
   return (
@@ -43,200 +93,215 @@ function AnimatedSection({ children, className = '', delay = 0 }) {
 }
 
 export default function Courses() {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get(`${API}/courses`);
-        setCourses(response.data);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-        // Fallback to static data
-        setCourses([
-          {
-            id: '1',
-            title: 'Digital Marketing Foundation',
-            slug: 'digital-marketing-foundation',
-            short_description: 'Master the fundamentals of digital marketing from scratch',
-            duration: '3 Months',
-            highlights: ['100% Practical Training', 'Real Projects', 'Internship Certificate', 'Placement Assistance'],
-            certification: 'Google Analytics Certification',
-          },
-          {
-            id: '2',
-            title: 'Advanced SEO & Performance',
-            slug: 'advanced-seo-performance',
-            short_description: 'Become an SEO expert with advanced techniques and strategies',
-            duration: '2 Months',
-            highlights: ['Advanced Tools Training', 'Live Projects', 'Agency Experience', 'SEO Certification'],
-            certification: 'Google Ads & Analytics Certification',
-          },
-          {
-            id: '3',
-            title: 'Social Media & Ads Mastery',
-            slug: 'social-media-ads-mastery',
-            short_description: 'Master social media marketing and paid advertising',
-            duration: '2 Months',
-            highlights: ['Hands-on Ad Campaigns', 'Budget Management', 'Client Projects', 'Industry Certification'],
-            certification: 'Meta Blueprint + Google Ads Certification',
-          },
-          {
-            id: '4',
-            title: 'AI-Powered Digital Marketing',
-            slug: 'ai-powered-digital-marketing',
-            short_description: 'Leverage AI tools to supercharge your marketing',
-            duration: '1 Month',
-            highlights: ['Latest AI Tools', 'Prompt Libraries', 'Automation Templates', 'Future-Ready Skills'],
-            certification: 'Skillax AI Marketing Certificate',
-          },
-          {
-            id: '5',
-            title: 'Web, App & QA Marketing',
-            slug: 'web-app-qa-marketing',
-            short_description: 'Technical marketing for web and mobile applications',
-            duration: '2 Months',
-            highlights: ['Technical Skills', 'Growth Frameworks', 'MarTech Expertise', 'Industry Projects'],
-            certification: 'HubSpot Marketing Certification',
-          },
-          {
-            id: '6',
-            title: 'Freelancing & Agency Building',
-            slug: 'freelancing-agency-building',
-            short_description: 'Start your own digital marketing business',
-            duration: '1 Month',
-            highlights: ['Business Templates', 'Client Pitch Deck', 'Legal Documents', 'Lifetime Support'],
-            certification: 'Skillax Business Certificate',
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
-
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-background via-background to-primary/5">
-        <div className="container-custom">
+      <section className="relative pt-20 pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-brand-indigo">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl" />
+          </div>
+        </div>
+
+        <div className="container-custom relative z-10 text-white">
           <AnimatedSection className="text-center max-w-4xl mx-auto">
-            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Our Programs
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
+              <Sparkles className="h-4 w-4" />
+              Transform Your Career
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="courses-page-title">
-              Transform Your Career with{' '}
-              <span className="gradient-text">Industry-Ready Skills</span>
+              Choose Your Path to{' '}
+              <span className="text-brand-amber">Digital Success</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
-              From foundational courses to advanced specializations, find the perfect program 
-              to launch or accelerate your digital marketing career.
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
+              Two carefully crafted programs designed to make you industry-ready with 
+              AI-powered skills and guaranteed internship at Infopark.
             </p>
           </AnimatedSection>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 100" fill="none" className="w-full">
+            <path d="M0 100V50C240 90 480 10 720 50C960 90 1200 10 1440 50V100H0Z" fill="currentColor" className="text-background"/>
+          </svg>
+        </div>
       </section>
 
-      {/* Courses Grid */}
-      <section className="section-padding">
+      {/* Course Cards */}
+      <section className="section-padding -mt-12">
         <div className="container-custom">
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {courses.map((course, index) => {
-                const Icon = iconMap[course.slug] || BookOpen;
-                const colorClass = colorMap[course.slug] || 'bg-primary/10 text-primary';
-
-                return (
-                  <AnimatedSection key={course.id || index} delay={index * 0.1}>
-                    <Link
-                      to={`/courses/${course.slug}`}
-                      data-testid={`course-${course.slug}`}
-                      className="group block card-base h-full hover-lift"
-                    >
-                      {/* Icon */}
-                      <div className={`inline-flex p-4 rounded-2xl ${colorClass} mb-4`}>
-                        <Icon className="h-8 w-8" />
+          <div className="grid lg:grid-cols-2 gap-8">
+            {courses.map((course, index) => {
+              const Icon = course.icon;
+              return (
+                <AnimatedSection key={course.id} delay={index * 0.15}>
+                  <div className={`card-base h-full bg-gradient-to-br ${course.bgGradient} border-2 hover:border-primary/30 transition-all relative overflow-hidden`}>
+                    {course.featured && (
+                      <div className="absolute top-4 right-4 px-3 py-1 bg-brand-amber text-white text-xs font-bold rounded-full">
+                        MOST POPULAR
                       </div>
+                    )}
 
-                      {/* Title & Description */}
-                      <h3 className="font-heading font-semibold text-xl mb-2 group-hover:text-primary transition-colors">
-                        {course.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-4">
-                        {course.short_description}
-                      </p>
-
-                      {/* Duration & Certification */}
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="flex items-center gap-2 text-sm">
-                          <Clock className="h-4 w-4 text-muted-foreground" />
-                          <span>{course.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <Award className="h-4 w-4 text-muted-foreground" />
-                          <span>Certified</span>
+                    {/* Header */}
+                    <div className="flex items-start gap-4 mb-6">
+                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${course.gradient} shrink-0`}>
+                        <Icon className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h2 className="font-heading font-bold text-2xl mb-1">{course.title}</h2>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {course.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Award className="h-4 w-4" />
+                            {course.certifications.length} Certifications
+                          </span>
                         </div>
                       </div>
+                    </div>
 
-                      {/* Highlights */}
-                      <div className="space-y-2 mb-6">
-                        {course.highlights?.slice(0, 3).map((highlight, i) => (
-                          <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <ChevronRight className="h-4 w-4 text-primary" />
-                            <span>{highlight}</span>
-                          </div>
+                    {/* Description */}
+                    <p className="text-muted-foreground mb-6">{course.description}</p>
+
+                    {/* Highlights */}
+                    <div className="grid grid-cols-2 gap-3 mb-6">
+                      {course.highlights.slice(0, 6).map((highlight, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4 text-brand-success shrink-0" />
+                          <span className="text-sm">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Certifications Preview */}
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold mb-2">Certifications Included:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {course.certifications.map((cert, i) => (
+                          <span key={i} className="px-3 py-1 bg-card border border-border rounded-full text-xs font-medium">
+                            {cert}
+                          </span>
                         ))}
                       </div>
+                    </div>
 
-                      {/* CTA */}
-                      <div className="flex items-center justify-between pt-4 border-t border-border">
-                        <span className="text-sm font-medium text-muted-foreground">
-                          {course.certification?.split('+')[0] || 'Industry Certified'}
-                        </span>
-                        <span className="flex items-center gap-1 text-primary font-medium text-sm group-hover:gap-2 transition-all">
-                          View Details <ArrowRight className="h-4 w-4" />
-                        </span>
+                    {/* Suitable For */}
+                    <div className="mb-6">
+                      <h4 className="text-sm font-semibold mb-2">Perfect For:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {course.suitable.map((item, i) => (
+                          <span key={i} className="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-medium">
+                            {item}
+                          </span>
+                        ))}
                       </div>
-                    </Link>
-                  </AnimatedSection>
-                );
-              })}
-            </div>
-          )}
+                    </div>
+
+                    {/* CTA */}
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link to="/contact" className="flex-1">
+                        <Button className={`w-full bg-gradient-to-r ${course.gradient} text-white rounded-full py-6 font-semibold`}>
+                          Enroll Now <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </Link>
+                      <Button variant="outline" className="rounded-full py-6">
+                        Download Syllabus
+                      </Button>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum Overview */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+              Detailed Curriculum
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              What You'll Learn
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Our curriculum is designed with input from industry experts and updated regularly.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {courses.map((course, courseIndex) => {
+              const Icon = course.icon;
+              return (
+                <AnimatedSection key={course.id} delay={courseIndex * 0.1}>
+                  <div className="card-base">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ${course.gradient}`}>
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-bold text-lg">{course.title}</h3>
+                        <p className="text-sm text-muted-foreground">{course.duration}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {course.modules.map((module, i) => (
+                        <div key={i} className="flex items-center justify-between p-3 bg-muted/50 rounded-xl">
+                          <div className="flex items-center gap-3">
+                            <span className="w-8 h-8 flex items-center justify-center bg-primary/10 text-primary rounded-lg text-sm font-semibold">
+                              {i + 1}
+                            </span>
+                            <span className="font-medium text-sm">{module.title}</span>
+                          </div>
+                          <span className="text-xs text-muted-foreground bg-card px-2 py-1 rounded-full">
+                            {module.weeks}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* Why Choose Our Courses */}
-      <section className="section-padding bg-muted/30">
+      <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
               Why Skillax
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              What Sets Our Courses Apart
+              What Sets Us Apart
             </h2>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: Users, title: 'Small Batch Size', desc: 'Max 15 students per batch for personalized attention' },
-              { icon: Briefcase, title: 'Real Projects', desc: 'Work on actual client projects during training' },
-              { icon: Award, title: 'Global Certifications', desc: 'Get certified by Google, Meta, HubSpot & more' },
-              { icon: TrendingUp, title: 'Placement Support', desc: '100% placement assistance with top companies' },
+              { icon: Building, title: 'Infopark Internship', desc: 'Real-world experience at top IT companies' },
+              { icon: Brain, title: 'AI-Powered Learning', desc: 'Master ChatGPT, Midjourney & more' },
+              { icon: Award, title: '15+ Certifications', desc: 'Industry-recognized credentials' },
+              { icon: Users, title: 'Small Batches', desc: 'Maximum 15 students for personalized attention' },
+              { icon: Laptop, title: 'Live Projects', desc: 'Work on real client campaigns' },
+              { icon: Calendar, title: 'Flexible Timings', desc: 'Morning, evening & weekend options' },
+              { icon: Target, title: '100% Practical', desc: 'Learn by doing, not just theory' },
+              { icon: Briefcase, title: 'Placement Support', desc: 'Lifetime career assistance' },
             ].map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <AnimatedSection key={index} delay={index * 0.1}>
-                  <div className="card-base text-center h-full">
+                  <div className="card-base text-center h-full hover-lift">
                     <div className="inline-flex p-4 bg-primary/10 rounded-2xl mb-4">
-                      <Icon className="h-8 w-8 text-primary" />
+                      <Icon className="h-7 w-7 text-primary" />
                     </div>
                     <h3 className="font-heading font-semibold text-lg mb-2">{feature.title}</h3>
                     <p className="text-sm text-muted-foreground">{feature.desc}</p>
@@ -256,8 +321,7 @@ export default function Courses() {
               Not Sure Which Course to Choose?
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
-              Our career counselors can help you find the perfect course based on your 
-              background, interests, and career goals. Get a free consultation today.
+              Get a free career assessment and personalized course recommendation from our experts.
             </p>
             <Link to="/contact">
               <Button 
