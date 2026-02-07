@@ -71,13 +71,13 @@ export default function About() {
               </p>
               <div className="flex items-center gap-6">
                 <div className="text-center">
-                  <div className="font-heading font-bold text-4xl text-primary">500+</div>
-                  <div className="text-sm text-muted-foreground">Students Trained</div>
+                  <div className="font-heading font-bold text-4xl text-primary">15+</div>
+                  <div className="text-sm text-muted-foreground">Certifications</div>
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="text-center">
-                  <div className="font-heading font-bold text-4xl text-primary">95%</div>
-                  <div className="text-sm text-muted-foreground">Placement Rate</div>
+                  <div className="font-heading font-bold text-4xl text-primary">100%</div>
+                  <div className="text-sm text-muted-foreground">Practical Training</div>
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="text-center">
