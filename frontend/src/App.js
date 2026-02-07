@@ -41,6 +41,8 @@ function App() {
           <Route path="/courses" element={<Layout><Courses /></Layout>} />
           <Route path="/courses/:slug" element={<Layout><CourseDetail /></Layout>} />
           <Route path="/certifications" element={<Layout><Certifications /></Layout>} />
+          <Route path="/ai-tools" element={<Layout><AITools /></Layout>} />
+          <Route path="/careers" element={<Layout><Careers /></Layout>} />
           <Route path="/blog" element={<Layout><Blog /></Layout>} />
           <Route path="/blog/:slug" element={<Layout><Blog /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
