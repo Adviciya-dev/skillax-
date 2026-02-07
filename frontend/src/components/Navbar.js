@@ -11,12 +11,8 @@ import { Button } from '../components/ui/button';
 const LOGO_URL = "https://customer-assets.emergentagent.com/job_72a42d6f-d52d-43a7-9830-99ee47bb23ab/artifacts/27yldfrm_image.png";
 
 const courses = [
-  { name: 'Digital Marketing Foundation', slug: 'digital-marketing-foundation', icon: BookOpen, desc: 'Master the fundamentals' },
-  { name: 'Advanced SEO & Performance', slug: 'advanced-seo-performance', icon: Award, desc: 'Dominate search engines' },
-  { name: 'Social Media & Ads Mastery', slug: 'social-media-ads-mastery', icon: Users, desc: 'Conquer social platforms' },
-  { name: 'AI-Powered Digital Marketing', slug: 'ai-powered-digital-marketing', icon: Cpu, desc: 'Future-proof your skills' },
-  { name: 'Web, App & QA Marketing', slug: 'web-app-qa-marketing', icon: PenTool, desc: 'Technical marketing mastery' },
-  { name: 'Freelancing & Agency Building', slug: 'freelancing-agency-building', icon: Briefcase, desc: 'Build your business' },
+  { name: 'Professional Digital Marketing', slug: 'professional-digital-marketing', icon: BookOpen, desc: '4 Months - Complete Mastery' },
+  { name: 'Advanced AI-Powered Marketing', slug: 'ai-powered-marketing', icon: Cpu, desc: '2 Months - AI Tools Expert' },
 ];
 
 const navLinks = [
@@ -24,6 +20,8 @@ const navLinks = [
   { name: 'About', path: '/about' },
   { name: 'Courses', path: '/courses', hasDropdown: true },
   { name: 'Certifications', path: '/certifications' },
+  { name: 'AI & Tools', path: '/ai-tools' },
+  { name: 'Careers', path: '/careers' },
   { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ];
