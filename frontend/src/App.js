@@ -8,6 +8,8 @@ import About from "./pages/About";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import Certifications from "./pages/Certifications";
+import AITools from "./pages/AITools";
+import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
