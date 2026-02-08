@@ -459,6 +459,11 @@ async def get_analytics_summary(admin: dict = Depends(get_current_admin)):
     chatbot_leads = await db.leads.count_documents({"source": "chatbot"})
     total_courses = await db.courses.count_documents({"active": True})
     total_blogs = await db.blogs.count_documents({"published": True})
+    total_page_views = await db.page_views.count_documents({})
+    
+    # Count unique visitors by session_id
+    unique_sessions = await db.page_views.distinct("session_id")
+    unique_visitors = len(unique_sessions)
     
     return AnalyticsSummary(
         total_leads=total_leads,
@@ -466,7 +471,9 @@ async def get_analytics_summary(admin: dict = Depends(get_current_admin)):
         website_leads=website_leads,
         chatbot_leads=chatbot_leads,
         total_courses=total_courses,
-        total_blogs=total_blogs
+        total_blogs=total_blogs,
+        total_page_views=total_page_views,
+        unique_visitors=unique_visitors
     )
 
 @api_router.get("/analytics/leads-by-source")
