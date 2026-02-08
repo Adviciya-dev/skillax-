@@ -840,6 +840,7 @@ function FinalCTASection() {
 }
 
 export default function Courses() {
+  const [showAILab, setShowAILab] = useState(false);
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -851,6 +852,14 @@ export default function Courses() {
 
   return (
     <div className="overflow-hidden bg-background">
+      {/* SEO Meta Tags */}
+      <SEO 
+        title="Digital Marketing Courses | SEO AEO Google Ads Meta Ads Training"
+        description="Explore our comprehensive digital marketing courses. Learn SEO, AEO, GEO, Google Ads, Meta Ads, ChatGPT Ads, 30+ AI tools with guaranteed Infopark internship. Professional and Advanced programs available."
+        keywords="digital marketing courses, seo training kerala, google ads course, meta ads training, ai marketing, chatgpt ads course, digital marketing certification"
+        url="https://skillax.in/courses"
+      />
+      
       {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative min-h-[95vh] flex items-center pt-20 overflow-hidden">
         {/* Animated Background */}
