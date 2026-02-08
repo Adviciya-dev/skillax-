@@ -259,7 +259,7 @@ export default function Contact() {
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-brand-success" /> Counselor callback within 24 hours</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-brand-success" /> Personalized course recommendation</li>
                         <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-brand-success" /> Fee details & scholarship options</li>
-                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-brand-success" /> March 2025 batch enrollment</li>
+                        <li className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-brand-success" /> March 2026 batch enrollment</li>
                       </ul>
                     </div>
                     <Button variant="outline" onClick={() => setIsSuccess(false)} className="rounded-full">
