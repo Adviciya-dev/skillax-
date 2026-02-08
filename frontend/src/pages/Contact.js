@@ -389,7 +389,7 @@ export default function Contact() {
               {/* Benefits */}
               <AnimatedSection delay={0.1}>
                 <div className="card-base">
-                  <h3 className="font-heading font-bold text-lg mb-4">Why Join March 2025 Batch?</h3>
+                  <h3 className="font-heading font-bold text-lg mb-4">Why Join March 2026 Batch?</h3>
                   <div className="grid grid-cols-2 gap-4">
                     {benefits.map((benefit, i) => {
                       const Icon = benefit.icon;
