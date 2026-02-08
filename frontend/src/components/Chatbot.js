@@ -118,7 +118,7 @@ export default function Chatbot() {
     try {
       await axios.post(`${API}/leads`, {
         name: leadData.name,
-        email: leadData.email || `${leadData.phone}@chatbot.skillax.in`,
+        email: leadData.email || `${leadData.phone}@chatbot.askillax.in`,
         phone: leadData.phone,
         interest: 'Course Inquiry',
         source: 'chatbot',
@@ -129,7 +129,7 @@ export default function Chatbot() {
       setShowLeadForm(false);
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: `Thanks ${leadData.name}! 🎉\n\nYour details have been saved. Our counselor will call you within 24 hours.\n\n**What you'll get:**\n- Exact course fees\n- Scholarship options\n- March 2025 batch details\n\nAnything else I can help with?`
+        content: `Thanks ${leadData.name}! 🎉\n\nYour details have been saved. Our counselor will call you within 24 hours.\n\n**What you'll get:**\n- Exact course fees\n- Scholarship options\n- March 2026 batch details\n\nAnything else I can help with?`
       }]);
     } catch (error) {
       console.error('Lead submission error:', error);
@@ -167,9 +167,9 @@ export default function Chatbot() {
     } else if (userMessage.includes('batch') || userMessage.includes('start') || userMessage.includes('when') || userMessage.includes('timing')) {
       response = predefinedQA.batch.answer;
     } else if (userMessage.includes('hi') || userMessage.includes('hello') || userMessage.includes('hey')) {
-      response = "Hello! 👋 Welcome to Skillax Academy!\n\n**March 2025 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 25+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
+      response = "Hello! 👋 Welcome to Askillax Academy!\n\n**March 2026 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 30+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
     } else if (userMessage.includes('thank')) {
-      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@skillax.in\n\nGood luck with your digital marketing journey!";
+      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@askillax.in\n\nGood luck with your digital marketing journey!";
     } else if (userMessage.includes('seo') || userMessage.includes('aeo') || userMessage.includes('geo')) {
       response = "We cover ALL three optimization types:\n\n**SEO** - Search Engine Optimization\n- Google, Bing rankings\n\n**AEO** - Answer Engine Optimization\n- ChatGPT, Perplexity visibility\n\n**GEO** - Generative Engine Optimization\n- AI-generated search results\n\nThis is the future of search! We're one of the few academies teaching this.";
     } else {
@@ -247,7 +247,7 @@ export default function Chatbot() {
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-white flex items-center gap-2">
-                    Skillax AI
+                    Askillax AI
                     <Sparkles className="h-4 w-4" />
                   </h3>
                   <p className="text-xs text-white/80">Online • Instant replies</p>
