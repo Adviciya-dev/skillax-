@@ -203,8 +203,8 @@ export default function Courses() {
           <AnimatedSection delay={0.2} className="mt-12">
             <div className="flex flex-wrap justify-center gap-8">
               {[
-                { value: '25+', label: 'Certifications' },
-                { value: '6', label: 'AI Tools' },
+                { value: '30+', label: 'Certifications' },
+                { value: '30+', label: 'AI Tools' },
                 { value: '100%', label: 'Practical' },
                 { value: 'March', label: 'Next Batch' },
               ].map((stat, i) => (
