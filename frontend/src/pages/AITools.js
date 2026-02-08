@@ -89,10 +89,10 @@ const toolCategories = [
     tools: ['Zoho CRM', 'HubSpot', 'Salesforce', 'Google Analytics 4', 'Hotjar', 'Mixpanel'],
   },
   {
-    title: 'Development & Testing',
+    title: 'AI-Powered QA & Testing',
     icon: Code,
     color: 'from-purple-500 to-pink-500',
-    tools: ['GitHub Copilot', 'Cursor AI', 'Replit AI', 'Selenium', 'Cypress', 'Playwright'],
+    tools: ['GitHub Copilot', 'Playwright + AI', 'Automated Bug Detection', 'Visual Regression Testing'],
   },
   {
     title: 'Design & Creative',
