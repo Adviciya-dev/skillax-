@@ -407,26 +407,42 @@ export default function AITools() {
         </div>
       </section>
 
-      {/* Testing & Automation Section */}
+      {/* Full-Stack Digital Transformation Section */}
       <section className="section-padding bg-gradient-to-br from-purple-500/5 via-background to-blue-500/5">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-purple-500/10 text-purple-600 rounded-full text-sm font-medium mb-4">
-              Testing & QA
+              Full-Stack Digital Transformation
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Testing Automation with AI
+              Become a Complete Digital Expert
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Learn how to use GitHub Copilot for automated testing, QA processes, and code validation.
+              Not just marketing – learn to automate and test digital products using AI. 
+              Use GitHub Copilot with Playwright to detect bugs and ensure quality.
             </p>
           </AnimatedSection>
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { icon: Code, title: 'GitHub Copilot', desc: 'AI-powered code completion and testing script generation', color: 'from-gray-700 to-gray-900' },
-              { icon: TestTube, title: 'Test Automation', desc: 'Selenium, Cypress, Playwright for E2E testing', color: 'from-green-500 to-emerald-500' },
-              { icon: Settings, title: 'CI/CD Pipelines', desc: 'Automated deployment and quality assurance', color: 'from-blue-500 to-cyan-500' },
+              { 
+                icon: Code, 
+                title: 'AI-Powered Automation', 
+                desc: 'Use GitHub Copilot to write Playwright scripts that automate digital marketing workflows and detect issues', 
+                color: 'from-purple-500 to-pink-500' 
+              },
+              { 
+                icon: TestTube, 
+                title: 'Smart QA Testing', 
+                desc: 'Automate testing of landing pages, funnels, and campaigns. Find bugs before they impact conversions', 
+                color: 'from-green-500 to-emerald-500' 
+              },
+              { 
+                icon: Settings, 
+                title: 'Digital Transformation Expert', 
+                desc: 'Master the complete stack: Marketing + Automation + AI. Stand out as a full-stack digital professional', 
+                color: 'from-blue-500 to-cyan-500' 
+              },
             ].map((item, i) => {
               const Icon = item.icon;
               return (
