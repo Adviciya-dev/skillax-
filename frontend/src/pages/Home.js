@@ -24,7 +24,7 @@ const images = {
   office: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
 };
 
-// 25+ Certification logos with proper URLs
+// 30+ Certification logos
 const certificationLogos = [
   { name: 'Google Ads', logo: 'https://www.gstatic.com/images/branding/product/2x/google_ads_64dp.png' },
   { name: 'Meta', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png' },
@@ -39,6 +39,8 @@ const certificationLogos = [
   { name: 'Hootsuite', logo: 'https://hootsuite.com/favicon.ico' },
   { name: 'Buffer', logo: 'https://buffer.com/static/icons/favicon-32x32.png' },
   { name: 'Skill India', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Skill_India.png/220px-Skill_India.png' },
+  { name: 'Zoho', logo: 'https://www.zoho.com/favicon.ico' },
+  { name: 'Shopify', logo: 'https://cdn.shopify.com/shopifycloud/brochure/assets/brand-assets/shopify-logo-shopping-bag-full-color-66166b2e55d67988b56b4bd28b63c271e2b9713358cb723070a92bde17ad7d63.svg' },
 ];
 
 // Two courses only
@@ -46,62 +48,63 @@ const courses = [
   {
     id: 'professional',
     title: 'Professional Digital Marketing',
+    slug: 'professional-digital-marketing',
     duration: '4 Months',
     icon: Rocket,
     color: 'from-blue-600 to-indigo-600',
     bgColor: 'bg-gradient-to-br from-blue-500/10 to-indigo-500/10',
-    description: 'Complete A-Z digital marketing mastery with AI tools, live projects & guaranteed internship at Infopark IT company.',
+    description: 'Complete A-Z digital marketing mastery with 30+ AI tools, live projects & guaranteed internship at Infopark IT company.',
     highlights: [
       'SEO, AEO, GEO Optimization',
       'Google Ads & Meta Ads Mastery',
       'ChatGPT Ads (Next Big Trend!)',
-      'AI Tools: ChatGPT, Perplexity, Gemini, Copilot, Grok',
+      '30+ AI Tools Training',
       'Reddit & Quora Marketing',
       'Guaranteed Internship at Infopark',
     ],
-    certifications: 8,
+    certifications: 25,
   },
   {
     id: 'advanced',
     title: 'Advanced AI-Powered Marketing',
+    slug: 'ai-powered-marketing',
     duration: '2 Months',
     icon: Brain,
     color: 'from-purple-600 to-pink-600',
     bgColor: 'bg-gradient-to-br from-purple-500/10 to-pink-500/10',
     description: 'Master cutting-edge AI marketing tools and automation. Perfect for working professionals wanting to upskill.',
     highlights: [
-      'ChatGPT, Perplexity, Copilot, Gemini, Grok',
+      '30+ AI Tools Mastery',
       'AI Content & Image Generation',
       'Answer Engine Optimization (AEO)',
       'Marketing Automation',
       'Prompt Engineering Mastery',
       'Weekend Batches Available',
     ],
-    certifications: 5,
+    certifications: 15,
   },
 ];
 
-// Digital Transformation Statistics
+// Digital Transformation Statistics - Updated for 2026
 const stats = [
-  { number: 87, suffix: '%', label: 'Companies using AI by 2025', icon: Brain },
-  { number: 4.4, suffix: 'T', label: 'Digital Ad Spend by 2027', icon: DollarSign },
-  { number: 73, suffix: '%', label: 'Jobs need Digital Skills', icon: Briefcase },
-  { number: 156, suffix: '%', label: 'AI Marketing Growth', icon: TrendingUp },
+  { number: 92, suffix: '%', label: 'Companies using AI in 2026', icon: Brain },
+  { number: 5.2, suffix: 'T', label: 'Global Digital Ad Spend 2026', icon: DollarSign },
+  { number: 78, suffix: '%', label: 'Jobs need Digital Skills', icon: Briefcase },
+  { number: 180, suffix: '%', label: 'AI Marketing Growth Rate', icon: TrendingUp },
 ];
 
-// AI Search Queries for typing animation
+// AI Search Queries for typing animation - More training focused
 const searchQueries = [
-  "best digital marketing course in Kerala",
-  "learn Google Ads near Wayanad",
-  "ChatGPT Ads training India",
-  "SEO AEO GEO course Kerala",
-  "AI marketing certification",
-  "Meta Ads course Mananthavady",
-  "digital marketing internship Infopark",
+  "best digital marketing training Kerala",
+  "learn AI marketing tools 2026",
+  "Askillax digital marketing course",
+  "ChatGPT Ads training program",
+  "SEO AEO GEO certification Kerala",
+  "practical digital marketing training",
+  "AI-powered marketing academy",
   "Perplexity marketing training",
-  "learn Gemini AI for marketing",
-  "Grok AI course India",
-  "Reddit Quora marketing course",
+  "digital marketing with internship Kerala",
+  "hands-on marketing training",
 ];
 
 // Animated counter
@@ -144,7 +147,7 @@ function AnimatedSection({ children, className = '', delay = 0 }) {
   );
 }
 
-// AI Search Demo Component (like aivisibility.adviciya.com)
+// AI Search Demo Component - Training focused
 function AISearchDemo() {
   const [currentQuery, setCurrentQuery] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -159,7 +162,7 @@ function AISearchDemo() {
       if (displayText.length < query.length) {
         timeout = setTimeout(() => {
           setDisplayText(query.slice(0, displayText.length + 1));
-        }, 40);
+        }, 35);
       } else {
         timeout = setTimeout(() => {
           setShowResult(true);
@@ -167,13 +170,13 @@ function AISearchDemo() {
             setShowResult(false);
             setIsTyping(false);
           }, 2500);
-        }, 500);
+        }, 400);
       }
     } else {
       if (displayText.length > 0) {
         timeout = setTimeout(() => {
           setDisplayText(displayText.slice(0, -1));
-        }, 20);
+        }, 15);
       } else {
         setCurrentQuery((prev) => (prev + 1) % searchQueries.length);
         setIsTyping(true);
@@ -201,7 +204,7 @@ function AISearchDemo() {
           </div>
           <div className="flex-1 flex justify-center">
             <span className="px-4 py-1 bg-card rounded-full text-xs font-medium text-muted-foreground border border-border">
-              ChatGPT / Perplexity / Gemini / Grok
+              AI Search Engines 2026
             </span>
           </div>
         </div>
@@ -214,13 +217,14 @@ function AISearchDemo() {
               <Search className="h-5 w-5 text-white" />
             </div>
             <div className="flex-1">
-              <span className="text-xs text-muted-foreground">User is asking...</span>
+              <span className="text-xs text-muted-foreground">Students are searching...</span>
               <div className="mt-1 text-lg font-semibold min-h-[28px]">
                 "{displayText}<span className="animate-pulse text-primary">|</span>"
               </div>
               <div className="mt-2 flex gap-2">
-                <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">Digital Marketing</span>
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-xs rounded-full">Training</span>
                 <span className="px-2 py-0.5 bg-brand-amber/10 text-brand-amber text-xs rounded-full">Kerala</span>
+                <span className="px-2 py-0.5 bg-brand-success/10 text-brand-success text-xs rounded-full">AI</span>
               </div>
             </div>
           </div>
@@ -245,11 +249,11 @@ function AISearchDemo() {
                   <div className="mt-2 p-4 bg-brand-success/5 border border-brand-success/20 rounded-xl">
                     <div className="flex items-center gap-2 mb-2">
                       <BadgeCheck className="h-5 w-5 text-brand-success" />
-                      <span className="font-semibold text-brand-success">Skillax Academy, Wayanad</span>
+                      <span className="font-semibold text-brand-success">Askillax Academy, Wayanad</span>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Top-rated digital marketing academy with AI-powered curriculum, 25+ certifications, 
-                      and guaranteed internship at Infopark.
+                      #1 rated digital marketing training in Kerala with 30+ AI tools, 
+                      hands-on projects, and guaranteed Infopark internship.
                     </p>
                   </div>
                 </div>
@@ -289,7 +293,6 @@ function CareerAssessmentModal({ isOpen, onClose }) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      // Submit lead to backend
       await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/leads`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -333,7 +336,7 @@ function CareerAssessmentModal({ isOpen, onClose }) {
                 <Sparkles className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="font-heading font-bold text-xl">Career Assessment</h3>
+                <h3 className="font-heading font-bold text-xl">Free Career Guidance</h3>
                 <p className="text-xs text-muted-foreground">Step {step} of 4</p>
               </div>
             </div>
@@ -352,15 +355,52 @@ function CareerAssessmentModal({ isOpen, onClose }) {
           </div>
 
           {step === 1 && (
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-              <p className="text-muted-foreground">Get personalized course recommendations. Your future starts here!</p>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+              <h4 className="font-semibold">What's your current status?</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {['Student', 'Working Professional', 'Fresher', 'Business Owner'].map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => { setFormData({ ...formData, experience: option }); setStep(2); }}
+                    className={`p-4 border rounded-xl text-left transition-all hover:border-primary hover:bg-primary/5 ${
+                      formData.experience === option ? 'border-primary bg-primary/5' : 'border-border'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {step === 2 && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+              <h4 className="font-semibold">What's your goal?</h4>
+              <div className="grid grid-cols-1 gap-3">
+                {['Get a high-paying job', 'Start freelancing', 'Grow my business', 'Upskill for promotion'].map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => { setFormData({ ...formData, goal: option }); setStep(3); }}
+                    className={`p-4 border rounded-xl text-left transition-all hover:border-primary hover:bg-primary/5 ${
+                      formData.goal === option ? 'border-primary bg-primary/5' : 'border-border'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {step === 3 && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
+              <h4 className="font-semibold">Your contact details</h4>
               <input
                 type="text"
-                placeholder="Your Full Name"
+                placeholder="Full Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full input-base"
-                data-testid="assessment-name"
               />
               <input
                 type="email"
@@ -368,7 +408,6 @@ function CareerAssessmentModal({ isOpen, onClose }) {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full input-base"
-                data-testid="assessment-email"
               />
               <input
                 type="tel"
@@ -376,131 +415,32 @@ function CareerAssessmentModal({ isOpen, onClose }) {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="w-full input-base"
-                data-testid="assessment-phone"
               />
               <Button 
-                onClick={() => setStep(2)} 
-                className="w-full bg-primary hover:bg-primary/90 rounded-full"
-                disabled={!formData.name || !formData.email || !formData.phone}
-              >
-                Continue <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </motion.div>
-          )}
-
-          {step === 2 && (
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-              <p className="text-muted-foreground">What's your current situation?</p>
-              <div className="grid grid-cols-2 gap-3">
-                {['Student/Fresher (18-25)', 'Working Professional', 'Business Owner', 'Career Change (25+)'].map((exp) => (
-                  <button
-                    key={exp}
-                    onClick={() => setFormData({ ...formData, experience: exp })}
-                    className={`p-4 rounded-xl border-2 text-left text-sm transition-all ${
-                      formData.experience === exp 
-                        ? 'border-primary bg-primary/5' 
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                  >
-                    {exp}
-                  </button>
-                ))}
-              </div>
-              <Button 
-                onClick={() => setStep(3)} 
-                className="w-full bg-primary hover:bg-primary/90 rounded-full"
-                disabled={!formData.experience}
-              >
-                Continue <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </motion.div>
-          )}
-
-          {step === 3 && (
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-              <p className="text-muted-foreground">What's your primary goal?</p>
-              <div className="space-y-3">
-                {[
-                  'Get a high-paying digital marketing job',
-                  'Start freelancing & work from anywhere',
-                  'Grow my business with AI marketing',
-                  'Master AI tools (ChatGPT, Perplexity, etc.)',
-                ].map((goal) => (
-                  <button
-                    key={goal}
-                    onClick={() => setFormData({ ...formData, goal })}
-                    className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                      formData.goal === goal 
-                        ? 'border-primary bg-primary/5' 
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                  >
-                    {goal}
-                  </button>
-                ))}
-              </div>
-              <Button 
                 onClick={handleSubmit} 
-                className="w-full bg-primary hover:bg-primary/90 rounded-full"
-                disabled={!formData.goal || isSubmitting}
+                disabled={!formData.name || !formData.phone || isSubmitting}
+                className="w-full bg-primary hover:bg-primary/90 rounded-full py-6"
               >
-                {isSubmitting ? 'Processing...' : 'Get My Recommendation'} <Sparkles className="ml-2 h-4 w-4" />
+                {isSubmitting ? 'Submitting...' : 'Get Free Guidance'}
               </Button>
             </motion.div>
           )}
 
           {step === 4 && (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-4">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-success/10 rounded-full">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-6">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-brand-success/10 rounded-full mb-4">
                 <CheckCircle className="h-10 w-10 text-brand-success" />
               </div>
-              <h4 className="font-heading font-bold text-2xl">Perfect Match Found!</h4>
-              <p className="text-muted-foreground">
-                Based on your profile, we recommend our <strong className="text-primary">Professional Digital Marketing</strong> course.
+              <h4 className="font-heading font-bold text-xl mb-2">Thank You!</h4>
+              <p className="text-muted-foreground mb-6">
+                Our career counselor will contact you within 24 hours with personalized guidance.
               </p>
-              <div className="p-4 bg-primary/5 rounded-xl border border-primary/20 text-left">
-                <p className="text-sm">
-                  <strong>What's next?</strong><br />
-                  Our counselor will contact you within 24 hours with:
-                </p>
-                <ul className="mt-2 text-sm text-muted-foreground space-y-1">
-                  <li>• Personalized learning path</li>
-                  <li>• Fee structure & scholarship options</li>
-                  <li>• March 2025 batch details</li>
-                </ul>
-              </div>
-              <Button onClick={onClose} className="w-full bg-primary hover:bg-primary/90 rounded-full">
-                Done
-              </Button>
+              <Button onClick={onClose} variant="outline" className="rounded-full">Close</Button>
             </motion.div>
           )}
         </motion.div>
       </motion.div>
     </AnimatePresence>
-  );
-}
-
-// Marquee component for certifications
-function CertificationMarquee() {
-  return (
-    <div className="relative overflow-hidden py-4">
-      <div className="flex animate-marquee">
-        {[...certificationLogos, ...certificationLogos, ...certificationLogos].map((cert, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-3 px-6 py-3 mx-3 bg-card rounded-xl border border-border shrink-0 hover:border-primary/30 transition-colors"
-          >
-            <img 
-              src={cert.logo} 
-              alt={cert.name} 
-              className="h-8 w-8 object-contain"
-              loading="lazy"
-            />
-            <span className="font-medium whitespace-nowrap">{cert.name}</span>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -510,509 +450,350 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
-        {/* Animated Background */}
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-amber/10 rounded-full blur-3xl animate-pulse animation-delay-1000" />
+          <div className="absolute top-20 right-20 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-20 w-[400px] h-[400px] bg-brand-amber/5 rounded-full blur-3xl" />
         </div>
 
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLDAsMCwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
-
         <div className="container-custom relative z-10">
-          <div className="text-center max-w-5xl mx-auto">
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-amber/10 border border-brand-amber/30 rounded-full mb-6"
-            >
-              <Sparkles className="h-4 w-4 text-brand-amber" />
-              <span className="text-sm font-medium text-brand-amber">March 2025 Batch - Enrolling Now!</span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
-            >
-              When People Search with AI,{' '}
-              <span className="relative">
-                <span className="gradient-text">Are You the Answer?</span>
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                  <path d="M2 10C50 4 100 4 150 6C200 8 250 4 298 8" stroke="url(#gradient)" strokeWidth="3" strokeLinecap="round"/>
-                  <defs>
-                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="0">
-                      <stop stopColor="#2B2D9C"/>
-                      <stop offset="1" stopColor="#F59E0B"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl mx-auto"
-            >
-              <span className="font-semibold text-foreground">The AI revolution is here.</span> ChatGPT, Perplexity, Gemini, Grok – 
-              billions are using AI to search. Learn <span className="text-primary font-semibold">SEO, AEO, GEO & ChatGPT Ads</span> at Kerala's #1 Academy.
-            </motion.p>
-
-            {/* Trust Indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-wrap justify-center gap-6 mb-8"
-            >
-              {[
-                { icon: Building, text: 'Infopark Internship' },
-                { icon: Award, text: '25+ Certifications' },
-                { icon: Brain, text: 'AI-First Curriculum' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-full text-sm">
-                  <item.icon className="h-4 w-4 text-brand-success" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-4"
-            >
-              <Button
-                onClick={() => setShowAssessment(true)}
-                data-testid="hero-assessment-btn"
-                size="lg"
-                className="bg-gradient-to-r from-primary to-brand-indigo hover:opacity-90 text-white rounded-full px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all group"
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="flex flex-wrap items-center gap-3"
               >
-                <Sparkles className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                Free Career Assessment
-              </Button>
-              <Link to="/courses">
+                {[
+                  { icon: Building, text: 'Infopark Internship' },
+                  { icon: Award, text: '30+ Certifications' },
+                  { icon: Brain, text: 'AI-First Training' },
+                ].map((badge, i) => (
+                  <span key={i} className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium">
+                    <badge.icon className="h-4 w-4 text-primary" />
+                    {badge.text}
+                  </span>
+                ))}
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                data-testid="hero-title"
+              >
+                Master Digital Marketing with{' '}
+                <span className="gradient-text">30+ AI Tools</span>{' '}
+                at Askillax
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-lg text-muted-foreground max-w-xl"
+              >
+                Kerala's #1 AI-powered digital marketing training academy. 
+                Get certified in ChatGPT, Perplexity, Gemini, Copilot, Grok + guaranteed internship at Infopark.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-wrap gap-4"
+              >
+                <Link to="/courses">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 rounded-full px-8 font-semibold">
+                    Explore Training Programs
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
                 <Button
                   size="lg"
                   variant="outline"
-                  data-testid="hero-courses-btn"
-                  className="rounded-full px-8 py-6 text-lg font-semibold border-2"
+                  className="rounded-full px-8"
+                  onClick={() => setShowAssessment(true)}
                 >
-                  View Courses
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <Play className="mr-2 h-5 w-5" />
+                  Free Career Guidance
                 </Button>
-              </Link>
-            </motion.div>
+              </motion.div>
+
+              {/* Trust Badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="pt-6 border-t border-border"
+              >
+                <p className="text-sm text-muted-foreground mb-4">Trusted by 500+ students across Kerala</p>
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-brand-amber border-2 border-background" />
+                      ))}
+                    </div>
+                    <span className="text-sm font-medium">500+ Alumni</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-brand-amber text-brand-amber" />
+                    ))}
+                    <span className="text-sm font-medium ml-1">4.9/5</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Right Column - AI Search Demo */}
+            <AISearchDemo />
           </div>
-
-          {/* AI Search Demo */}
-          <AISearchDemo />
         </div>
       </section>
 
-      {/* Certification Logos Marquee */}
-      <section className="py-6 bg-muted/30 border-y border-border overflow-hidden">
-        <div className="container-custom mb-4">
-          <p className="text-center text-sm text-muted-foreground font-medium uppercase tracking-wider">
-            Get 25+ Certifications from Industry Leaders
-          </p>
-        </div>
-        <CertificationMarquee />
-      </section>
-
-      {/* Digital Transformation Stats */}
-      <section className="section-padding bg-gradient-to-br from-primary via-primary to-brand-indigo text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-
-        <div className="container-custom relative">
-          <AnimatedSection className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 bg-white/10 text-white rounded-full text-sm font-medium mb-4">
-              The Digital Revolution
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              The World is Going Digital. Are You?
-            </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
-              The digital economy is worth trillions. Those with digital skills are earning 40% more. 
-              Don't get left behind.
-            </p>
-          </AnimatedSection>
-
+      {/* Stats Section */}
+      <section className="section-padding bg-primary text-primary-foreground">
+        <div className="container-custom">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((stat, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/10">
+            {stats.map((stat, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <motion.div 
+                  className="text-center p-6 bg-white/5 rounded-2xl border border-white/10"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
                   <stat.icon className="h-8 w-8 mx-auto mb-3 opacity-80" />
-                  <div className="font-heading font-bold text-4xl md:text-5xl mb-2">
+                  <div className="font-heading font-bold text-4xl mb-1">
                     <AnimatedCounter target={stat.number} suffix={stat.suffix} decimals={stat.suffix === 'T' ? 1 : 0} />
                   </div>
-                  <div className="text-white/80 text-sm">{stat.label}</div>
-                </div>
+                  <p className="text-sm opacity-80">{stat.label}</p>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Comparison Section - Students of Your Age */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-16">
-            <span className="inline-block px-4 py-1.5 bg-destructive/10 text-destructive rounded-full text-sm font-medium mb-4">
-              Reality Check
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Students Your Age Are Already{' '}
-              <span className="gradient-text">Landing Dream Jobs</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              While you're thinking, others are doing. Here's what separates digital marketing 
-              professionals from everyone else.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Without Training */}
-            <AnimatedSection delay={0.1}>
-              <div className="card-base border-destructive/30 bg-destructive/5 h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-destructive/10 rounded-lg">
-                    <X className="h-6 w-6 text-destructive" />
-                  </div>
-                  <h3 className="font-heading font-bold text-xl">Without Digital Skills</h3>
-                </div>
-                <ul className="space-y-4">
-                  {[
-                    'Starting salary: ₹15,000-20,000/month',
-                    'Limited to local job opportunities',
-                    'No remote work options',
-                    'Missing AI revolution completely',
-                    'Dependent on traditional job market',
-                    'No freelancing income potential',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <X className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimatedSection>
-
-            {/* With Skillax */}
-            <AnimatedSection delay={0.2}>
-              <div className="card-base border-brand-success/30 bg-brand-success/5 h-full relative overflow-hidden">
-                <div className="absolute top-4 right-4 px-3 py-1 bg-brand-success text-white text-xs font-bold rounded-full">
-                  RECOMMENDED
-                </div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-brand-success/10 rounded-lg">
-                    <CheckCircle className="h-6 w-6 text-brand-success" />
-                  </div>
-                  <h3 className="font-heading font-bold text-xl">With Skillax Training</h3>
-                </div>
-                <ul className="space-y-4">
-                  {[
-                    'Starting salary: ₹40,000-80,000/month',
-                    '25+ industry certifications',
-                    'Guaranteed Infopark internship',
-                    'Master AI: ChatGPT, Perplexity, Gemini, Grok',
-                    'Learn SEO, AEO, GEO & ChatGPT Ads',
-                    'Freelance on Upwork, Fiverr globally',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-brand-success shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link to="/contact" className="block mt-6">
-                  <Button className="w-full bg-brand-success hover:bg-brand-success/90 text-white rounded-full">
-                    Start My Journey <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </AnimatedSection>
-          </div>
+      {/* Certification Marquee */}
+      <section className="py-8 bg-muted/30 border-y border-border overflow-hidden">
+        <div className="container-custom mb-4">
+          <p className="text-center text-sm text-muted-foreground font-medium uppercase tracking-wider">
+            Earn 30+ Industry Certifications
+          </p>
         </div>
+        <motion.div
+          className="flex gap-8"
+          animate={{ x: [0, -1500] }}
+          transition={{ x: { duration: 30, repeat: Infinity, ease: 'linear' } }}
+        >
+          {[...certificationLogos, ...certificationLogos].map((cert, i) => (
+            <div key={i} className="flex items-center gap-3 px-6 py-3 bg-card border border-border rounded-xl shrink-0">
+              <img src={cert.logo} alt={cert.name} className="h-8 w-8 object-contain" loading="lazy" />
+              <span className="font-medium whitespace-nowrap">{cert.name}</span>
+            </div>
+          ))}
+        </motion.div>
       </section>
 
       {/* Courses Section */}
-      <section className="section-padding bg-muted/30" data-testid="courses-section">
+      <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Our Programs
+              Training Programs
             </span>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Choose Your Path to Success
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Two comprehensive programs covering everything from traditional marketing to 
-              AI-powered strategies. March 2025 batch now open!
+              Comprehensive digital marketing training designed for the AI era. 
+              Real projects, real skills, real results.
             </p>
           </AnimatedSection>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {courses.map((course, index) => {
-              const Icon = course.icon;
-              return (
-                <AnimatedSection key={course.id} delay={index * 0.15}>
-                  <div className={`card-base h-full ${course.bgColor} border-2 hover:border-primary/30 transition-all hover-lift`}>
+          <div className="grid md:grid-cols-2 gap-8">
+            {courses.map((course, index) => (
+              <AnimatedSection key={course.id} delay={index * 0.1}>
+                <motion.div
+                  className={`card-base h-full ${course.bgColor} border-2 hover:border-primary/30 transition-all relative overflow-hidden`}
+                  whileHover={{ y: -10 }}
+                >
+                  {/* Gradient Overlay */}
+                  <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${course.color} opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2`} />
+                  
+                  <div className="relative z-10">
+                    {/* Header */}
                     <div className="flex items-start justify-between mb-6">
-                      <div className={`p-4 rounded-2xl bg-gradient-to-br ${course.color}`}>
-                        <Icon className="h-8 w-8 text-white" />
+                      <div className={`p-4 bg-gradient-to-br ${course.color} rounded-2xl text-white`}>
+                        <course.icon className="h-8 w-8" />
                       </div>
                       <div className="text-right">
-                        <span className="px-4 py-1.5 bg-card border border-border rounded-full text-sm font-medium">
-                          {course.duration}
-                        </span>
-                        <div className="mt-2 text-xs text-muted-foreground">
-                          {course.certifications} Certifications
-                        </div>
+                        <span className="text-xs text-muted-foreground">Duration</span>
+                        <div className="font-heading font-bold text-lg">{course.duration}</div>
                       </div>
                     </div>
 
+                    {/* Content */}
                     <h3 className="font-heading font-bold text-2xl mb-3">{course.title}</h3>
                     <p className="text-muted-foreground mb-6">{course.description}</p>
 
+                    {/* Highlights */}
                     <div className="space-y-3 mb-6">
                       {course.highlights.map((highlight, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <CheckCircle className="h-4 w-4 text-brand-success shrink-0" />
+                        <motion.div 
+                          key={i} 
+                          className="flex items-center gap-3"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.05 }}
+                        >
+                          <CheckCircle className="h-5 w-5 text-brand-success shrink-0" />
                           <span className="text-sm">{highlight}</span>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
 
-                    <Link to="/contact">
-                      <Button className={`w-full bg-gradient-to-r ${course.color} text-white rounded-full py-6 font-semibold`}>
-                        Enroll Now <ArrowRight className="ml-2 h-5 w-5" />
-                      </Button>
-                    </Link>
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-6 border-t border-border">
+                      <div className="flex items-center gap-2">
+                        <Award className="h-5 w-5 text-brand-amber" />
+                        <span className="text-sm font-medium">{course.certifications}+ Certifications</span>
+                      </div>
+                      <Link to={`/courses/${course.slug}`}>
+                        <Button className={`bg-gradient-to-r ${course.color} hover:opacity-90 rounded-full`}>
+                          Learn More
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* AI Tools Section */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <AnimatedSection className="text-center mb-12">
-            <span className="inline-block px-4 py-1.5 bg-purple-500/10 text-purple-600 rounded-full text-sm font-medium mb-4">
-              AI-First Curriculum
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Master the AI Tools That Matter
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Not just ChatGPT – we teach you ALL the AI tools dominating the market right now.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { name: 'ChatGPT', desc: 'Content & Ads' },
-              { name: 'Perplexity', desc: 'Research & AEO' },
-              { name: 'Gemini', desc: 'Google AI' },
-              { name: 'Copilot', desc: 'Microsoft AI' },
-              { name: 'Grok', desc: 'X/Twitter AI' },
-              { name: 'Midjourney', desc: 'Image Gen' },
-            ].map((tool, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className="card-base text-center hover-lift p-4">
-                  <div className="p-3 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl inline-block mb-3">
-                    <Brain className="h-6 w-6 text-purple-600" />
-                  </div>
-                  <h4 className="font-semibold text-sm">{tool.name}</h4>
-                  <p className="text-xs text-muted-foreground">{tool.desc}</p>
-                </div>
+                </motion.div>
               </AnimatedSection>
             ))}
           </div>
-
-          {/* SEO/AEO/GEO Section */}
-          <AnimatedSection className="mt-12">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { 
-                  title: 'SEO', 
-                  full: 'Search Engine Optimization',
-                  desc: 'Rank on Google, Bing & traditional search engines',
-                  color: 'from-blue-500 to-cyan-500'
-                },
-                { 
-                  title: 'AEO', 
-                  full: 'Answer Engine Optimization',
-                  desc: 'Get recommended by ChatGPT, Perplexity & AI assistants',
-                  color: 'from-purple-500 to-pink-500'
-                },
-                { 
-                  title: 'GEO', 
-                  full: 'Generative Engine Optimization',
-                  desc: 'Optimize for AI-generated search results & summaries',
-                  color: 'from-orange-500 to-red-500'
-                },
-              ].map((item, i) => (
-                <div key={i} className="card-base text-center">
-                  <div className={`inline-block px-6 py-2 bg-gradient-to-r ${item.color} text-white rounded-full font-bold text-2xl mb-4`}>
-                    {item.title}
-                  </div>
-                  <h4 className="font-semibold mb-2">{item.full}</h4>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
-          {/* ChatGPT Ads - Next Big Trend */}
-          <AnimatedSection className="mt-12">
-            <div className="card-base bg-gradient-to-br from-brand-amber/10 to-orange-500/10 border-brand-amber/30 text-center p-8">
-              <span className="inline-block px-4 py-1 bg-brand-amber text-white text-xs font-bold rounded-full mb-4">
-                🔥 NEXT BIG TREND
-              </span>
-              <h3 className="font-heading font-bold text-2xl md:text-3xl mb-4">
-                ChatGPT Ads & AI Advertising
-              </h3>
-              <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-                OpenAI is launching ads on ChatGPT. Google's AI Overviews are changing search. 
-                Meta's AI is transforming social ads. Learn to advertise where the future is!
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                {['ChatGPT Ads', 'Google AI Ads', 'Meta AI Ads', 'Reddit Marketing', 'Quora Marketing'].map((item, i) => (
-                  <span key={i} className="px-4 py-2 bg-card border border-border rounded-full text-sm font-medium">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
-      {/* Infopark Internship */}
-      <section className="section-padding bg-gradient-to-br from-primary/5 via-background to-brand-amber/5">
+      {/* Why Askillax */}
+      <section className="section-padding bg-muted/30">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection>
-              <span className="inline-block px-4 py-1.5 bg-brand-amber/10 text-brand-amber rounded-full text-sm font-medium mb-4">
-                Exclusive Opportunity
-              </span>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
-                Guaranteed Internship at{' '}
-                <span className="gradient-text">Infopark IT Company</span>
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Get real-world experience at Kerala's premier technology hub. Work on live 
-                projects with top IT companies and build your professional portfolio.
-              </p>
+          <AnimatedSection className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+              Why Askillax?
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+              What Makes Us Different
+            </h2>
+          </AnimatedSection>
 
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {[
-                  { icon: Building, title: 'Infopark Campus', desc: 'Premium IT hub' },
-                  { icon: Briefcase, title: 'Live Projects', desc: 'Real client work' },
-                  { icon: Users, title: 'Industry Mentors', desc: 'Expert guidance' },
-                  { icon: TrendingUp, title: 'Job Conversion', desc: 'High placement' },
-                ].map((item, i) => (
-                  <div key={i} className="p-4 bg-card rounded-xl border border-border">
-                    <item.icon className="h-6 w-6 text-primary mb-2" />
-                    <h4 className="font-semibold text-sm">{item.title}</h4>
-                    <p className="text-xs text-muted-foreground">{item.desc}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Brain, title: '30+ AI Tools', desc: 'ChatGPT, Perplexity, Gemini, Copilot, Grok, ManyChat, Zoho & more', color: 'from-purple-500 to-pink-500' },
+              { icon: Building, title: 'Infopark Internship', desc: 'Guaranteed internship at top IT companies in Kerala', color: 'from-blue-500 to-cyan-500' },
+              { icon: Award, title: '30+ Certifications', desc: 'Google, Meta, HubSpot, SEMrush & more included', color: 'from-brand-amber to-orange-500' },
+              { icon: Target, title: '100% Practical', desc: 'Real projects, real clients, real experience', color: 'from-green-500 to-emerald-500' },
+            ].map((item, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <motion.div 
+                  className="card-base text-center h-full"
+                  whileHover={{ y: -10 }}
+                >
+                  <div className={`inline-flex p-4 bg-gradient-to-br ${item.color} rounded-2xl text-white mb-4`}>
+                    <item.icon className="h-8 w-8" />
                   </div>
-                ))}
-              </div>
-
-              <Link to="/contact">
-                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6">
-                  Apply for Internship
-                </Button>
-              </Link>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <div className="relative">
-                <img
-                  src={images.office}
-                  alt="Infopark Office"
-                  className="rounded-3xl shadow-2xl"
-                  loading="lazy"
-                />
-                <div className="absolute -bottom-6 -left-6 bg-card border border-border rounded-2xl p-4 shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-brand-success/10 rounded-lg">
-                      <Building className="h-6 w-6 text-brand-success" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">Infopark, Kochi</div>
-                      <div className="text-xs text-muted-foreground">400+ IT Companies</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
+                  <h3 className="font-heading font-semibold text-xl mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm">{item.desc}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-br from-primary via-primary to-brand-indigo text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
+      {/* Testimonials */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+              Success Stories
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold">
+              What Our Students Say
+            </h2>
+          </AnimatedSection>
 
-        <div className="container-custom relative">
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: 'Rahul K.', role: 'Digital Marketer @ Infopark', quote: 'Askillax transformed my career. The AI tools training is exceptional!' },
+              { name: 'Priya M.', role: 'Freelancer', quote: 'Now earning more than my previous job. Best investment ever!' },
+              { name: 'Arun S.', role: 'SEO Lead @ Agency', quote: 'The practical training and internship opened so many doors for me.' },
+            ].map((testimonial, index) => (
+              <AnimatedSection key={index} delay={index * 0.1}>
+                <motion.div 
+                  className="card-base h-full"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-brand-indigo rounded-full flex items-center justify-center text-white font-bold">
+                      {testimonial.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground italic">"{testimonial.quote}"</p>
+                  <div className="flex mt-4">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <Star key={i} className="h-4 w-4 fill-brand-amber text-brand-amber" />
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Form Section */}
+      <section className="section-padding bg-gradient-to-br from-primary via-brand-indigo to-purple-600 text-white">
+        <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection>
-              <span className="inline-block px-4 py-1.5 bg-white/10 text-white rounded-full text-sm font-medium mb-4">
-                March 2025 Batch - Limited Seats
+              <span className="inline-block px-4 py-1.5 bg-white/10 rounded-full text-sm font-medium mb-4">
+                March 2026 Batch Enrolling
               </span>
-              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                Your Future Starts Today
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">
+                Ready to Start Your Digital Marketing Journey?
               </h2>
-              <p className="text-white/80 text-lg mb-8">
-                Join Kerala's #1 digital marketing academy with AI-powered curriculum, 
-                25+ certifications, and guaranteed Infopark internship.
+              <p className="text-white/80 mb-8">
+                Get a free consultation with our career counselor. 
+                We'll help you choose the right program based on your goals.
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  'Free Career Counseling',
-                  'Flexible EMI Options',
-                  'Weekend Batches',
-                  'Lifetime Support',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5" />
-                    <span className="text-sm">{item}</span>
-                  </div>
+              <div className="space-y-4">
+                {['Free career counseling session', 'Personalized learning path', 'Flexible payment options', 'No prior experience needed'].map((item, i) => (
+                  <motion.div 
+                    key={i} 
+                    className="flex items-center gap-3"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <CheckCircle className="h-5 w-5 text-brand-amber" />
+                    <span>{item}</span>
+                  </motion.div>
                 ))}
               </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <div className="bg-card text-card-foreground rounded-3xl p-8 shadow-2xl">
-                <h3 className="font-heading font-bold text-xl mb-2">
-                  Get Free Career Consultation
-                </h3>
-                <p className="text-muted-foreground text-sm mb-6">
-                  Our counselor will contact you within 24 hours.
-                </p>
-                <LeadForm source="home_cta" />
+              <div className="bg-card text-foreground rounded-3xl p-8 shadow-2xl">
+                <LeadForm source="home_page" />
               </div>
             </AnimatedSection>
           </div>
