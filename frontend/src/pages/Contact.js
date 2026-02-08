@@ -515,7 +515,7 @@ export default function Contact() {
               { q: 'Is online learning available?', a: 'Yes! We offer hybrid mode with live online classes for those who cannot attend in person.' },
               { q: 'What about job placement?', a: 'We provide 100% placement assistance with guaranteed internship at Infopark IT companies.' },
               { q: 'Are EMI options available?', a: 'Yes! Easy EMI starting from ₹2,999/month with no-cost EMI options available.' },
-              { q: 'When is the next batch?', a: 'March 2025 batch is now enrolling. Morning, evening & weekend options available.' },
+              { q: 'When is the next batch?', a: 'March 2026 batch is now enrolling. Morning, evening & weekend options available.' },
               { q: 'What AI tools will I learn?', a: 'ChatGPT, Perplexity, Gemini, Copilot, Grok, Midjourney & many more!' },
             ].map((faq, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
