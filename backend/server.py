@@ -148,6 +148,34 @@ class AnalyticsSummary(BaseModel):
     chatbot_leads: int
     total_courses: int
     total_blogs: int
+    total_page_views: int = 0
+    unique_visitors: int = 0
+
+class PageView(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    path: str
+    referrer: Optional[str] = None
+    user_agent: Optional[str] = None
+    ip_address: Optional[str] = None
+    country: Optional[str] = None
+    city: Optional[str] = None
+    session_id: str
+    timestamp: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class PageViewCreate(BaseModel):
+    path: str
+    referrer: Optional[str] = None
+    user_agent: Optional[str] = None
+    session_id: str
+
+class LeadConversionStats(BaseModel):
+    total_leads: int
+    converted_leads: int
+    pending_leads: int
+    conversion_rate: float
+    leads_by_status: List[Dict[str, Any]]
+    leads_trend: List[Dict[str, Any]]
 
 # ==================== AUTH HELPERS ====================
 
