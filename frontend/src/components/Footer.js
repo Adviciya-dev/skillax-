@@ -61,12 +61,12 @@ export default function Footer() {
                 <span>Mananthavady, Wayanad, Kerala 670645</span>
               </a>
               <a 
-                href="mailto:contact@skillax.in"
+                href="mailto:contact@askillax.in"
                 className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                 data-testid="footer-email"
               >
                 <Mail className="h-5 w-5 shrink-0" />
-                <span>contact@skillax.in</span>
+                <span>contact@askillax.in</span>
               </a>
             </div>
 
