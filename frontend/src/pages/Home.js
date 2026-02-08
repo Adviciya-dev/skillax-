@@ -524,30 +524,34 @@ export default function Home() {
                 </Button>
               </motion.div>
 
-              {/* Trust Badges */}
+              {/* First Batch Highlights */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
                 className="pt-6 border-t border-border"
               >
-                <p className="text-sm text-muted-foreground mb-4">Trusted by 500+ students across Kerala</p>
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-brand-amber border-2 border-background" />
-                      ))}
-                    </div>
-                    <span className="text-sm font-medium">500+ Alumni</span>
+                <div className="flex flex-wrap items-center gap-4">
+                  <motion.div 
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-amber/10 to-orange-500/10 border border-brand-amber/30 rounded-full"
+                    animate={{ scale: [1, 1.02, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <Sparkles className="h-4 w-4 text-brand-amber" />
+                    <span className="text-sm font-semibold text-brand-amber">Founding Batch - March 2026</span>
+                  </motion.div>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-brand-success/10 border border-brand-success/30 rounded-full">
+                    <Zap className="h-4 w-4 text-brand-success" />
+                    <span className="text-sm font-medium text-brand-success">Limited to 15 Students</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="h-4 w-4 fill-brand-amber text-brand-amber" />
-                    ))}
-                    <span className="text-sm font-medium ml-1">4.9/5</span>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full">
+                    <Award className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Special Launch Pricing</span>
                   </div>
                 </div>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Be part of our exclusive founding batch and get personalized mentorship from industry experts
+                </p>
               </motion.div>
             </div>
 
