@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     question: 'Will I get a certificate after completion?',
-    answer: 'Yes, upon successful completion, you will receive a Skillax certification along with industry-recognized certifications from Google, HubSpot, or Meta depending on the course you choose.',
+    answer: 'Yes, upon successful completion, you will receive an Askillax certification along with industry-recognized certifications from Google, HubSpot, or Meta depending on the course you choose.',
   },
 ];
 
