@@ -28,9 +28,9 @@ const contactInfo = [
   { 
     icon: Mail, 
     title: 'Email Us', 
-    content: 'contact@askillax.in', 
+    content: 'contact@skillax.in', 
     subtext: '24hr response',
-    link: 'mailto:contact@askillax.in',
+    link: 'mailto:contact@skillax.in',
     gradient: 'from-purple-500 to-pink-500'
   },
   { 
