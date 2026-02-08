@@ -173,7 +173,7 @@ export default function Chatbot() {
     } else if (userMessage.includes('seo') || userMessage.includes('aeo') || userMessage.includes('geo')) {
       response = "We cover ALL three optimization types:\n\n**SEO** - Search Engine Optimization\n- Google, Bing rankings\n\n**AEO** - Answer Engine Optimization\n- ChatGPT, Perplexity visibility\n\n**GEO** - Generative Engine Optimization\n- AI-generated search results\n\nThis is the future of search! We're one of the few academies teaching this.";
     } else {
-      response = "Great question! 🤔\n\nFor detailed info about this, I'd recommend speaking with our counselor.\n\nOr try asking about:\n- Our courses\n- 25+ certifications\n- Infopark internship\n- AI tools (ChatGPT, etc.)\n- Next batch dates\n\nI'm here to help!";
+      response = "Great question! 🤔\n\nFor detailed info about this, I'd recommend speaking with our counselor.\n\nOr try asking about:\n- Our courses\n- 30+ certifications\n- Infopark internship\n- AI tools (ChatGPT, etc.)\n- Next batch dates\n\nI'm here to help!";
     }
 
     setTimeout(() => {
