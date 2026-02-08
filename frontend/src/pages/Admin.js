@@ -1134,22 +1134,294 @@ function Dashboard({ user, onLogout }) {
                 </div>
               )}
 
-              {/* Settings Tab - Placeholder */}
-              {activeTab === 'settings' && (
+              {/* Profiles Tab */}
+              {activeTab === 'profiles' && (
                 <div className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-bold">Settings</h2>
-                    <p className="text-muted-foreground">Configure your admin panel</p>
+                    <h2 className="text-2xl font-bold">AI Profile Analytics</h2>
+                    <p className="text-muted-foreground">Student profiles created via AI Profile Creator</p>
                   </div>
+
+                  {/* Profile Stats */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <StatCard 
+                      title="Total Profiles" 
+                      value={profileAnalytics?.total_profiles || 0}
+                      icon={User}
+                      color="purple"
+                    />
+                    <StatCard 
+                      title="Students" 
+                      value={profileAnalytics?.by_career_stage?.find(s => s.stage === 'student')?.count || 0}
+                      icon={GraduationCap}
+                      color="blue"
+                    />
+                    <StatCard 
+                      title="Freshers" 
+                      value={profileAnalytics?.by_career_stage?.find(s => s.stage === 'fresher')?.count || 0}
+                      icon={Target}
+                      color="green"
+                    />
+                    <StatCard 
+                      title="Professionals" 
+                      value={(profileAnalytics?.by_career_stage?.filter(s => ['1-3_years', '3-5_years', '5+_years'].includes(s.stage)).reduce((a, b) => a + b.count, 0)) || 0}
+                      icon={Briefcase}
+                      color="amber"
+                    />
+                  </div>
+
+                  {/* Recent Profiles */}
                   <Card>
-                    <CardContent className="py-12 text-center">
-                      <Settings className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="font-semibold mb-2">Settings Panel Coming Soon</h3>
-                      <p className="text-muted-foreground">
-                        Site settings, user management, and integrations will be available here.
-                      </p>
+                    <CardHeader>
+                      <CardTitle>Recent Profiles</CardTitle>
+                      <CardDescription>Latest student profiles created</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {profiles.length > 0 ? profiles.slice(0, 10).map((profile, index) => (
+                          <div key={index} className="flex items-center justify-between p-4 bg-muted/50 rounded-xl">
+                            <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center text-white font-bold text-lg">
+                                {profile.full_name?.charAt(0)?.toUpperCase()}
+                              </div>
+                              <div>
+                                <div className="font-semibold">{profile.full_name}</div>
+                                <div className="text-sm text-muted-foreground">{profile.email}</div>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <span className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full capitalize">
+                                    {profile.career_stage?.replace('_', ' ')}
+                                  </span>
+                                  <span className="text-xs text-muted-foreground">
+                                    Target: {profile.target_role}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-sm font-medium">{profile.profile_code}</div>
+                              <div className="text-xs text-muted-foreground flex items-center gap-1">
+                                <Eye className="h-3 w-3" />
+                                {profile.profile_views || 0} views
+                              </div>
+                              <Button variant="ghost" size="sm" asChild className="mt-1">
+                                <a href={`/profile/${profile.profile_code}`} target="_blank" rel="noopener noreferrer">
+                                  <ExternalLink className="h-3 w-3 mr-1" />
+                                  View
+                                </a>
+                              </Button>
+                            </div>
+                          </div>
+                        )) : (
+                          <div className="text-center py-8 text-muted-foreground">
+                            <User className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                            <p>No profiles created yet</p>
+                            <p className="text-sm">Profiles will appear here when students use the AI Profile Creator</p>
+                          </div>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
+                </div>
+              )}
+
+              {/* Settings Tab - Full SEO & Site Settings */}
+              {activeTab === 'settings' && siteSettings && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold">Site Settings & SEO</h2>
+                    <p className="text-muted-foreground">Configure your website settings and SEO metadata</p>
+                  </div>
+
+                  {/* Site Info */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Site Information</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Site Name</label>
+                          <input
+                            type="text"
+                            value={siteSettings.site_name || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, site_name: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Tagline</label>
+                          <input
+                            type="text"
+                            value={siteSettings.tagline || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, tagline: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Contact Email</label>
+                          <input
+                            type="email"
+                            value={siteSettings.contact_email || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, contact_email: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Contact Phone</label>
+                          <input
+                            type="tel"
+                            value={siteSettings.contact_phone || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, contact_phone: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">WhatsApp Number</label>
+                          <input
+                            type="tel"
+                            value={siteSettings.whatsapp_number || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, whatsapp_number: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1.5">Address</label>
+                        <input
+                          type="text"
+                          value={siteSettings.address || ''}
+                          onChange={(e) => setSiteSettings({...siteSettings, address: e.target.value})}
+                          className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* SEO Settings */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>SEO Settings</CardTitle>
+                      <CardDescription>Search engine optimization metadata</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1.5">Meta Title</label>
+                        <input
+                          type="text"
+                          value={siteSettings.meta_title || ''}
+                          onChange={(e) => setSiteSettings({...siteSettings, meta_title: e.target.value})}
+                          className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          maxLength={60}
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">{(siteSettings.meta_title || '').length}/60 characters</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1.5">Meta Description</label>
+                        <textarea
+                          value={siteSettings.meta_description || ''}
+                          onChange={(e) => setSiteSettings({...siteSettings, meta_description: e.target.value})}
+                          className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl resize-none"
+                          rows={3}
+                          maxLength={160}
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">{(siteSettings.meta_description || '').length}/160 characters</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1.5">Meta Keywords</label>
+                        <textarea
+                          value={siteSettings.meta_keywords || ''}
+                          onChange={(e) => setSiteSettings({...siteSettings, meta_keywords: e.target.value})}
+                          className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl resize-none"
+                          rows={2}
+                          placeholder="keyword1, keyword2, keyword3"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1.5">Google Analytics ID</label>
+                        <input
+                          type="text"
+                          value={siteSettings.google_analytics_id || ''}
+                          onChange={(e) => setSiteSettings({...siteSettings, google_analytics_id: e.target.value})}
+                          className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                          placeholder="G-XXXXXXXXXX"
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Social Links */}
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Social Media Links</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Facebook</label>
+                          <input
+                            type="url"
+                            value={siteSettings.social_facebook || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, social_facebook: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                            placeholder="https://facebook.com/..."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">Instagram</label>
+                          <input
+                            type="url"
+                            value={siteSettings.social_instagram || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, social_instagram: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                            placeholder="https://instagram.com/..."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">LinkedIn</label>
+                          <input
+                            type="url"
+                            value={siteSettings.social_linkedin || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, social_linkedin: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                            placeholder="https://linkedin.com/..."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-1.5">YouTube</label>
+                          <input
+                            type="url"
+                            value={siteSettings.social_youtube || ''}
+                            onChange={(e) => setSiteSettings({...siteSettings, social_youtube: e.target.value})}
+                            className="w-full px-4 py-2.5 bg-muted border border-border rounded-xl"
+                            placeholder="https://youtube.com/..."
+                          />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Save Button */}
+                  <div className="flex justify-end">
+                    <Button 
+                      onClick={async () => {
+                        setSavingSettings(true);
+                        try {
+                          await axios.put(`${API}/admin/settings`, siteSettings, { headers });
+                          toast.success('Settings saved successfully');
+                        } catch (error) {
+                          toast.error('Failed to save settings');
+                        }
+                        setSavingSettings(false);
+                      }}
+                      disabled={savingSettings}
+                      className="px-8"
+                    >
+                      {savingSettings ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
+                      Save Settings
+                    </Button>
+                  </div>
                 </div>
               )}
             </>
