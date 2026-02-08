@@ -71,7 +71,7 @@ const courses = [
       'Weekend Batches Available',
     ],
     certifications: [
-      'Skillax AI Expert', 'HubSpot Automation', 
+      'Askillax AI Expert', 'HubSpot Automation', 
       'Google AI Marketing', 'AI Content Specialist', 'Prompt Engineering'
     ],
     modules: [
