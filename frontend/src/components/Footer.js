@@ -168,7 +168,7 @@ export default function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Skillax Digital Marketing Academy. All rights reserved.
+              © {currentYear} Askillax Digital Marketing Academy. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm">
               <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">
