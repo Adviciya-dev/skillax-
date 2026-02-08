@@ -12,15 +12,15 @@ const quickLinks = [
   { name: 'About Us', path: '/about' },
   { name: 'All Courses', path: '/courses' },
   { name: 'Certifications', path: '/certifications' },
+  { name: 'AI & Tools', path: '/ai-tools' },
+  { name: 'Careers', path: '/careers' },
   { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ];
 
 const courses = [
-  { name: 'Digital Marketing Foundation', path: '/courses/digital-marketing-foundation' },
-  { name: 'Advanced SEO & Performance', path: '/courses/advanced-seo-performance' },
-  { name: 'Social Media & Ads Mastery', path: '/courses/social-media-ads-mastery' },
-  { name: 'AI-Powered Marketing', path: '/courses/ai-powered-digital-marketing' },
+  { name: 'Professional Digital Marketing', path: '/courses/professional-digital-marketing' },
+  { name: 'Advanced AI-Powered Marketing', path: '/courses/ai-powered-marketing' },
 ];
 
 const certifications = [
