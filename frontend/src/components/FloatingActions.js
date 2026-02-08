@@ -228,6 +228,7 @@ function CourseQuizModal({ isOpen, onClose }) {
 export default function FloatingActions() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showLab, setShowLab] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -237,6 +238,28 @@ export default function FloatingActions() {
         <AnimatePresence>
           {isExpanded && (
             <>
+              {/* AI Profile Creator Button */}
+              <motion.button
+                initial={{ opacity: 0, y: 20, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.8 }}
+                transition={{ delay: 0.2 }}
+                onClick={() => { setShowProfile(true); setIsExpanded(false); }}
+                className="group flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                data-testid="fab-profile-btn"
+              >
+                <User className="h-5 w-5" />
+                <span className="font-semibold text-sm">Create AI Profile</span>
+                <motion.span
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
+                  <Sparkles className="h-4 w-4" />
+                </motion.span>
+              </motion.button>
+
               {/* AI Lab Button */}
               <motion.button
                 initial={{ opacity: 0, y: 20, scale: 0.8 }}
@@ -247,15 +270,10 @@ export default function FloatingActions() {
                 className="group flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                data-testid="fab-lab-btn"
               >
                 <Brain className="h-5 w-5" />
                 <span className="font-semibold text-sm">AI Marketing Lab</span>
-                <motion.span
-                  animate={{ scale: [1, 1.3, 1] }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                >
-                  <Sparkles className="h-4 w-4" />
-                </motion.span>
               </motion.button>
 
               {/* Course Quiz Button */}
@@ -267,6 +285,7 @@ export default function FloatingActions() {
                 className="group flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                data-testid="fab-quiz-btn"
               >
                 <GraduationCap className="h-5 w-5" />
                 <span className="font-semibold text-sm">Find Your Course</span>
@@ -282,6 +301,7 @@ export default function FloatingActions() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           animate={{ rotate: isExpanded ? 180 : 0 }}
+          data-testid="fab-main-btn"
         >
           {/* Pulsing ring */}
           <motion.div
@@ -309,6 +329,7 @@ export default function FloatingActions() {
       {/* Modals */}
       <CourseQuizModal isOpen={showQuiz} onClose={() => setShowQuiz(false)} />
       <AIMarketingLab isOpen={showLab} onClose={() => setShowLab(false)} />
+      <AIProfileCreator isOpen={showProfile} onClose={() => setShowProfile(false)} />
     </>
   );
 }
