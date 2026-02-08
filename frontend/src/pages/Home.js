@@ -1119,6 +1119,7 @@ const Calendar = Clock;
 
 export default function Home() {
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showAILab, setShowAILab] = useState(false);
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -1128,6 +1129,14 @@ export default function Home() {
 
   return (
     <div className="overflow-hidden">
+      {/* SEO Meta Tags */}
+      <SEO 
+        title="Digital Marketing Academy | SEO AEO GEO Google Ads AI Tools"
+        description="Kerala's #1 AI-powered digital marketing academy. Master SEO, AEO, GEO, GMB, Google Ads, Meta Ads, ChatGPT Ads, 30+ AI tools. Guaranteed Infopark internship. Located in Mananthavady, Wayanad."
+        keywords="digital marketing course kerala, digital marketing training wayanad, seo course mananthavady, aeo training, geo optimization, google ads certification, meta ads training, chatgpt ads, ai marketing course, infopark internship"
+        url="https://skillax.in"
+      />
+      
       {/* Hero Section with Parallax */}
       <section ref={heroRef} className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5">
