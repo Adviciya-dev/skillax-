@@ -1060,21 +1060,75 @@ function Dashboard({ user, onLogout }) {
                 </Card>
               )}
 
-              {/* Courses Tab - Placeholder */}
+              {/* Courses Tab - Full Course Management */}
               {activeTab === 'courses' && (
                 <div className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-bold">Course Management</h2>
-                    <p className="text-muted-foreground">Manage your course catalog</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-2xl font-bold">Course Management</h2>
+                      <p className="text-muted-foreground">Manage your course catalog</p>
+                    </div>
                   </div>
-                  <Card>
-                    <CardContent className="py-12 text-center">
-                      <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="font-semibold mb-2">Course Editor Coming Soon</h3>
-                      <p className="text-muted-foreground">
-                        Currently courses are managed via the frontend code. 
-                        A full course editor will be available in the next update.
-                      </p>
+
+                  <div className="grid gap-4">
+                    {courses.length > 0 ? courses.map((course, index) => (
+                      <Card key={index} className="overflow-hidden">
+                        <CardContent className="p-0">
+                          <div className="flex items-center">
+                            <div className={`w-2 h-full ${course.active ? 'bg-green-500' : 'bg-amber-500'}`} />
+                            <div className="flex-1 p-4">
+                              <div className="flex items-start justify-between">
+                                <div>
+                                  <h3 className="font-semibold text-lg">{course.title}</h3>
+                                  <p className="text-sm text-muted-foreground line-clamp-1">{course.description}</p>
+                                  <div className="flex items-center gap-4 mt-2 text-sm">
+                                    <span className="flex items-center gap-1">
+                                      <Clock className="h-4 w-4" />
+                                      {course.duration}
+                                    </span>
+                                    <span className={`px-2 py-0.5 rounded-full text-xs ${course.active ? 'bg-green-500/10 text-green-600' : 'bg-amber-500/10 text-amber-600'}`}>
+                                      {course.active ? 'Active' : 'Inactive'}
+                                    </span>
+                                    <span className="text-muted-foreground">/{course.slug}</span>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <Button variant="ghost" size="sm" asChild>
+                                    <a href={`/courses/${course.slug}`} target="_blank" rel="noopener noreferrer">
+                                      <ExternalLink className="h-4 w-4" />
+                                    </a>
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )) : (
+                      <Card>
+                        <CardContent className="py-12 text-center">
+                          <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                          <h3 className="font-semibold mb-2">No courses yet</h3>
+                          <p className="text-muted-foreground">
+                            Courses are configured in the codebase.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </div>
+
+                  <Card className="border-dashed">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <AlertCircle className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
+                        <div>
+                          <h3 className="font-semibold mb-1">Course Content is Pre-configured</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Course modules, curriculum, and pricing are currently managed in the frontend code for optimal performance. 
+                            Contact your developer to update course content or add new courses.
+                          </p>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
