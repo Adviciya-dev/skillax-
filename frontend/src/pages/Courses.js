@@ -35,7 +35,7 @@ const courses = [
     certifications: [
       'Google Ads Search', 'Google Ads Display', 'Google Analytics 4',
       'Meta Blueprint', 'HubSpot Inbound', 'HubSpot Content',
-      'SEMrush SEO', 'Skillax Professional'
+      'SEMrush SEO', 'Askillax Professional'
     ],
     modules: [
       { title: 'Digital Marketing Fundamentals', weeks: '2 weeks', topics: ['Marketing Basics', 'Customer Journey', 'Digital Channels', 'Analytics Setup'] },
