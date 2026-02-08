@@ -90,8 +90,8 @@ const courses = [
 // Features
 const features = [
   { icon: Building, title: 'Infopark Internship', desc: 'Real-world experience at top IT companies', color: 'text-blue-600 bg-blue-500/10' },
-  { icon: Brain, title: 'AI-First Curriculum', desc: 'Master ChatGPT, Perplexity, Gemini & more', color: 'text-purple-600 bg-purple-500/10' },
-  { icon: Award, title: '25+ Certifications', desc: 'Industry-recognized credentials', color: 'text-amber-600 bg-amber-500/10' },
+  { icon: Brain, title: 'AI-First Curriculum', desc: 'Master 30+ AI tools', color: 'text-purple-600 bg-purple-500/10' },
+  { icon: Award, title: '30+ Certifications', desc: 'Industry-recognized credentials', color: 'text-amber-600 bg-amber-500/10' },
   { icon: Users, title: 'Small Batches', desc: 'Max 15 students for personal attention', color: 'text-green-600 bg-green-500/10' },
   { icon: Laptop, title: 'Live Projects', desc: 'Work on real client campaigns', color: 'text-pink-600 bg-pink-500/10' },
   { icon: Calendar, title: 'Flexible Timings', desc: 'Morning, evening & weekend options', color: 'text-cyan-600 bg-cyan-500/10' },
