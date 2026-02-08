@@ -832,7 +832,243 @@ async def seed_data():
         ]
         await db.blogs.insert_many(blogs)
     
+    # Initialize site settings if not exists
+    existing_settings = await db.site_settings.find_one({"id": "site_settings"})
+    if not existing_settings:
+        settings = SiteSettings().model_dump()
+        await db.site_settings.insert_one(settings)
+    
     return {"message": "Data seeded successfully", "admin_email": "admin@skillax.in", "admin_password": "SkillaxAdmin2024!"}
+
+# ==================== STUDENT PROFILE ENDPOINTS ====================
+
+@api_router.post("/profiles", response_model=StudentProfile)
+async def create_student_profile(profile_data: StudentProfileCreate):
+    """Create a new student profile with AI-generated content"""
+    
+    # Check if profile with email exists
+    existing = await db.student_profiles.find_one({"email": profile_data.email})
+    if existing:
+        raise HTTPException(status_code=400, detail="Profile with this email already exists")
+    
+    profile = StudentProfile(**profile_data.model_dump())
+    
+    # Generate AI content for the profile
+    try:
+        llm = LlmChat(api_key=EMERGENT_LLM_KEY)
+        
+        ai_prompt = f"""You are a career counselor and professional profile writer for a digital marketing academy. 
+Create content for a student profile based on this information:
+
+Name: {profile.full_name}
+Education: {profile.education_level} in {profile.field_of_study or 'General'}
+Career Stage: {profile.career_stage}
+Current Role: {profile.current_role or 'Student/Fresher'}
+Target Role: {profile.target_role}
+Career Goals: {profile.career_goals}
+Current Skills: {', '.join(profile.current_skills) if profile.current_skills else 'None specified'}
+Interests: {', '.join(profile.interests) if profile.interests else 'Digital Marketing'}
+Why Digital Marketing: {profile.why_digital_marketing}
+
+Generate the following in JSON format:
+{{
+    "ai_bio": "A compelling 3-4 sentence professional bio highlighting their potential and goals",
+    "ai_linkedin_headline": "A catchy LinkedIn headline (under 120 chars)",
+    "ai_strengths": ["strength1", "strength2", "strength3", "strength4"],
+    "ai_skill_gaps": ["skill1", "skill2", "skill3", "skill4", "skill5"],
+    "ai_course_recommendation": "Either 'Professional Digital Marketing' or 'Advanced AI-Powered Marketing' with 2-sentence justification",
+    "ai_career_roadmap": [
+        {{"phase": "Month 1-2", "title": "Foundation", "goals": ["goal1", "goal2"]}},
+        {{"phase": "Month 3-4", "title": "Skill Building", "goals": ["goal1", "goal2"]}},
+        {{"phase": "Month 5-6", "title": "Specialization", "goals": ["goal1", "goal2"]}},
+        {{"phase": "Month 7-12", "title": "Career Launch", "goals": ["goal1", "goal2"]}}
+    ]
+}}
+
+Return ONLY valid JSON, no other text."""
+
+        response = await llm.send_message_async(
+            model="gpt-4o",
+            messages=[UserMessage(content=ai_prompt)]
+        )
+        
+        import json
+        # Extract JSON from response
+        response_text = response.content
+        if "```json" in response_text:
+            response_text = response_text.split("```json")[1].split("```")[0]
+        elif "```" in response_text:
+            response_text = response_text.split("```")[1].split("```")[0]
+        
+        ai_content = json.loads(response_text.strip())
+        
+        profile.ai_bio = ai_content.get("ai_bio")
+        profile.ai_linkedin_headline = ai_content.get("ai_linkedin_headline")
+        profile.ai_strengths = ai_content.get("ai_strengths", [])
+        profile.ai_skill_gaps = ai_content.get("ai_skill_gaps", [])
+        profile.ai_course_recommendation = ai_content.get("ai_course_recommendation")
+        profile.ai_career_roadmap = ai_content.get("ai_career_roadmap", [])
+        
+    except Exception as e:
+        logger.error(f"AI generation error: {e}")
+        # Set default values if AI fails
+        profile.ai_bio = f"{profile.full_name} is an aspiring digital marketing professional with a passion for {profile.target_role}."
+        profile.ai_linkedin_headline = f"Aspiring {profile.target_role} | Digital Marketing Enthusiast"
+        profile.ai_course_recommendation = "Professional Digital Marketing - Perfect foundation for your career goals"
+    
+    # Save to database
+    doc = profile.model_dump()
+    await db.student_profiles.insert_one(doc)
+    
+    # Also create a lead entry
+    lead = Lead(
+        name=profile.full_name,
+        email=profile.email,
+        phone=profile.phone,
+        interest=profile.target_role,
+        source="ai_profile_creator",
+        message=f"Career Goals: {profile.career_goals}"
+    )
+    await db.leads.insert_one(lead.model_dump())
+    
+    return profile
+
+@api_router.get("/profiles/{profile_code}")
+async def get_student_profile(profile_code: str):
+    """Get a student profile by profile code (public)"""
+    profile = await db.student_profiles.find_one({"profile_code": profile_code, "is_public": True}, {"_id": 0})
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    
+    # Increment view count
+    await db.student_profiles.update_one(
+        {"profile_code": profile_code},
+        {"$inc": {"profile_views": 1}}
+    )
+    
+    return profile
+
+@api_router.get("/admin/profiles", response_model=List[StudentProfile])
+async def get_all_profiles(
+    limit: int = Query(default=50, le=100),
+    skip: int = 0,
+    admin: dict = Depends(get_current_admin)
+):
+    """Get all student profiles (admin)"""
+    profiles = await db.student_profiles.find({}, {"_id": 0}).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    return profiles
+
+@api_router.get("/analytics/profiles")
+async def get_profile_analytics(admin: dict = Depends(get_current_admin)):
+    """Get student profile analytics"""
+    total_profiles = await db.student_profiles.count_documents({})
+    
+    # Profiles by career stage
+    stage_pipeline = [
+        {"$group": {"_id": "$career_stage", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    by_stage = await db.student_profiles.aggregate(stage_pipeline).to_list(10)
+    
+    # Profiles by education level
+    edu_pipeline = [
+        {"$group": {"_id": "$education_level", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    by_education = await db.student_profiles.aggregate(edu_pipeline).to_list(10)
+    
+    # Top target roles
+    role_pipeline = [
+        {"$group": {"_id": "$target_role", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}},
+        {"$limit": 5}
+    ]
+    top_roles = await db.student_profiles.aggregate(role_pipeline).to_list(5)
+    
+    # Recent profiles
+    recent = await db.student_profiles.find({}, {"_id": 0}).sort("created_at", -1).limit(5).to_list(5)
+    
+    return {
+        "total_profiles": total_profiles,
+        "by_career_stage": [{"stage": item["_id"], "count": item["count"]} for item in by_stage],
+        "by_education": [{"education": item["_id"], "count": item["count"]} for item in by_education],
+        "top_target_roles": [{"role": item["_id"], "count": item["count"]} for item in top_roles],
+        "recent_profiles": recent
+    }
+
+# ==================== SITE SETTINGS ENDPOINTS ====================
+
+@api_router.get("/settings")
+async def get_site_settings():
+    """Get site settings (public for SEO)"""
+    settings = await db.site_settings.find_one({"id": "site_settings"}, {"_id": 0})
+    if not settings:
+        settings = SiteSettings().model_dump()
+    return settings
+
+@api_router.put("/admin/settings")
+async def update_site_settings(settings_data: Dict[str, Any], admin: dict = Depends(get_current_admin)):
+    """Update site settings"""
+    settings_data["id"] = "site_settings"
+    settings_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    
+    await db.site_settings.update_one(
+        {"id": "site_settings"},
+        {"$set": settings_data},
+        upsert=True
+    )
+    
+    return {"message": "Settings updated successfully"}
+
+# ==================== COURSE MANAGEMENT ENDPOINTS (Admin) ====================
+
+@api_router.post("/admin/courses", response_model=Course)
+async def create_course(course_data: CourseCreate, admin: dict = Depends(get_current_admin)):
+    """Create a new course"""
+    # Check slug uniqueness
+    existing = await db.courses.find_one({"slug": course_data.slug})
+    if existing:
+        raise HTTPException(status_code=400, detail="Course with this slug already exists")
+    
+    course = Course(**course_data.model_dump())
+    doc = course.model_dump()
+    await db.courses.insert_one(doc)
+    return course
+
+@api_router.put("/admin/courses/{course_id}")
+async def update_course(course_id: str, course_data: Dict[str, Any], admin: dict = Depends(get_current_admin)):
+    """Update a course"""
+    course_data.pop("id", None)
+    course_data.pop("created_at", None)
+    
+    result = await db.courses.update_one(
+        {"id": course_id},
+        {"$set": course_data}
+    )
+    
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Course not found")
+    
+    return {"message": "Course updated successfully", "course_id": course_id}
+
+@api_router.delete("/admin/courses/{course_id}")
+async def delete_course(course_id: str, admin: dict = Depends(get_current_admin)):
+    """Delete a course"""
+    result = await db.courses.delete_one({"id": course_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return {"message": "Course deleted successfully"}
+
+@api_router.patch("/admin/courses/{course_id}/status")
+async def toggle_course_status(course_id: str, active: bool, admin: dict = Depends(get_current_admin)):
+    """Toggle course active status"""
+    result = await db.courses.update_one(
+        {"id": course_id},
+        {"$set": {"active": active}}
+    )
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return {"message": f"Course {'activated' if active else 'deactivated'}", "course_id": course_id}
 
 # Include the router
 app.include_router(api_router)
