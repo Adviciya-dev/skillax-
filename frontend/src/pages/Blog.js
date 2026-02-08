@@ -239,7 +239,7 @@ export default function Blog() {
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
               Our comprehensive courses cover everything from these blog topics in depth.
-              Join Skillax and master digital marketing.
+              Join Askillax and master digital marketing.
             </p>
             <Link to="/courses">
               <Button 
