@@ -28,9 +28,9 @@ const contactInfo = [
   { 
     icon: Mail, 
     title: 'Email Us', 
-    content: 'contact@skillax.in', 
+    content: 'contact@askillax.in', 
     subtext: '24hr response',
-    link: 'mailto:contact@skillax.in',
+    link: 'mailto:contact@askillax.in',
     gradient: 'from-purple-500 to-pink-500'
   },
   { 
@@ -146,7 +146,7 @@ export default function Contact() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6 backdrop-blur-sm"
             >
               <Sparkles className="h-5 w-5 text-brand-amber" />
-              <span>March 2025 Batch - Limited Seats!</span>
+              <span>March 2026 Batch - Limited Seats!</span>
             </motion.div>
             
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="contact-title">
@@ -163,7 +163,7 @@ export default function Contact() {
               {[
                 { icon: Star, text: '4.9 Rating' },
                 { icon: Users, text: '100+ Alumni' },
-                { icon: Globe, text: '25+ Certifications' },
+                { icon: Globe, text: '30+ Certifications' },
               ].map((badge, i) => (
                 <motion.div
                   key={i}
