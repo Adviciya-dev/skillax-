@@ -50,7 +50,7 @@ const quickQuestions = [
   { id: 'courses', label: '📚 Courses' },
   { id: 'fees', label: '💰 Fees' },
   { id: 'internship', label: '🏢 Internship' },
-  { id: 'certifications', label: '🏆 25+ Certs' },
+  { id: 'certifications', label: '🏆 30+ Certs' },
   { id: 'ai', label: '🤖 AI Tools' },
   { id: 'batch', label: '📅 Next Batch' },
 ];
@@ -60,7 +60,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "👋 Hi! I'm Skillax AI Assistant.\n\n**March 2025 batch** enrolling now!\n\nI can help you with:\n• Course details (2 programs)\n• 25+ Certifications\n• Infopark Internship\n• AI Tools (ChatGPT, Perplexity, etc.)\n\nTap a quick question or type below!",
+      content: "👋 Hi! I'm Askillax AI Assistant.\n\n**March 2026 batch** enrolling now!\n\nI can help you with:\n• Course details (2 programs)\n• 30+ Certifications\n• Infopark Internship\n• 30+ AI Tools (ChatGPT, Perplexity, etc.)\n\nTap a quick question or type below!",
     },
   ]);
   const [input, setInput] = useState('');
