@@ -654,6 +654,105 @@ export default function Courses() {
         </div>
       </section>
 
+      {/* Course Comparison Section */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-custom">
+          <AnimatedSection className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold mb-4">
+              <Layers className="h-4 w-4" />
+              Compare Programs
+            </span>
+            <h2 className="font-heading text-3xl md:text-5xl font-bold mb-4">
+              Side-by-Side{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
+                Comparison
+              </span>
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Not sure which program is right for you? Compare the key features to make an informed decision.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse" data-testid="course-comparison-table">
+                <thead>
+                  <tr>
+                    <th className="text-left p-4 bg-muted/50 rounded-tl-2xl font-semibold">Feature</th>
+                    <th className="p-4 bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
+                      <div className="flex items-center justify-center gap-2">
+                        <Rocket className="h-5 w-5 text-blue-600" />
+                        <span className="font-semibold">Professional</span>
+                      </div>
+                      <span className="text-xs text-muted-foreground">4 Months</span>
+                    </th>
+                    <th className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-tr-2xl">
+                      <div className="flex items-center justify-center gap-2">
+                        <Brain className="h-5 w-5 text-purple-600" />
+                        <span className="font-semibold">AI-Powered</span>
+                      </div>
+                      <span className="text-xs text-muted-foreground">2 Months</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { feature: 'Duration', prof: '4 Months', ai: '2 Months' },
+                    { feature: 'Certifications', prof: '25+', ai: '15+' },
+                    { feature: 'AI Tools Training', prof: '30+ Tools', ai: '30+ Tools' },
+                    { feature: 'SEO Training', prof: 'Comprehensive', ai: 'AEO/GEO Focus' },
+                    { feature: 'Google Ads', prof: '✓ Full Course', ai: '✕' },
+                    { feature: 'Meta Ads', prof: '✓ Full Course', ai: '✕' },
+                    { feature: 'AI Agent Building', prof: '✓ Basic', ai: '✓ Advanced' },
+                    { feature: 'Prompt Engineering', prof: '✓ Included', ai: '✓ Deep Dive' },
+                    { feature: 'Infopark Internship', prof: '✓ 4 Weeks', ai: '✕' },
+                    { feature: 'Placement Assistance', prof: '100%', ai: 'Career Support' },
+                    { feature: 'Weekend Batches', prof: '✕', ai: '✓ Available' },
+                    { feature: 'Best For', prof: 'Freshers & Career Changers', ai: 'Working Professionals' },
+                  ].map((row, i) => (
+                    <motion.tr 
+                      key={row.feature}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.03 }}
+                      className="border-b border-border/50 hover:bg-muted/30 transition-colors"
+                    >
+                      <td className="p-4 font-medium">{row.feature}</td>
+                      <td className="p-4 text-center">
+                        <span className={row.prof.includes('✓') ? 'text-green-600 font-semibold' : row.prof.includes('✕') ? 'text-muted-foreground' : ''}>
+                          {row.prof}
+                        </span>
+                      </td>
+                      <td className="p-4 text-center">
+                        <span className={row.ai.includes('✓') ? 'text-green-600 font-semibold' : row.ai.includes('✕') ? 'text-muted-foreground' : ''}>
+                          {row.ai}
+                        </span>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Link to="/contact">
+                <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full px-8">
+                  <Rocket className="mr-2 h-5 w-5" />
+                  Enroll in Professional
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-8">
+                  <Brain className="mr-2 h-5 w-5" />
+                  Enroll in AI-Powered
+                </Button>
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Features Grid */}
       <section className="section-padding bg-gradient-to-b from-muted/30 to-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
