@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, Brain, GraduationCap, X, ChevronUp,
-  Rocket, Target, Zap, ArrowRight
+  Rocket, Target, Zap, ArrowRight, User
 } from 'lucide-react';
 import AIMarketingLab from './AIMarketingLab';
+import AIProfileCreator from './AIProfileCreator';
 
 // Course Quiz Modal (simplified version)
 function CourseQuizModal({ isOpen, onClose }) {
