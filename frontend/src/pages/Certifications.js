@@ -4,91 +4,60 @@ import { Award, CheckCircle, BadgeCheck, Sparkles, ArrowRight, Trophy, Star, Zap
 import { Button } from '../components/ui/button';
 import { Link } from 'react-router-dom';
 
-// 25+ Certification logos with proper high-quality URLs
-const certificationLogos = [
-  { name: 'Google Ads', logo: 'https://www.gstatic.com/images/branding/product/2x/google_ads_64dp.png', color: '#4285F4' },
-  { name: 'Google Analytics', logo: 'https://www.gstatic.com/analytics-suite/header/suite/v2/ic_analytics.svg', color: '#F9AB00' },
-  { name: 'Meta Blueprint', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png', color: '#1877F2' },
-  { name: 'HubSpot', logo: 'https://www.hubspot.com/hubfs/HubSpot_Logos/HubSpot-Inversed-Favicon.png', color: '#FF7A59' },
-  { name: 'SEMrush', logo: 'https://cdn.semrush.com/static/index/semrush-logo.svg', color: '#FF642D' },
-  { name: 'LinkedIn', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/600px-LinkedIn_logo_initials.png', color: '#0A66C2' },
-  { name: 'Canva', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg', color: '#00C4CC' },
-  { name: 'Mailchimp', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Mailchimp_2018.svg/512px-Mailchimp_2018.svg.png', color: '#FFE01B' },
-  { name: 'Ahrefs', logo: 'https://ahrefs.com/favicon-32x32.png', color: '#FF6B00' },
-  { name: 'Hootsuite', logo: 'https://hootsuite.com/favicon.ico', color: '#143059' },
-  { name: 'Buffer', logo: 'https://buffer.com/static/icons/favicon-32x32.png', color: '#231F20' },
-  { name: 'Skill India', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Skill_India.png/220px-Skill_India.png', color: '#FF9933' },
-  { name: 'Google Tag Manager', logo: 'https://www.gstatic.com/analytics-suite/header/suite/v2/ic_tag_manager.svg', color: '#4285F4' },
-  { name: 'Instagram', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/132px-Instagram_logo_2016.svg.png', color: '#E4405F' },
-  { name: 'YouTube', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/240px-YouTube_full-color_icon_%282017%29.svg.png', color: '#FF0000' },
-  { name: 'Twitter/X', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/X_logo_2023_original.svg/240px-X_logo_2023_original.svg.png', color: '#000000' },
-  { name: 'Pinterest', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png', color: '#E60023' },
-  { name: 'Shopify', logo: 'https://cdn.shopify.com/shopifycloud/brochure/assets/brand-assets/shopify-logo-shopping-bag-full-color-66166b2e55d67988b56b4bd28b63c271e2b9713358cb723070a92bde17ad7d63.svg', color: '#7AB55C' },
-  { name: 'WordPress', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/WordPress_blue_logo.svg/240px-WordPress_blue_logo.svg.png', color: '#21759B' },
-  { name: 'Moz', logo: 'https://moz.com/favicon.ico', color: '#2BA9E1' },
-  { name: 'Sprout Social', logo: 'https://sproutsocial.com/favicon.ico', color: '#59CB59' },
-  { name: 'Google My Business', logo: 'https://www.gstatic.com/images/branding/product/2x/hh_my_business_64dp.png', color: '#4285F4' },
-  { name: 'Constant Contact', logo: 'https://www.constantcontact.com/favicon.ico', color: '#0078BC' },
-  { name: 'Wix', logo: 'https://www.wix.com/favicon.ico', color: '#000000' },
-  { name: 'Skillax AI Expert', logo: 'https://customer-assets.emergentagent.com/job_72a42d6f-d52d-43a7-9830-99ee47bb23ab/artifacts/27yldfrm_image.png', color: '#2B2D9C' },
+// 30+ Certification Programs
+const certificationPrograms = [
+  // Google Certifications
+  { name: 'Google Ads Search', category: 'Google', icon: '🔍' },
+  { name: 'Google Ads Display', category: 'Google', icon: '📊' },
+  { name: 'Google Ads Video', category: 'Google', icon: '🎬' },
+  { name: 'Google Analytics 4', category: 'Google', icon: '📈' },
+  { name: 'Google Tag Manager', category: 'Google', icon: '🏷️' },
+  { name: 'Google My Business', category: 'Google', icon: '📍' },
+  // Meta Certifications
+  { name: 'Meta Blueprint', category: 'Meta', icon: '📱' },
+  { name: 'Facebook Ads Manager', category: 'Meta', icon: '📢' },
+  { name: 'Instagram Marketing', category: 'Meta', icon: '📸' },
+  { name: 'WhatsApp Business', category: 'Meta', icon: '💬' },
+  // HubSpot Certifications
+  { name: 'Inbound Marketing', category: 'HubSpot', icon: '🎯' },
+  { name: 'Content Marketing', category: 'HubSpot', icon: '📝' },
+  { name: 'Email Marketing', category: 'HubSpot', icon: '✉️' },
+  { name: 'Social Media Marketing', category: 'HubSpot', icon: '📲' },
+  // SEO Tools
+  { name: 'SEMrush SEO Toolkit', category: 'SEO', icon: '🛠️' },
+  { name: 'Ahrefs Certification', category: 'SEO', icon: '🔗' },
+  { name: 'Moz SEO Fundamentals', category: 'SEO', icon: '🌐' },
+  // Social Media
+  { name: 'Hootsuite Platform', category: 'Social', icon: '🦉' },
+  { name: 'Buffer Marketing', category: 'Social', icon: '📆' },
+  { name: 'Sprout Social', category: 'Social', icon: '🌱' },
+  // Design & Creative
+  { name: 'Canva Pro Design', category: 'Design', icon: '🎨' },
+  { name: 'Adobe Creative Cloud', category: 'Design', icon: '✨' },
+  // E-commerce
+  { name: 'Shopify Partner', category: 'E-commerce', icon: '🛒' },
+  { name: 'WooCommerce', category: 'E-commerce', icon: '🏪' },
+  // Others
+  { name: 'LinkedIn Marketing', category: 'Professional', icon: '💼' },
+  { name: 'YouTube Creator', category: 'Video', icon: '▶️' },
+  { name: 'Twitter/X Marketing', category: 'Social', icon: '🐦' },
+  { name: 'Pinterest Marketing', category: 'Social', icon: '📌' },
+  // Government & Industry
+  { name: 'Skill India Certificate', category: 'Government', icon: '🇮🇳' },
+  { name: 'NSDC Recognition', category: 'Government', icon: '🏛️' },
+  // Askillax Certifications
+  { name: 'Askillax Professional', category: 'Askillax', icon: '⭐' },
+  { name: 'Askillax AI Expert', category: 'Askillax', icon: '🤖' },
 ];
 
-// Certification categories with details
-const certificationCategories = [
-  {
-    id: 'google',
-    name: 'Google Certifications',
-    icon: '🔍',
-    description: 'Official Google certifications for Ads, Analytics, Tag Manager & My Business.',
-    color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-500/5 border-blue-500/20',
-    certs: ['Google Ads Search', 'Google Ads Display', 'Google Ads Video', 'Google Analytics 4', 'Google Tag Manager', 'Google My Business'],
-  },
-  {
-    id: 'meta',
-    name: 'Meta/Facebook',
-    icon: '📱',
-    description: 'Facebook, Instagram & WhatsApp marketing certifications.',
-    color: 'from-blue-600 to-indigo-600',
-    bgColor: 'bg-indigo-500/5 border-indigo-500/20',
-    certs: ['Meta Blueprint', 'Facebook Ads Manager', 'Instagram Marketing', 'WhatsApp Business', 'Messenger Marketing'],
-  },
-  {
-    id: 'hubspot',
-    name: 'HubSpot Academy',
-    icon: '🎯',
-    description: 'Inbound marketing, content strategy & automation certifications.',
-    color: 'from-orange-500 to-red-500',
-    bgColor: 'bg-orange-500/5 border-orange-500/20',
-    certs: ['Inbound Marketing', 'Content Marketing', 'Email Marketing', 'Social Media Marketing', 'Marketing Automation'],
-  },
-  {
-    id: 'seo',
-    name: 'SEO & Analytics',
-    icon: '📊',
-    description: 'Industry-leading SEO and analytics tool certifications.',
-    color: 'from-purple-500 to-pink-500',
-    bgColor: 'bg-purple-500/5 border-purple-500/20',
-    certs: ['SEMrush SEO Toolkit', 'Ahrefs Certification', 'Moz SEO', 'Google Search Console', 'Screaming Frog'],
-  },
-  {
-    id: 'social',
-    name: 'Social Media Tools',
-    icon: '🚀',
-    description: 'Social media management and scheduling platforms.',
-    color: 'from-pink-500 to-rose-500',
-    bgColor: 'bg-pink-500/5 border-pink-500/20',
-    certs: ['Hootsuite', 'Buffer', 'Sprout Social', 'Later', 'Canva Pro'],
-  },
-  {
-    id: 'government',
-    name: 'Government & Industry',
-    icon: '🏛️',
-    description: 'Government-recognized certifications for career advancement.',
-    color: 'from-green-500 to-emerald-500',
-    bgColor: 'bg-green-500/5 border-green-500/20',
-    certs: ['Skill India Certificate', 'NSDC Recognition', 'LinkedIn Marketing', 'Skillax Professional', 'Skillax AI Expert'],
-  },
+// Group certifications by category
+const certCategories = [
+  { id: 'google', name: 'Google Certifications', icon: '🔍', color: 'from-blue-500 to-cyan-500', count: 6 },
+  { id: 'meta', name: 'Meta/Facebook', icon: '📱', color: 'from-blue-600 to-indigo-600', count: 4 },
+  { id: 'hubspot', name: 'HubSpot Academy', icon: '🎯', color: 'from-orange-500 to-red-500', count: 4 },
+  { id: 'seo', name: 'SEO & Analytics', icon: '📊', color: 'from-purple-500 to-pink-500', count: 3 },
+  { id: 'social', name: 'Social Media Tools', icon: '🚀', color: 'from-pink-500 to-rose-500', count: 6 },
+  { id: 'other', name: 'Design, E-commerce & More', icon: '✨', color: 'from-green-500 to-emerald-500', count: 9 },
 ];
 
 // Animated section wrapper
@@ -135,39 +104,29 @@ function AnimatedCounter({ target }) {
 }
 
 // Interactive Logo Marquee
-function LogoMarquee({ logos, direction = 'left', speed = 25 }) {
-  const duplicatedLogos = [...logos, ...logos, ...logos];
+function CertificationMarquee({ certs, direction = 'left', speed = 30 }) {
+  const duplicatedCerts = [...certs, ...certs, ...certs];
   
   return (
     <div className="relative overflow-hidden py-4">
       <motion.div
-        className="flex gap-6"
+        className="flex gap-4"
         animate={{ 
-          x: direction === 'left' ? [0, -100 * logos.length] : [-100 * logos.length, 0] 
+          x: direction === 'left' ? [0, -50 * certs.length] : [-50 * certs.length, 0] 
         }}
         transition={{ 
           x: { duration: speed, repeat: Infinity, ease: 'linear' }
         }}
       >
-        {duplicatedLogos.map((logo, i) => (
+        {duplicatedCerts.map((cert, i) => (
           <motion.div
             key={i}
             whileHover={{ scale: 1.1, y: -5 }}
-            className="flex items-center gap-3 px-6 py-4 bg-card rounded-2xl border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all cursor-pointer shrink-0"
+            className="flex items-center gap-3 px-5 py-3 bg-card rounded-xl border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all cursor-pointer shrink-0"
           >
-            <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-muted to-muted/50 rounded-xl p-2">
-              <img 
-                src={logo.logo} 
-                alt={logo.name} 
-                className="w-full h-full object-contain"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-            </div>
-            <span className="font-semibold whitespace-nowrap">{logo.name}</span>
-            <BadgeCheck className="h-5 w-5 text-brand-success" />
+            <span className="text-2xl">{cert.icon}</span>
+            <span className="font-medium whitespace-nowrap text-sm">{cert.name}</span>
+            <BadgeCheck className="h-4 w-4 text-brand-success" />
           </motion.div>
         ))}
       </motion.div>
@@ -175,61 +134,13 @@ function LogoMarquee({ logos, direction = 'left', speed = 25 }) {
   );
 }
 
-// Category Card with hover effect
-function CategoryCard({ category, index }) {
-  const [isHovered, setIsHovered] = useState(false);
-  
-  return (
-    <AnimatedSection delay={index * 0.1}>
-      <motion.div
-        className={`card-base h-full ${category.bgColor} hover:border-primary/30 transition-all cursor-pointer relative overflow-hidden`}
-        whileHover={{ scale: 1.02, y: -5 }}
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-        data-testid={`cert-${category.id}`}
-      >
-        {/* Glow effect */}
-        <motion.div
-          className={`absolute -inset-20 bg-gradient-to-r ${category.color} opacity-0 blur-3xl`}
-          animate={{ opacity: isHovered ? 0.1 : 0 }}
-        />
-        
-        <div className="relative z-10">
-          {/* Header */}
-          <div className="flex items-center gap-4 mb-4">
-            <div className={`p-3 bg-gradient-to-br ${category.color} rounded-xl text-white text-2xl`}>
-              {category.icon}
-            </div>
-            <div>
-              <h3 className="font-heading font-bold text-lg">{category.name}</h3>
-              <p className="text-xs text-muted-foreground">{category.certs.length} certifications</p>
-            </div>
-          </div>
-
-          <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
-
-          {/* Certifications List */}
-          <div className="space-y-2">
-            {category.certs.map((cert, i) => (
-              <motion.div
-                key={i}
-                className="flex items-center gap-2 p-2 bg-card/50 rounded-lg"
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <CheckCircle className="h-4 w-4 text-brand-success shrink-0" />
-                <span className="text-sm">{cert}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </AnimatedSection>
-  );
-}
-
 export default function Certifications() {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const filteredCerts = selectedCategory === 'all' 
+    ? certificationPrograms 
+    : certificationPrograms.filter(c => c.category.toLowerCase() === selectedCategory);
+
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -269,7 +180,7 @@ export default function Certifications() {
             
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="certifications-title">
               Earn{' '}
-              <span className="text-brand-amber"><AnimatedCounter target={25} /></span>{' '}
+              <span className="text-brand-amber"><AnimatedCounter target={30} /></span>{' '}
               Global Certifications
             </h1>
             <p className="text-lg text-white/80 mb-8">
@@ -280,8 +191,8 @@ export default function Certifications() {
             {/* Stats */}
             <div className="flex flex-wrap justify-center gap-8">
               {[
-                { value: '25+', label: 'Certifications', icon: Trophy },
-                { value: '6', label: 'Platforms', icon: Zap },
+                { value: '30+', label: 'Certifications', icon: Trophy },
+                { value: '10+', label: 'Platforms', icon: Zap },
                 { value: '100%', label: 'Included', icon: Star },
               ].map((stat, i) => (
                 <motion.div
@@ -311,15 +222,15 @@ export default function Certifications() {
       <section className="py-6 bg-muted/30 border-b border-border overflow-hidden">
         <div className="container-custom mb-4">
           <p className="text-center text-sm text-muted-foreground font-medium uppercase tracking-wider">
-            25+ Industry-Leading Certifications
+            30+ Industry-Leading Certifications
           </p>
         </div>
-        <LogoMarquee logos={certificationLogos.slice(0, 13)} direction="left" speed={30} />
+        <CertificationMarquee certs={certificationPrograms.slice(0, 16)} direction="left" speed={35} />
       </section>
 
       {/* Interactive Logo Marquee - Row 2 (reverse direction) */}
       <section className="py-6 bg-muted/30 border-b border-border overflow-hidden">
-        <LogoMarquee logos={certificationLogos.slice(13)} direction="right" speed={35} />
+        <CertificationMarquee certs={certificationPrograms.slice(16)} direction="right" speed={40} />
       </section>
 
       {/* Why Certifications Matter */}
@@ -341,14 +252,14 @@ export default function Certifications() {
             {[
               { 
                 icon: '📈', 
-                title: '47% Higher Salary',
-                desc: 'Certified professionals earn significantly more than non-certified peers.',
+                title: 'Stand Out',
+                desc: 'Certified professionals get noticed first by recruiters and clients.',
                 color: 'from-green-500 to-emerald-500'
               },
               { 
                 icon: '🎯', 
                 title: '2x Interview Calls',
-                desc: 'Certifications make your resume stand out and get more interview opportunities.',
+                desc: 'Certifications make your resume stand out and get more opportunities.',
                 color: 'from-blue-500 to-cyan-500'
               },
               { 
@@ -375,24 +286,60 @@ export default function Certifications() {
         </div>
       </section>
 
-      {/* Certification Categories */}
+      {/* All Certifications Grid */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
-          <AnimatedSection className="text-center mb-16">
+          <AnimatedSection className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              All Certifications
+              Complete List
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Certification Categories
+              All 30+ Certifications
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
               Every certification is included in your course fee. No hidden costs!
             </p>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              <button
+                onClick={() => setSelectedCategory('all')}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedCategory === 'all' 
+                    ? 'bg-primary text-white' 
+                    : 'bg-card border border-border hover:border-primary/30'
+                }`}
+              >
+                All ({certificationPrograms.length})
+              </button>
+              {['Google', 'Meta', 'HubSpot', 'SEO', 'Social', 'Design', 'Askillax'].map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat.toLowerCase())}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    selectedCategory === cat.toLowerCase() 
+                      ? 'bg-primary text-white' 
+                      : 'bg-card border border-border hover:border-primary/30'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certificationCategories.map((category, index) => (
-              <CategoryCard key={category.id} category={category} index={index} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredCerts.map((cert, index) => (
+              <AnimatedSection key={index} delay={index * 0.02}>
+                <motion.div
+                  className="card-base text-center p-4"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                >
+                  <span className="text-3xl mb-2 block">{cert.icon}</span>
+                  <h4 className="font-semibold text-sm mb-1">{cert.name}</h4>
+                  <span className="text-xs text-muted-foreground">{cert.category}</span>
+                </motion.div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -415,10 +362,10 @@ export default function Certifications() {
             <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-green-500 -translate-y-1/2 -z-10 opacity-20" />
             
             {[
-              { step: '01', title: 'Enroll', desc: 'Join our comprehensive program', color: 'from-blue-500 to-cyan-500', icon: '📝' },
+              { step: '01', title: 'Enroll', desc: 'Join our training program', color: 'from-blue-500 to-cyan-500', icon: '📝' },
               { step: '02', title: 'Learn', desc: 'Master skills with hands-on training', color: 'from-purple-500 to-pink-500', icon: '📚' },
               { step: '03', title: 'Practice', desc: 'Work on real projects & exams', color: 'from-orange-500 to-red-500', icon: '💪' },
-              { step: '04', title: 'Certify', desc: 'Get 25+ industry certifications', color: 'from-green-500 to-emerald-500', icon: '🏆' },
+              { step: '04', title: 'Certify', desc: 'Get 30+ industry certifications', color: 'from-green-500 to-emerald-500', icon: '🏆' },
             ].map((item, index) => (
               <AnimatedSection key={index} delay={index * 0.15}>
                 <motion.div 
@@ -450,7 +397,7 @@ export default function Certifications() {
                 Your Achievement
               </span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-                Certificates That Get You Hired
+                Certificates That Get You Noticed
               </h2>
               <p className="text-muted-foreground mb-6">
                 Every certificate comes with a unique verification ID. Share on LinkedIn, 
@@ -510,16 +457,16 @@ export default function Certifications() {
                   [Your Name Here]
                 </motion.p>
                 <p className="text-muted-foreground text-sm mb-6">
-                  has successfully completed all coursework and examinations at Skillax Academy
+                  has successfully completed all coursework and examinations at Askillax Academy
                 </p>
                 <div className="flex justify-center gap-8 text-sm text-muted-foreground border-t border-border pt-4">
                   <div>
                     <div className="font-medium">Date</div>
-                    <div>March 2025</div>
+                    <div>March 2026</div>
                   </div>
                   <div>
                     <div className="font-medium">Certificate ID</div>
-                    <div>SKX-2025-XXXX</div>
+                    <div>ASX-2026-XXXX</div>
                   </div>
                 </div>
 
@@ -547,13 +494,13 @@ export default function Certifications() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 rounded-full text-sm font-medium mb-6"
             >
               <Sparkles className="h-5 w-5 text-brand-amber" />
-              March 2025 Batch Enrolling
+              March 2026 Batch Enrolling
             </motion.div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Ready to Get Certified?
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-8">
-              All 25+ certifications are included in your course fee. Start your journey today!
+              All 30+ certifications are included in your course fee. Start your journey today!
             </p>
             <Link to="/contact">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
