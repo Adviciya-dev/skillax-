@@ -177,6 +177,107 @@ class LeadConversionStats(BaseModel):
     leads_by_status: List[Dict[str, Any]]
     leads_trend: List[Dict[str, Any]]
 
+# ==================== STUDENT PROFILE MODELS ====================
+
+class StudentProfileCreate(BaseModel):
+    # Basic Info
+    full_name: str
+    email: EmailStr
+    phone: str
+    location: str
+    linkedin_url: Optional[str] = None
+    portfolio_url: Optional[str] = None
+    
+    # Education
+    education_level: str  # high_school, bachelors, masters, working_professional
+    field_of_study: Optional[str] = None
+    institution: Optional[str] = None
+    graduation_year: Optional[str] = None
+    
+    # Career Info
+    career_stage: str  # student, fresher, 1-3_years, 3-5_years, 5+_years
+    current_role: Optional[str] = None
+    target_role: str
+    career_goals: str
+    
+    # Skills & Interests
+    current_skills: List[str] = []
+    interests: List[str] = []
+    preferred_learning_style: str  # self_paced, instructor_led, hybrid
+    
+    # Additional
+    why_digital_marketing: str
+    availability: str  # full_time, part_time, weekends
+
+class StudentProfile(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    profile_code: str = Field(default_factory=lambda: f"SKX{uuid.uuid4().hex[:8].upper()}")
+    
+    # Basic Info
+    full_name: str
+    email: str
+    phone: str
+    location: str
+    linkedin_url: Optional[str] = None
+    portfolio_url: Optional[str] = None
+    
+    # Education
+    education_level: str
+    field_of_study: Optional[str] = None
+    institution: Optional[str] = None
+    graduation_year: Optional[str] = None
+    
+    # Career Info
+    career_stage: str
+    current_role: Optional[str] = None
+    target_role: str
+    career_goals: str
+    
+    # Skills & Interests
+    current_skills: List[str] = []
+    interests: List[str] = []
+    preferred_learning_style: str
+    
+    # Additional
+    why_digital_marketing: str
+    availability: str
+    
+    # AI Generated Content
+    ai_bio: Optional[str] = None
+    ai_linkedin_headline: Optional[str] = None
+    ai_career_roadmap: Optional[List[Dict[str, Any]]] = None
+    ai_skill_gaps: Optional[List[str]] = None
+    ai_course_recommendation: Optional[str] = None
+    ai_strengths: Optional[List[str]] = None
+    
+    # Metadata
+    profile_views: int = 0
+    is_public: bool = True
+    status: str = "active"
+    created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
+class SiteSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = "site_settings"
+    site_name: str = "Skillax Digital Marketing Academy"
+    tagline: str = "Kerala's #1 AI-Powered Digital Marketing Academy"
+    contact_email: str = "contact@skillax.in"
+    contact_phone: str = "+91-9876543210"
+    address: str = "Mananthavady, Wayanad, Kerala 670645"
+    social_facebook: Optional[str] = None
+    social_instagram: Optional[str] = None
+    social_linkedin: Optional[str] = None
+    social_twitter: Optional[str] = None
+    social_youtube: Optional[str] = None
+    whatsapp_number: Optional[str] = None
+    google_analytics_id: Optional[str] = None
+    meta_title: str = "Skillax Digital Marketing Academy | Mananthavady, Kerala"
+    meta_description: str = "Kerala's #1 AI-powered digital marketing academy. Learn SEO, AEO, GEO, Google Ads, Meta Ads, ChatGPT Ads, 30+ AI tools."
+    meta_keywords: str = "digital marketing course kerala, seo training wayanad"
+    updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+
 # ==================== AUTH HELPERS ====================
 
 def create_token(user_id: str, email: str, role: str) -> str:
