@@ -177,41 +177,96 @@ export default function Courses() {
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-brand-indigo">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
-            <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl" />
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-amber rounded-full blur-3xl animate-pulse" />
           </div>
+          {/* Floating elements */}
+          <motion.div
+            className="absolute top-32 left-20 text-white/10"
+            animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+          >
+            <Rocket className="h-20 w-20" />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-40 right-20 text-white/10"
+            animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity }}
+          >
+            <Brain className="h-24 w-24" />
+          </motion.div>
         </div>
 
         <div className="container-custom relative z-10 text-white">
           <AnimatedSection className="text-center max-w-4xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
-              <Sparkles className="h-4 w-4" />
-              March 2026 Batch - Enrolling Now!
-            </span>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6 backdrop-blur-sm"
+            >
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                🚀
+              </motion.span>
+              <span>Founding Batch - March 2026</span>
+              <motion.span
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+              >
+                ✨
+              </motion.span>
+            </motion.div>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="courses-page-title">
-              Master Digital Marketing{' '}
-              <span className="text-brand-amber">& 30+ AI Tools</span>
+              Transform Your Career with{' '}
+              <span className="text-brand-amber">AI-Powered</span>{' '}
+              Digital Marketing
             </h1>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
-              Two comprehensive programs covering SEO, AEO, GEO, Google Ads, Meta Ads, ChatGPT Ads, 
-              and 30+ major AI tools. 30+ certifications included!
+            <p className="text-lg text-white/80 max-w-2xl mx-auto mb-8">
+              Two comprehensive programs. 30+ AI tools. 30+ certifications. 
+              Real-world internship at Infopark. Everything you need to become a digital marketing expert.
             </p>
+            
+            {/* Animated CTA */}
+            <motion.div 
+              className="flex flex-wrap justify-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Link to="/contact">
+                <Button size="lg" className="bg-brand-amber hover:bg-brand-amber/90 text-white rounded-full px-8">
+                  Enroll Now - Limited Seats
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 rounded-full px-8">
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </Button>
+            </motion.div>
           </AnimatedSection>
 
-          {/* Quick Stats */}
+          {/* Quick Stats with animation */}
           <AnimatedSection delay={0.2} className="mt-12">
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="flex flex-wrap justify-center gap-6">
               {[
-                { value: '30+', label: 'Certifications' },
-                { value: '30+', label: 'AI Tools' },
-                { value: '100%', label: 'Practical' },
-                { value: 'March', label: 'Next Batch' },
+                { value: '30+', label: 'Certifications', icon: '🏆' },
+                { value: '30+', label: 'AI Tools', icon: '🤖' },
+                { value: '100%', label: 'Practical', icon: '💪' },
+                { value: '15', label: 'Max Students', icon: '👥' },
               ].map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="font-heading font-bold text-3xl">{stat.value}</div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
-                </div>
+                <motion.div 
+                  key={i} 
+                  className="text-center p-4 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/10"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <span className="text-2xl mb-1 block">{stat.icon}</span>
+                  <div className="font-heading font-bold text-2xl">{stat.value}</div>
+                  <div className="text-xs text-white/70">{stat.label}</div>
+                </motion.div>
               ))}
             </div>
           </AnimatedSection>
