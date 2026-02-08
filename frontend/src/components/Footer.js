@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   MapPin, Phone, Mail, Facebook, Instagram, Linkedin, Twitter, 
-  GraduationCap, Send, ArrowUpRight 
+  GraduationCap, Send, ArrowUpRight, Settings
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
