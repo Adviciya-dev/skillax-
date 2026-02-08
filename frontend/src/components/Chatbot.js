@@ -34,7 +34,7 @@ const predefinedQA = {
   },
   location: {
     question: "Where is the academy located?",
-    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@askillax.in"
+    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@skillax.in"
   },
   ai: {
     question: "What AI tools will I learn?",
@@ -118,7 +118,7 @@ export default function Chatbot() {
     try {
       await axios.post(`${API}/leads`, {
         name: leadData.name,
-        email: leadData.email || `${leadData.phone}@chatbot.askillax.in`,
+        email: leadData.email || `${leadData.phone}@chatbot.skillax.in`,
         phone: leadData.phone,
         interest: 'Course Inquiry',
         source: 'chatbot',
@@ -169,7 +169,7 @@ export default function Chatbot() {
     } else if (userMessage.includes('hi') || userMessage.includes('hello') || userMessage.includes('hey')) {
       response = "Hello! 👋 Welcome to Skillax Academy!\n\n**March 2026 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 30+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
     } else if (userMessage.includes('thank')) {
-      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@askillax.in\n\nGood luck with your digital marketing journey!";
+      response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@skillax.in\n\nGood luck with your digital marketing journey!";
     } else if (userMessage.includes('seo') || userMessage.includes('aeo') || userMessage.includes('geo')) {
       response = "We cover ALL three optimization types:\n\n**SEO** - Search Engine Optimization\n- Google, Bing rankings\n\n**AEO** - Answer Engine Optimization\n- ChatGPT, Perplexity visibility\n\n**GEO** - Generative Engine Optimization\n- AI-generated search results\n\nThis is the future of search! We're one of the few academies teaching this.";
     } else {
