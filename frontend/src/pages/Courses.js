@@ -1089,6 +1089,9 @@ export default function Courses() {
 
       {/* Final CTA */}
       <FinalCTASection />
+      
+      {/* AI Marketing Lab Modal */}
+      <AIMarketingLab isOpen={showAILab} onClose={() => setShowAILab(false)} />
     </div>
   );
 }
