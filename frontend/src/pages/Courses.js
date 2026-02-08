@@ -330,7 +330,7 @@ export default function Courses() {
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Why Skillax
+              Why Askillax
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               What Sets Us Apart
