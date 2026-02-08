@@ -16,6 +16,9 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import LeadForm from '../components/LeadForm';
+import SEO from '../components/SEO';
+import { QuizCTABanner, AILabCTACard, EnrollmentCTASection } from '../components/CTAComponents';
+import AIMarketingLab from '../components/AIMarketingLab';
 
 // Rotating hero hooks - multiple value propositions (removed 100% Placement)
 const heroHooks = [
