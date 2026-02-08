@@ -7,7 +7,7 @@ Build an "ultra-premium" digital marketing academy website for Skillax Academy b
 - **Frontend:** React with Tailwind CSS, Framer Motion, react-helmet-async
 - **Backend:** FastAPI (Python)
 - **Database:** MongoDB
-- **Architecture:** Single Page Application (SPA) with REST API
+- **AI:** OpenAI GPT-4o (via Emergent LLM Key)
 
 ---
 
@@ -19,38 +19,94 @@ Build an "ultra-premium" digital marketing academy website for Skillax Academy b
 - CourseDetail page with gradient hero, interactive curriculum, lead capture
 - Glassmorphism, gradients, micro-animations throughout
 
-### 2. Admin CMS (Full Implementation)
-- **Dashboard Overview:** Total Leads (45+), Page Views (35+), Conversion Rate (4.4%), Blog Posts
-- **Analytics Dashboard:** Lead Conversion Funnel, Leads Trend, Top Pages, Traffic Sources
-- **Lead Management:** Search/filter, status updates, CSV export
-- **Blog Management:** Create/Edit/Delete with rich text editor, publish toggle
-- **Visitor Tracking:** Automatic page view tracking with session-based unique visitors
+### 2. Admin CMS (Full End-to-End Coverage)
 
-### 3. Hooks and Funnels (Lead Capture Integration)
-- **Quiz CTA Banner:** Orange gradient "Limited Founding Batch - March 2026" on Home page
-- **AI Lab CTA Section:** "Experience Our AI Marketing Lab" with card on Home page
-- **Course Quiz Modal:** 4-question quiz for course recommendation + lead capture
-- **Floating Action Button:** Quick access to Quiz and AI Lab
-- **Strategic CTAs** throughout the site
+**Dashboard Overview:**
+- Total Leads, Page Views, Unique Visitors, Conversion Rate, Blog Posts
+- Leads by Source chart with percentages
+- Top Pages, Recent Leads
 
-### 4. AI Marketing Lab (WOW Factor)
-- **6 AI Tools:**
-  1. AI Ad Copy Generator - Google Ads & Meta Ads copies
-  2. AI Blog Outline Creator - SEO-optimized structures
-  3. 🔥 AI Lead Magnet Generator - 5 irresistible lead magnet ideas
-  4. AI Social Media Generator - Multi-platform posts
-  5. AI SEO Keyword Analyzer - Keywords with AEO tips
-  6. 🚀 AI Competitor Analyzer - Strategic insights
+**Analytics Dashboard:**
+- Lead Conversion Funnel (New → Contacted → Converted → Lost)
+- Leads Trend (Last 7 Days) with daily breakdown
+- Most Visited Pages with view counts
+- Traffic Sources breakdown (Website, Chatbot, AI Profile Creator, etc.)
 
-### 5. SEO & Performance
-- **react-helmet-async** for dynamic meta tags on all pages
-- Page-specific title, description, keywords, Open Graph tags
-- JSON-LD schema markup (Organization, Course, Blog schemas)
+**Lead Management:**
+- Search and filter by name/email/status
+- Status updates (New/Contacted/Converted/Lost)
+- CSV Export functionality
+
+**AI Profiles Tab:**
+- Total Profiles, Students, Freshers, Professionals counts
+- Recent Profiles list with profile codes, target roles, view counts
+- Direct link to public profiles
+
+**Courses Tab:**
+- Course list with title, duration, status (Active/Inactive)
+- External preview links
+- Note about pre-configured content
+
+**Settings Tab (SEO Editor):**
+- Site Information: Name, Tagline, Contact Email, Phone, WhatsApp, Address
+- SEO Settings: Meta Title (60 char limit), Meta Description (160 char), Keywords, GA4 ID
+- Social Media Links: Facebook, Instagram, LinkedIn, YouTube
+- Save Settings functionality
+
+### 3. AI Profile Creator (Lead Magnet)
+
+**5-Step Multi-Form:**
+1. Basic Info: Name, Email, Phone, Location, LinkedIn, Portfolio
+2. Education: Level, Field of Study, Institution
+3. Career Goals: Career Stage, Current Role, Target Role, Goals
+4. Skills & Interests: Current Skills, Areas of Interest, Learning Style
+5. Final Details: Why Digital Marketing, Availability
+
+**AI-Generated Content (GPT-4o):**
+- Professional Bio (3-4 sentences)
+- LinkedIn Headline
+- Key Strengths (4 points)
+- Skills to Develop (5 points)
+- Personalized Career Roadmap (4 phases)
+- Course Recommendation with justification
+
+**Profile Output:**
+- Unique Profile Code (SKX{8-hex})
+- Public shareable URL: /profile/{profile_code}
+- Copy/Share buttons
+- View counter
+- Verified badge
+
+### 4. Hooks and Funnels
+
+**Floating Action Button (FAB):**
+- Find Your Course (Quiz)
+- AI Marketing Lab
+- Create AI Profile *(NEW)*
+
+**Strategic CTAs:**
+- Quiz CTA Banner after hero ("Limited Founding Batch - March 2026")
+- AI Lab CTA Section with feature highlights
+- Enrollment CTA before footer
+
+### 5. AI Marketing Lab (6 Tools)
+
+1. AI Ad Copy Generator - Google Ads & Meta Ads
+2. AI Blog Outline Creator - SEO-optimized structures
+3. 🔥 AI Lead Magnet Generator - 5 irresistible lead magnet ideas
+4. AI Social Media Generator - Multi-platform posts
+5. AI SEO Keyword Analyzer - Keywords with AEO tips
+6. 🚀 AI Competitor Analyzer - Strategic insights
+
+### 6. SEO & Performance
+
+- react-helmet-async for dynamic meta tags
+- Page-specific JSON-LD schemas
 - robots.txt and sitemap.xml
-- Lazy loading for images (LazyImage component)
+- LazyImage component for lazy loading
 
-### 6. Hidden Admin Link
-- Settings icon in footer (low opacity) linking to /admin
+### 7. Hidden Admin Access
+- Settings icon in footer (low opacity) → /admin
 
 ---
 
@@ -63,18 +119,31 @@ Build an "ultra-premium" digital marketing academy website for Skillax Academy b
 - `GET /api/courses` - All courses
 - `GET /api/courses/:slug` - Course by slug
 - `GET /api/blogs` - Published blogs
-- `GET /api/blogs/:slug` - Blog by slug
 - `POST /api/track/pageview` - Track page view
+- `POST /api/profiles` - Create student profile (with AI generation)
+- `GET /api/profiles/:code` - Get public profile
+- `GET /api/settings` - Get site settings
 
 ### Admin (Protected)
 - `POST /api/admin/login` - Login
-- `GET /api/admin/me` - Profile
-- `GET /api/leads` - All leads
+- `GET /api/leads` - All leads with filters
 - `PATCH /api/leads/:id/status` - Update status
 - `GET /api/analytics/*` - All analytics endpoints
 - `GET/POST/PUT/DELETE /api/blogs/*` - Blog CRUD
+- `GET /api/admin/profiles` - All student profiles
+- `GET /api/analytics/profiles` - Profile analytics
+- `PUT /api/admin/settings` - Update site settings
 
 ---
+
+## Database Collections
+- `admins` - Admin users
+- `leads` - Lead captures
+- `courses` - Course catalog
+- `blogs` - Blog posts
+- `page_views` - Visitor tracking
+- `student_profiles` - AI-generated student profiles
+- `site_settings` - SEO and site configuration
 
 ## Admin Credentials
 - **Email:** admin@skillax.in
@@ -83,26 +152,26 @@ Build an "ultra-premium" digital marketing academy website for Skillax Academy b
 ---
 
 ## Testing Results (Feb 8, 2026)
-- **Backend:** 31/31 tests passed (100%)
+- **Backend:** 43/43 tests passed (100%)
 - **Frontend:** All features verified (100%)
-- **Test Report:** `/app/test_reports/iteration_9.json`
+- **Test Report:** `/app/test_reports/iteration_10.json`
 
 ---
 
 ## Future/Backlog (P3)
-- [ ] Course Editor in Admin CMS
-- [ ] GA4 deep integration
-- [ ] Free SEO/AEO Audit Tool
-- [ ] Geographic visitor analytics with map
+- [ ] GA4 deep integration for real-time analytics
+- [ ] Free SEO/AEO Audit Tool as lead magnet
+- [ ] Course content management (modules, pricing)
+- [ ] Email notification system for new leads
 
 ---
 
 ## Third-Party Integrations
-- **OpenAI GPT-4o:** AI chatbot and Marketing Lab (via Emergent LLM Key)
+- **OpenAI GPT-4o:** AI chatbot, Marketing Lab, Profile Creator (via Emergent LLM Key)
 - **Framer Motion:** Frontend animations
 - **react-helmet-async:** Dynamic SEO tags
 
 ---
 
 *Last Updated: February 8, 2026*
-*Version: 4.0 - Final Build*
+*Version: 5.0 - Final Build with AI Profile Creator*
