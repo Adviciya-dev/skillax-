@@ -5,7 +5,7 @@ import {
   MapPin, GraduationCap, TrendingUp, CheckCircle, Star,
   Brain, Rocket, Zap, Globe, BarChart3, Building,
   ShoppingCart, Megaphone, Bot, ArrowRight, Sparkles,
-  Code, Palette, Database, Settings
+  Code, Palette, Database, Settings, Coffee, Lightbulb
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
@@ -52,12 +52,40 @@ const shiftComparison = [
   },
 ];
 
-// Kerala Digital Landscape
+// Kerala Digital Landscape - Updated with Infopark as Internship Hub
 const keralaDigitalInfo = [
-  { city: 'Kochi', area: 'Infopark', type: 'IT Hub', desc: 'Kerala\'s largest IT park with major MNCs. Our students intern here!' },
-  { city: 'Trivandrum', area: 'Technopark', type: 'Technology Capital', desc: 'India\'s first IT park with thriving tech ecosystem.' },
-  { city: 'Kozhikode', area: 'Cyberpark', type: 'Emerging Hub', desc: 'Fast-growing tech destination in North Kerala.' },
-  { city: 'Wayanad', area: 'Skillax HQ', type: 'Training Hub', desc: 'Our home! Learn in peaceful hills, intern in Infopark.' },
+  { 
+    city: 'Kochi', 
+    area: 'Infopark', 
+    type: 'Internship & Real Client Hub', 
+    desc: 'Where our students intern with real clients! Work on live projects at Kerala\'s largest IT park.',
+    highlight: true,
+    badge: '🎯 INTERNSHIP'
+  },
+  { 
+    city: 'Wayanad', 
+    area: 'Skillax Academy', 
+    type: 'Training Headquarters', 
+    desc: 'Learn in the serene hills of Wayanad. Focused learning away from city distractions.',
+    highlight: true,
+    badge: '🏠 OUR HOME'
+  },
+  { 
+    city: 'Trivandrum', 
+    area: 'Technopark', 
+    type: 'Technology Capital', 
+    desc: 'India\'s first IT park with thriving tech ecosystem and career opportunities.',
+    highlight: false,
+    badge: null
+  },
+  { 
+    city: 'Kozhikode', 
+    area: 'Cyberpark', 
+    type: 'Emerging Hub', 
+    desc: 'Fast-growing tech destination in North Kerala with startup opportunities.',
+    highlight: false,
+    badge: null
+  },
 ];
 
 const values = [
@@ -67,23 +95,24 @@ const values = [
   { icon: TrendingUp, title: 'Growth', desc: 'We are committed to the continuous growth and success of our students.' },
 ];
 
-// Updated milestones - Company journey
+// Updated milestones - Parallel journey: IT company + Academy launch in 2026
 const milestones = [
-  { year: '2020', title: 'IT Company Founded', desc: 'Started as a global IT services company serving international clients' },
-  { year: '2021', title: 'Digital Solutions', desc: 'Expanded to provide comprehensive digital marketing services worldwide' },
-  { year: '2022', title: 'AI Integration', desc: 'Pioneered AI-powered marketing solutions for enterprise clients' },
-  { year: '2023', title: 'Education Vision', desc: 'Launched Skillax Academy to share our expertise with aspiring marketers' },
-  { year: '2024', title: 'Training Excellence', desc: 'First batch graduated with 90%+ placement rate at top companies' },
-  { year: '2025', title: 'AI Leadership', desc: 'Became Kerala\'s first academy with 30+ AI tools curriculum' },
-  { year: '2026', title: 'Expansion', desc: 'Opening new batches with ChatGPT Ads, AEO, GEO specializations' },
+  { year: '2020', title: 'IT Company Founded', desc: 'Started as a global IT services company serving international clients', icon: '🚀', color: 'from-blue-500 to-cyan-500' },
+  { year: '2021', title: 'Digital Expansion', desc: 'Grew to provide digital marketing services to clients worldwide', icon: '🌍', color: 'from-green-500 to-emerald-500' },
+  { year: '2022', title: 'AI Integration', desc: 'Pioneered AI-powered marketing solutions for enterprise clients', icon: '🤖', color: 'from-purple-500 to-pink-500' },
+  { year: '2023', title: 'Tools Development', desc: 'Built proprietary AI tools for lead gen, SEO, and content automation', icon: '⚡', color: 'from-orange-500 to-red-500' },
+  { year: '2024', title: 'Education Vision', desc: 'Decided to share our expertise with aspiring digital marketers', icon: '💡', color: 'from-yellow-500 to-amber-500' },
+  { year: '2026', title: 'Skillax Academy Launch', desc: 'Founding batch starts! Training the next generation of AI marketers', icon: '🎓', color: 'from-primary to-brand-indigo', current: true },
 ];
 
-// Faculty/Directors Section
-const leadership = [
-  { name: 'Rajesh Kumar', role: 'Founder & CEO', specialty: 'Digital Strategy Expert', initial: 'RK' },
-  { name: 'Priya Menon', role: 'Head of Training', specialty: 'AI & Social Media', initial: 'PM' },
-  { name: 'Arun Nair', role: 'Industry Relations', specialty: 'Infopark Partnerships', initial: 'AN' },
-  { name: 'Sneha Thomas', role: 'Lead Trainer', specialty: 'SEO & Content', initial: 'ST' },
+// Team characteristics (without names)
+const teamCharacteristics = [
+  { icon: Brain, title: 'AI & Tech Experts', desc: 'Data scientists, ML engineers, and AI specialists with global experience' },
+  { icon: Megaphone, title: 'Marketing Veterans', desc: 'Digital marketers with 10+ years managing enterprise campaigns' },
+  { icon: Code, title: 'Full-Stack Developers', desc: 'Engineers who build the tools our students learn to use' },
+  { icon: Lightbulb, title: 'Creative Strategists', desc: 'Content creators and brand strategists from top agencies' },
+  { icon: Globe, title: 'Global Experience', desc: 'Team members who\'ve worked with Fortune 500 companies' },
+  { icon: GraduationCap, title: 'Certified Trainers', desc: 'Google, Meta, and HubSpot certified professionals' },
 ];
 
 // Animated Counter
@@ -125,7 +154,7 @@ function AnimatedSection({ children, className = '', delay = 0 }) {
   );
 }
 
-// Kerala Digital Map Component
+// Kerala Digital Map Component - Updated
 function KeralaDigitalMap() {
   const [activeCity, setActiveCity] = useState(null);
   
@@ -147,9 +176,9 @@ function KeralaDigitalMap() {
         <div className="relative z-10">
           <div className="text-center mb-8">
             <h3 className="font-heading text-2xl md:text-3xl font-bold mb-2">
-              🗺️ Kerala's Digital Landscape
+              🗺️ Our Training & Internship Ecosystem
             </h3>
-            <p className="text-muted-foreground">The state is rapidly transforming into a digital powerhouse</p>
+            <p className="text-muted-foreground">Learn in Wayanad, Work with Real Clients at Infopark</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -157,7 +186,7 @@ function KeralaDigitalMap() {
               <motion.div
                 key={i}
                 className={`relative p-6 rounded-2xl border-2 transition-all cursor-pointer ${
-                  item.city === 'Wayanad' 
+                  item.highlight 
                     ? 'bg-gradient-to-br from-primary/10 to-brand-amber/10 border-primary/30' 
                     : 'bg-card/50 border-border hover:border-primary/30'
                 }`}
@@ -165,58 +194,69 @@ function KeralaDigitalMap() {
                 onHoverStart={() => setActiveCity(item.city)}
                 onHoverEnd={() => setActiveCity(null)}
               >
-                {item.city === 'Wayanad' && (
+                {item.badge && (
                   <div className="absolute -top-3 -right-3">
                     <motion.div 
-                      className="px-3 py-1 bg-brand-amber text-white text-xs font-bold rounded-full"
+                      className={`px-3 py-1 ${item.city === 'Kochi' ? 'bg-brand-success' : 'bg-brand-amber'} text-white text-xs font-bold rounded-full`}
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >
-                      ⭐ OUR BASE
+                      {item.badge}
                     </motion.div>
                   </div>
                 )}
                 
                 <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-xl ${item.city === 'Wayanad' ? 'bg-primary text-white' : 'bg-muted'}`}>
+                  <div className={`p-3 rounded-xl ${item.highlight ? 'bg-primary text-white' : 'bg-muted'}`}>
                     <MapPin className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-heading font-bold text-lg">{item.city}</h4>
                     <p className="text-sm text-muted-foreground mb-2">{item.area}</p>
-                    <span className="px-2 py-1 bg-brand-success/10 text-brand-success text-xs rounded-full font-medium">
+                    <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                      item.highlight ? 'bg-brand-success/10 text-brand-success' : 'bg-muted text-muted-foreground'
+                    }`}>
                       {item.type}
                     </span>
                   </div>
                 </div>
                 
-                {activeCity === item.city && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    className="mt-4 pt-4 border-t border-border"
-                  >
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  </motion.div>
-                )}
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: activeCity === item.city ? 1 : 0.7, height: 'auto' }}
+                  className="mt-4 pt-4 border-t border-border"
+                >
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </motion.div>
               </motion.div>
             ))}
           </div>
           
-          {/* Special Skillax callout */}
+          {/* Journey Flow */}
           <motion.div 
             className="mt-6 p-6 bg-gradient-to-r from-primary to-brand-indigo text-white rounded-2xl"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-white/20 rounded-xl">
-                <Sparkles className="h-8 w-8" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/20 rounded-lg">
+                  <GraduationCap className="h-6 w-6" />
+                </div>
+                <span className="font-semibold">Train in Wayanad</span>
               </div>
-              <div>
-                <h4 className="font-heading font-bold text-lg">Skillax Academy - Wayanad</h4>
-                <p className="text-white/80 text-sm">
-                  Train in the serene hills of Wayanad, intern at top Infopark companies. Best of both worlds!
-                </p>
+              <ArrowRight className="h-6 w-6 hidden md:block" />
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/20 rounded-lg">
+                  <Building className="h-6 w-6" />
+                </div>
+                <span className="font-semibold">Intern at Infopark</span>
+              </div>
+              <ArrowRight className="h-6 w-6 hidden md:block" />
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/20 rounded-lg">
+                  <Rocket className="h-6 w-6" />
+                </div>
+                <span className="font-semibold">Launch Your Career</span>
               </div>
             </div>
           </motion.div>
@@ -244,12 +284,13 @@ export default function About() {
               <p className="text-lg text-muted-foreground mb-8">
                 Born from a successful IT company serving global clients since 2020, 
                 Skillax Academy brings real-world digital marketing expertise to aspiring marketers in Kerala. 
-                We don't just teach theory – we share what works in the real business world.
+                In 2026, we're launching our academy while continuing our IT services – giving students 
+                access to real clients and live projects.
               </p>
               <div className="flex items-center gap-6">
                 <div className="text-center">
                   <div className="font-heading font-bold text-4xl text-primary">6+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
+                  <div className="text-sm text-muted-foreground">Years in IT</div>
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="text-center">
@@ -258,8 +299,8 @@ export default function About() {
                 </div>
                 <div className="w-px h-12 bg-border" />
                 <div className="text-center">
-                  <div className="font-heading font-bold text-4xl text-primary">4.9</div>
-                  <div className="text-sm text-muted-foreground">Student Rating</div>
+                  <div className="font-heading font-bold text-4xl text-primary">2026</div>
+                  <div className="text-sm text-muted-foreground">Academy Launch</div>
                 </div>
               </div>
             </AnimatedSection>
@@ -432,13 +473,13 @@ export default function About() {
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Our Reach
+              Training & Internship
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Kerala's Digital Revolution
+              Learn in Wayanad, Intern at Infopark
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              From Trivandrum to Wayanad, digital transformation is reshaping Kerala. We're proud to be part of this journey.
+              Our unique model: focused training in peaceful Wayanad hills, then real-world experience with live clients at Kochi Infopark.
             </p>
           </AnimatedSection>
 
@@ -446,43 +487,66 @@ export default function About() {
         </div>
       </section>
 
-      {/* Leadership Section */}
+      {/* The Minds Behind Skillax - Without Names */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Leadership
+              Our Team
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               The Minds Behind Skillax
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Industry veterans with global experience, now dedicated to nurturing Kerala's digital talent.
+              A diverse team of tech enthusiasts, marketing veterans, and AI specialists united by one mission: 
+              to create Kerala's best digital marketers.
             </p>
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {leadership.map((person, index) => (
-              <AnimatedSection key={index} delay={index * 0.1}>
-                <motion.div 
-                  className="card-base text-center group"
-                  whileHover={{ y: -10 }}
-                >
-                  <div className="relative mb-6">
-                    <motion.div 
-                      className="w-24 h-24 mx-auto bg-gradient-to-br from-primary to-brand-indigo rounded-full flex items-center justify-center text-white text-2xl font-bold"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      {person.initial}
-                    </motion.div>
-                  </div>
-                  <h3 className="font-heading font-semibold text-xl mb-1">{person.name}</h3>
-                  <p className="text-primary font-medium text-sm mb-2">{person.role}</p>
-                  <p className="text-xs text-muted-foreground">{person.specialty}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {teamCharacteristics.map((char, index) => {
+              const Icon = char.icon;
+              return (
+                <AnimatedSection key={index} delay={index * 0.1}>
+                  <motion.div 
+                    className="card-base h-full"
+                    whileHover={{ y: -10 }}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-gradient-to-br from-primary to-brand-indigo rounded-xl">
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-semibold text-lg mb-2">{char.title}</h3>
+                        <p className="text-muted-foreground text-sm">{char.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatedSection>
+              );
+            })}
           </div>
+
+          {/* Team Stats */}
+          <AnimatedSection delay={0.3} className="mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { number: '50+', label: 'Years Combined Experience' },
+                { number: '15+', label: 'Global Clients Served' },
+                { number: '6', label: 'Google Certified Trainers' },
+                { number: '4', label: 'AI Tool Patents' },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  className="text-center p-4 bg-card border border-border rounded-xl"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="font-heading font-bold text-2xl text-primary">{stat.number}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -553,36 +617,47 @@ export default function About() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Timeline - IT Company + Academy Launch */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
               Our Journey
             </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               From IT Company to Academy
             </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              6 years of IT excellence, now sharing our expertise through Skillax Academy
+            </p>
           </AnimatedSection>
 
           <div className="relative">
             <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-brand-amber to-brand-success hidden md:block" />
 
-            <div className="space-y-12">
+            <div className="space-y-8">
               {milestones.map((milestone, index) => (
                 <AnimatedSection key={index} delay={index * 0.1}>
                   <div className={`flex items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                     <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                       <motion.div 
-                        className="card-base inline-block"
+                        className={`card-base inline-block ${milestone.current ? 'border-2 border-primary ring-4 ring-primary/20' : ''}`}
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="text-primary font-heading font-bold text-2xl mb-2">{milestone.year}</div>
+                        {milestone.current && (
+                          <span className="inline-block px-3 py-1 bg-brand-amber text-white text-xs font-bold rounded-full mb-2">
+                            🚀 NOW LAUNCHING
+                          </span>
+                        )}
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-2xl">{milestone.icon}</span>
+                          <span className="text-primary font-heading font-bold text-xl">{milestone.year}</span>
+                        </div>
                         <h3 className="font-heading font-semibold text-lg mb-1">{milestone.title}</h3>
                         <p className="text-muted-foreground text-sm">{milestone.desc}</p>
                       </motion.div>
                     </div>
-                    <div className="hidden md:flex items-center justify-center w-4 h-4 bg-primary rounded-full z-10 ring-4 ring-background" />
+                    <div className={`hidden md:flex items-center justify-center w-4 h-4 rounded-full z-10 ring-4 ring-background ${milestone.current ? 'bg-brand-amber w-6 h-6' : 'bg-primary'}`} />
                     <div className="flex-1" />
                   </div>
                 </AnimatedSection>
@@ -600,8 +675,8 @@ export default function About() {
               Ready to Join the Skillax Family?
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
-              Take the first step towards your digital marketing career. 
-              Contact us for a free consultation and course demo.
+              Be part of our founding batch and transform your career with 
+              hands-on AI training and real client experience.
             </p>
             <Link to="/contact">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
