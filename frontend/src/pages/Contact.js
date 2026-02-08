@@ -60,7 +60,7 @@ const benefits = [
 
 const testimonials = [
   { name: 'Rahul K.', role: 'Digital Marketer', text: 'Best decision I made! Got placed at Infopark company.' },
-  { name: 'Priya M.', role: 'Freelancer', text: 'Earning 3x my previous salary now. Thank you Skillax!' },
+  { name: 'Priya M.', role: 'Freelancer', text: 'Earning 3x my previous salary now. Thank you Askillax!' },
 ];
 
 function AnimatedSection({ children, className = '', delay = 0 }) {
