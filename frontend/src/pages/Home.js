@@ -1259,6 +1259,13 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* Quiz CTA Banner - Hook #1 */}
+      <section className="py-8 px-4">
+        <div className="container-custom">
+          <QuizCTABanner onOpenQuiz={() => setShowQuiz(true)} variant="urgent" />
+        </div>
+      </section>
+
       {/* Certification Marquee */}
       <section className="py-6 bg-muted/30 border-y border-border overflow-hidden">
         <div className="container-custom mb-3">
