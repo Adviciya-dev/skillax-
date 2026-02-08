@@ -6,7 +6,8 @@ import {
   MessageCircle, Globe, ChevronRight, RefreshCcw, Plus,
   Edit, Trash2, Eye, EyeOff, Save, ArrowLeft, BarChart3,
   PieChart, Activity, MapPin, Calendar, Clock, CheckCircle,
-  XCircle, AlertCircle, Search, Filter, ChevronDown
+  XCircle, AlertCircle, Search, Filter, ChevronDown, User,
+  Target, Briefcase, GraduationCap, ExternalLink
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import {
