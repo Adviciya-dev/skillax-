@@ -494,6 +494,121 @@ async def get_leads_by_interest(admin: dict = Depends(get_current_admin)):
     result = await db.leads.aggregate(pipeline).to_list(100)
     return [{"interest": item["_id"], "count": item["count"]} for item in result]
 
+# ==================== VISITOR TRACKING ENDPOINTS ====================
+
+@api_router.post("/track/pageview")
+async def track_page_view(page_view_data: PageViewCreate):
+    """Track a page view - public endpoint for frontend tracking"""
+    page_view = PageView(**page_view_data.model_dump())
+    doc = page_view.model_dump()
+    await db.page_views.insert_one(doc)
+    return {"status": "tracked", "id": page_view.id}
+
+@api_router.get("/analytics/page-views")
+async def get_page_views(
+    days: int = Query(default=7, le=90),
+    admin: dict = Depends(get_current_admin)
+):
+    """Get page views grouped by day"""
+    from datetime import timedelta
+    start_date = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    
+    pipeline = [
+        {"$match": {"timestamp": {"$gte": start_date}}},
+        {"$addFields": {"date": {"$substr": ["$timestamp", 0, 10]}}},
+        {"$group": {"_id": "$date", "views": {"$sum": 1}}},
+        {"$sort": {"_id": 1}}
+    ]
+    result = await db.page_views.aggregate(pipeline).to_list(100)
+    return [{"date": item["_id"], "views": item["views"]} for item in result]
+
+@api_router.get("/analytics/top-pages")
+async def get_top_pages(
+    limit: int = Query(default=10, le=50),
+    admin: dict = Depends(get_current_admin)
+):
+    """Get most visited pages"""
+    pipeline = [
+        {"$group": {"_id": "$path", "views": {"$sum": 1}}},
+        {"$sort": {"views": -1}},
+        {"$limit": limit}
+    ]
+    result = await db.page_views.aggregate(pipeline).to_list(limit)
+    return [{"path": item["_id"], "views": item["views"]} for item in result]
+
+@api_router.get("/analytics/visitors-by-country")
+async def get_visitors_by_country(admin: dict = Depends(get_current_admin)):
+    """Get visitor distribution by country"""
+    pipeline = [
+        {"$match": {"country": {"$ne": None}}},
+        {"$group": {"_id": "$country", "visitors": {"$sum": 1}}},
+        {"$sort": {"visitors": -1}},
+        {"$limit": 10}
+    ]
+    result = await db.page_views.aggregate(pipeline).to_list(10)
+    return [{"country": item["_id"] or "Unknown", "visitors": item["visitors"]} for item in result]
+
+@api_router.get("/analytics/lead-conversion")
+async def get_lead_conversion_stats(admin: dict = Depends(get_current_admin)):
+    """Get lead conversion statistics"""
+    total_leads = await db.leads.count_documents({})
+    converted_leads = await db.leads.count_documents({"status": "converted"})
+    pending_leads = await db.leads.count_documents({"status": {"$in": ["new", "contacted"]}})
+    
+    conversion_rate = (converted_leads / total_leads * 100) if total_leads > 0 else 0
+    
+    # Leads by status
+    status_pipeline = [
+        {"$group": {"_id": "$status", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    status_result = await db.leads.aggregate(status_pipeline).to_list(10)
+    leads_by_status = [{"status": item["_id"], "count": item["count"]} for item in status_result]
+    
+    # Leads trend (last 7 days)
+    from datetime import timedelta
+    start_date = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+    trend_pipeline = [
+        {"$match": {"created_at": {"$gte": start_date}}},
+        {"$addFields": {"date": {"$substr": ["$created_at", 0, 10]}}},
+        {"$group": {"_id": "$date", "leads": {"$sum": 1}}},
+        {"$sort": {"_id": 1}}
+    ]
+    trend_result = await db.leads.aggregate(trend_pipeline).to_list(7)
+    leads_trend = [{"date": item["_id"], "leads": item["leads"]} for item in trend_result]
+    
+    return LeadConversionStats(
+        total_leads=total_leads,
+        converted_leads=converted_leads,
+        pending_leads=pending_leads,
+        conversion_rate=round(conversion_rate, 1),
+        leads_by_status=leads_by_status,
+        leads_trend=leads_trend
+    )
+
+# ==================== ADMIN BLOG MANAGEMENT ====================
+
+@api_router.get("/admin/blogs", response_model=List[BlogPost])
+async def get_all_blogs_admin(
+    limit: int = Query(default=50, le=100),
+    skip: int = 0,
+    admin: dict = Depends(get_current_admin)
+):
+    """Get all blogs including unpublished for admin"""
+    blogs = await db.blogs.find({}, {"_id": 0}).sort("created_at", -1).skip(skip).limit(limit).to_list(limit)
+    return blogs
+
+@api_router.patch("/blogs/{blog_id}/publish")
+async def toggle_blog_publish(blog_id: str, published: bool, admin: dict = Depends(get_current_admin)):
+    """Toggle blog publish status"""
+    result = await db.blogs.update_one(
+        {"id": blog_id},
+        {"$set": {"published": published, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Blog not found")
+    return {"message": f"Blog {'published' if published else 'unpublished'}", "blog_id": blog_id}
+
 # ==================== SEED DATA ENDPOINT (For Initial Setup) ====================
 
 @api_router.post("/seed")
