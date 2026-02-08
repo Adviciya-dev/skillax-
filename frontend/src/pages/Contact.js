@@ -481,7 +481,7 @@ export default function Contact() {
                     allowFullScreen=""
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Skillax Academy Location"
+                    title="Askillax Academy Location"
                     className="grayscale hover:grayscale-0 transition-all"
                   />
                   <div className="p-4 flex items-center gap-3">
@@ -489,7 +489,7 @@ export default function Contact() {
                       <MapPin className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-sm">Skillax Academy</div>
+                      <div className="font-semibold text-sm">Askillax Academy</div>
                       <div className="text-xs text-muted-foreground">Mananthavady, Wayanad, Kerala</div>
                     </div>
                   </div>
