@@ -184,6 +184,57 @@ H2: Conclusion
 - [Tip 2]
 - [Tip 3]`,
 
+        'lead-magnet': `You are a lead generation and content marketing expert. Create 5 IRRESISTIBLE lead magnet ideas with full implementation plans for:
+
+"${input}"
+
+Format the output as:
+
+🎁 LEAD MAGNET IDEAS:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🥇 IDEA #1: [Name of Lead Magnet]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+Type: [eBook/Checklist/Template/Calculator/Video Course/Webinar/etc.]
+Format: [PDF/Spreadsheet/Video/Interactive Tool]
+Target Audience: [Who will download this]
+Pain Point Addressed: [What problem does it solve]
+Compelling Title: "[Catchy, benefit-driven title]"
+Description: [2-3 sentence description]
+
+📋 Content Outline:
+1. [Section 1]
+2. [Section 2]
+3. [Section 3]
+4. [Section 4]
+5. [Section 5]
+
+🎯 Landing Page Headline: "[High-converting headline]"
+📧 Follow-up Email Subject: "[Engaging subject line]"
+💰 Potential Upsell: [What paid product/service to offer next]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🥈 IDEA #2: [Name]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+[Same detailed format]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🥉 IDEA #3: [Name]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+[Same detailed format]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+⭐ IDEA #4: [Name]
+━━━━━━━━━━━━━━━━━━━━━━━━━
+[Same detailed format]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━
+🔥 IDEA #5: [Name] - HIGHEST CONVERSION POTENTIAL
+━━━━━━━━━━━━━━━━━━━━━━━━━
+[Same detailed format]
+
+💡 PRO TIP: [Expert advice on lead magnet implementation]`,
+
         'social-post': `You are a social media marketing expert. Create engaging social media posts for multiple platforms about:
 
 "${input}"
@@ -245,7 +296,74 @@ Format the output as:
 💡 AEO (Answer Engine Optimization) TIPS:
 - [Tip for ranking in AI answers]
 - [Tip for featured snippets]
-- [Tip for voice search]`
+- [Tip for voice search]`,
+
+        'competitor-analyzer': `You are a competitive intelligence and digital marketing strategist. Analyze and provide strategic insights for competing against:
+
+"${input}"
+
+Format the output as:
+
+🔍 COMPETITOR ANALYSIS REPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 MARKET POSITIONING:
+- Competitor's Strengths: [List 3-5 key strengths]
+- Competitor's Weaknesses: [List 3-5 vulnerabilities]
+- Their Unique Value Proposition: [What makes them stand out]
+
+🎯 THEIR TARGET AUDIENCE:
+- Primary Demographic: [Who they're targeting]
+- Pain Points They Address: [What problems they solve]
+- Pricing Strategy: [How they price their offerings]
+
+📱 DIGITAL PRESENCE ANALYSIS:
+
+SEO Strategy:
+- Likely Target Keywords: [5-7 keywords they probably target]
+- Content Strategy: [Types of content they produce]
+- Estimated Domain Authority: [Low/Medium/High]
+
+Social Media:
+- Primary Platforms: [Where they're most active]
+- Content Types: [What they post]
+- Engagement Strategy: [How they engage]
+
+Paid Advertising:
+- Likely Ad Platforms: [Google Ads, Meta, etc.]
+- Ad Messaging Themes: [What they emphasize]
+
+🚀 YOUR COMPETITIVE ADVANTAGES:
+1. [How you can differentiate]
+2. [Gap in their offering you can fill]
+3. [Audience segment they're missing]
+4. [Service/feature you can offer better]
+5. [Unique positioning opportunity]
+
+💡 STRATEGIC RECOMMENDATIONS:
+
+Quick Wins (0-30 days):
+1. [Immediate action item]
+2. [Immediate action item]
+3. [Immediate action item]
+
+Medium-term (30-90 days):
+1. [Strategic initiative]
+2. [Strategic initiative]
+
+Long-term Dominance:
+1. [Major strategic move]
+2. [Sustainable competitive advantage to build]
+
+🎯 KILLER DIFFERENTIATION STATEMENT:
+"[A compelling one-liner that positions you against this competitor]"
+
+📝 CONTENT IDEAS TO OUTRANK THEM:
+1. [Blog post idea targeting their weakness]
+2. [Video content idea]
+3. [Lead magnet idea]
+4. [Social campaign idea]
+5. [SEO opportunity they're missing]`
       };
 
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/chat`, {
