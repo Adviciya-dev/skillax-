@@ -13,6 +13,9 @@ import {
   CircleCheck, Percent, Gift, Timer, Wifi, Monitor
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import SEO from '../components/SEO';
+import { QuizCTABanner, AILabCTACard } from '../components/CTAComponents';
+import AIMarketingLab from '../components/AIMarketingLab';
 
 // Two courses with full details
 const courses = [
