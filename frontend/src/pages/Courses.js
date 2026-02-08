@@ -187,15 +187,15 @@ export default function Courses() {
           <AnimatedSection className="text-center max-w-4xl mx-auto">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
-              March 2025 Batch - Enrolling Now!
+              March 2026 Batch - Enrolling Now!
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="courses-page-title">
               Master Digital Marketing{' '}
-              <span className="text-brand-amber">& AI Tools</span>
+              <span className="text-brand-amber">& 30+ AI Tools</span>
             </h1>
             <p className="text-lg text-white/80 max-w-2xl mx-auto">
               Two comprehensive programs covering SEO, AEO, GEO, Google Ads, Meta Ads, ChatGPT Ads, 
-              and all major AI tools. 25+ certifications included!
+              and 30+ major AI tools. 30+ certifications included!
             </p>
           </AnimatedSection>
 
