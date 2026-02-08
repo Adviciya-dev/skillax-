@@ -41,11 +41,11 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src={LOGO_URL} alt="Skillax Logo" className="h-12 w-auto" />
+              <img src={LOGO_URL} alt="Askillax Logo" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Empowering the next generation of digital marketers in Wayanad, Kerala. 
-              Transform your career with industry-leading training and certifications.
+              Transform your career with 30+ AI tools training and industry certifications.
             </p>
             
             {/* Contact Info */}
