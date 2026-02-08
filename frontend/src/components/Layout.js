@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Chatbot from './Chatbot';
 import WhatsAppButton from './WhatsAppButton';
+import FloatingActions from './FloatingActions';
 
 export default function Layout({ children }) {
   return (
@@ -14,6 +15,7 @@ export default function Layout({ children }) {
       <Footer />
       <Chatbot />
       <WhatsAppButton />
+      <FloatingActions />
     </div>
   );
 }
