@@ -90,7 +90,7 @@ export default function CourseDetail() {
               { title: 'SEO Basics', topics: ['On-Page SEO', 'Keyword Research', 'Google Analytics'] },
             ],
             highlights: ['100% Practical Training', 'Real Projects', 'Internship Certificate', 'Placement Assistance'],
-            certification: 'Skillax Foundation Certificate + Google Analytics Certification',
+            certification: 'Askillax Foundation Certificate + Google Analytics Certification',
           },
           'advanced-seo-performance': {
             title: 'Advanced SEO & Performance',
