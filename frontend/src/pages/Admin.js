@@ -330,6 +330,10 @@ function Dashboard({ user, onLogout }) {
   const [analytics, setAnalytics] = useState(null);
   const [leads, setLeads] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+  const [profileAnalytics, setProfileAnalytics] = useState(null);
+  const [siteSettings, setSiteSettings] = useState(null);
   const [leadsBySource, setLeadsBySource] = useState([]);
   const [leadConversion, setLeadConversion] = useState(null);
   const [topPages, setTopPages] = useState([]);
@@ -337,8 +341,11 @@ function Dashboard({ user, onLogout }) {
   const [loading, setLoading] = useState(true);
   const [editingBlog, setEditingBlog] = useState(null);
   const [showBlogEditor, setShowBlogEditor] = useState(false);
+  const [editingCourse, setEditingCourse] = useState(null);
+  const [showCourseEditor, setShowCourseEditor] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [savingSettings, setSavingSettings] = useState(false);
 
   const token = localStorage.getItem('adminToken');
   const headers = { Authorization: `Bearer ${token}` };
@@ -346,7 +353,7 @@ function Dashboard({ user, onLogout }) {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const [analyticsRes, leadsRes, sourceRes, conversionRes, topPagesRes, pageViewsRes, blogsRes] = await Promise.all([
+      const [analyticsRes, leadsRes, sourceRes, conversionRes, topPagesRes, pageViewsRes, blogsRes, coursesRes, profilesRes, profileAnalyticsRes, settingsRes] = await Promise.all([
         axios.get(`${API}/analytics/summary`, { headers }),
         axios.get(`${API}/leads?limit=100`, { headers }),
         axios.get(`${API}/analytics/leads-by-source`, { headers }),
@@ -354,6 +361,10 @@ function Dashboard({ user, onLogout }) {
         axios.get(`${API}/analytics/top-pages`, { headers }),
         axios.get(`${API}/analytics/page-views?days=7`, { headers }),
         axios.get(`${API}/admin/blogs`, { headers }),
+        axios.get(`${API}/courses`, { headers }),
+        axios.get(`${API}/admin/profiles`, { headers }).catch(() => ({ data: [] })),
+        axios.get(`${API}/analytics/profiles`, { headers }).catch(() => ({ data: {} })),
+        axios.get(`${API}/settings`),
       ]);
       setAnalytics(analyticsRes.data);
       setLeads(leadsRes.data);
@@ -362,6 +373,10 @@ function Dashboard({ user, onLogout }) {
       setTopPages(topPagesRes.data);
       setPageViews(pageViewsRes.data);
       setBlogs(blogsRes.data);
+      setCourses(coursesRes.data);
+      setProfiles(profilesRes.data);
+      setProfileAnalytics(profileAnalyticsRes.data);
+      setSiteSettings(settingsRes.data);
     } catch (error) {
       console.error('Error fetching data:', error);
       toast.error('Failed to fetch data');
@@ -378,6 +393,7 @@ function Dashboard({ user, onLogout }) {
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
     { id: 'leads', label: 'Leads', icon: Users },
+    { id: 'profiles', label: 'AI Profiles', icon: User },
     { id: 'blogs', label: 'Blog Posts', icon: FileText },
     { id: 'courses', label: 'Courses', icon: BookOpen },
     { id: 'settings', label: 'Settings', icon: Settings },
