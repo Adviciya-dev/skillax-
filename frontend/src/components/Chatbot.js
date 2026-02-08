@@ -10,39 +10,39 @@ const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const predefinedQA = {
   courses: {
     question: "What courses do you offer?",
-    answer: "We offer 2 comprehensive programs:\n\n**1. Professional Digital Marketing (4 Months)**\n- SEO, AEO, GEO Optimization\n- Google Ads, Meta Ads & ChatGPT Ads\n- AI Tools: ChatGPT, Perplexity, Gemini, Copilot, Grok\n- Reddit & Quora Marketing\n- Guaranteed Internship at Infopark\n- 8+ Certifications\n\n**2. Advanced AI-Powered Marketing (2 Months)**\n- All major AI tools mastery\n- AEO & GEO Optimization\n- Marketing Automation\n- Weekend Batches Available\n- 5 Certifications\n\nWhich one interests you more?"
+    answer: "We offer 2 comprehensive programs:\n\n**1. Professional Digital Marketing (4 Months)**\n- SEO, AEO, GEO Optimization\n- Google Ads, Meta Ads & ChatGPT Ads\n- 30+ AI Tools: ChatGPT, Perplexity, Gemini, Copilot, Grok\n- Reddit & Quora Marketing\n- Guaranteed Internship at Infopark\n- 30+ Certifications\n\n**2. Advanced AI-Powered Marketing (2 Months)**\n- All major AI tools mastery\n- AEO & GEO Optimization\n- Marketing Automation\n- Weekend Batches Available\n- 15 Certifications\n\nWhich one interests you more?"
   },
   fees: {
     question: "What are the course fees?",
-    answer: "💰 **Flexible Payment Options:**\n\n- One-time payment (Special discount!)\n- EMI starting from ₹2,999/month\n- No-cost EMI available\n\n🎁 **March 2025 Batch Offers:**\n- Early bird discount: 15% OFF\n- Group enrollment discounts\n- Scholarship for deserving candidates\n\n👉 Share your details and our counselor will provide personalized pricing!"
+    answer: "💰 **Flexible Payment Options:**\n\n- One-time payment (Special discount!)\n- EMI options available\n- No-cost EMI available\n\n🎁 **March 2026 Batch Offers:**\n- Early bird discount: 15% OFF\n- Group enrollment discounts\n- Scholarship for deserving candidates\n\n👉 Share your details and our counselor will provide personalized pricing!"
   },
   duration: {
     question: "How long is the course?",
-    answer: "**Course Duration:**\n\n📚 **Professional Digital Marketing:** 4 Months\n- Classes: 3-4 days/week\n- 2-3 hours per session\n- Includes 1-month Infopark internship\n\n🤖 **Advanced AI Marketing:** 2 Months\n- Weekend batches available\n- Intensive hands-on training\n\n**March 2025 batch** enrolling now! Limited seats."
+    answer: "**Course Duration:**\n\n📚 **Professional Digital Marketing:** 4 Months\n- Classes: 3-4 days/week\n- 2-3 hours per session\n- Includes 1-month Infopark internship\n\n🤖 **Advanced AI Marketing:** 2 Months\n- Weekend batches available\n- Intensive hands-on training\n\n**March 2026 batch** enrolling now! Limited seats."
   },
   internship: {
     question: "Tell me about the internship",
-    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery Professional course student gets:\n- Real work experience at IT companies\n- Live project portfolio building\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 **Infopark, Kochi** - Kerala's premier IT hub with 400+ companies!\n\nThis is what makes Skillax different from others!"
+    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery Professional course student gets:\n- Real work experience at IT companies\n- Live project portfolio building\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 **Infopark, Kochi** - Kerala's premier IT hub with 400+ companies!\n\nThis is what makes Askillax different from others!"
   },
   certifications: {
     question: "What certifications will I get?",
-    answer: "🏆 **25+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics 4\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n- Mailchimp\n\n**AI & More:**\n- Skillax AI Expert\n- Skill India Certificate\n\nAll globally recognized!"
+    answer: "🏆 **30+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics 4\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n- Mailchimp\n\n**AI & More:**\n- Askillax AI Expert\n- Skill India Certificate\n\nAll globally recognized!"
   },
   placement: {
     question: "Do you provide placement support?",
-    answer: "✅ **100% Placement Assistance**\n\n**What we offer:**\n- Dedicated placement cell\n- Resume building workshops\n- Mock interview sessions\n- Direct company referrals\n- Lifetime job support\n\n**Career Options After Course:**\n- Digital Marketing Manager (₹40K-80K/month)\n- SEO Specialist\n- Social Media Manager\n- Freelancer (Earn in USD!)\n- Start your own agency\n\nMany get placed during internship itself!"
+    answer: "✅ **100% Placement Assistance**\n\n**What we offer:**\n- Dedicated placement cell\n- Resume building workshops\n- Mock interview sessions\n- Direct company referrals\n- Lifetime job support\n\n**Career Options After Course:**\n- Digital Marketing Manager\n- SEO Specialist\n- Social Media Manager\n- Freelancer (Earn in USD!)\n- Start your own agency\n\nMany get placed during internship itself!"
   },
   location: {
     question: "Where is the academy located?",
-    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@skillax.in"
+    answer: "📍 **Askillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@askillax.in"
   },
   ai: {
     question: "What AI tools will I learn?",
-    answer: "🤖 **ALL Major AI Tools:**\n\n**Conversational AI:**\n- ChatGPT (OpenAI)\n- Perplexity\n- Google Gemini\n- Microsoft Copilot\n- X/Twitter Grok\n- Claude (Anthropic)\n\n**Image Generation:**\n- Midjourney\n- DALL-E\n- Canva AI\n\n**Marketing AI:**\n- Jasper AI\n- Copy.ai\n- Buffer AI\n\n**Plus:** Prompt Engineering, AEO, GEO optimization!\n\nBe future-ready with cutting-edge AI skills!"
+    answer: "🤖 **30+ AI Tools:**\n\n**Conversational AI:**\n- ChatGPT (OpenAI)\n- Perplexity\n- Google Gemini\n- Microsoft Copilot\n- X/Twitter Grok\n- Claude (Anthropic)\n\n**Automation:**\n- ManyChat\n- Zoho CRM\n- GitHub Copilot\n\n**Image Generation:**\n- Midjourney, DALL-E, Canva AI\n\n**Plus:** Our proprietary Askillax tools for lead gen, SEO, and content!\n\nBe future-ready with cutting-edge AI skills!"
   },
   batch: {
     question: "When is the next batch?",
-    answer: "📅 **March 2025 Batch**\n\n**Batch Timings Available:**\n- Morning: 9 AM - 12 PM\n- Afternoon: 2 PM - 5 PM\n- Evening: 6 PM - 9 PM\n- Weekend: Saturday & Sunday\n\n⚡ **Limited Seats!** Only 15 students per batch.\n\n🎁 Early bird discount available for March batch!\n\nShare your contact for priority enrollment."
+    answer: "📅 **March 2026 Batch**\n\n**Batch Timings Available:**\n- Morning: 9 AM - 12 PM\n- Afternoon: 2 PM - 5 PM\n- Evening: 6 PM - 9 PM\n- Weekend: Saturday & Sunday\n\n⚡ **Limited Seats!** Only 15 students per batch.\n\n🎁 Early bird discount available for March batch!\n\nShare your contact for priority enrollment."
   }
 };
 
