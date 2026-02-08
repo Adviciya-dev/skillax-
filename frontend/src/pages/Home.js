@@ -1293,6 +1293,40 @@ export default function Home() {
       {/* Global Digital Transformation Stats */}
       <GlobalStatsSection />
 
+      {/* AI Lab CTA - Hook #2 */}
+      <section className="py-12">
+        <div className="container-custom">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <AnimatedSection>
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 text-purple-600 rounded-full text-sm font-semibold mb-4">
+                <Brain className="h-4 w-4" />
+                Try Before You Join
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+                Experience Our{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                  AI Marketing Lab
+                </span>
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Get a taste of what you'll learn at Skillax. Our AI tools can generate ad copies, 
+                blog outlines, lead magnets, and competitor analyses - all powered by cutting-edge AI.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {['Ad Copy Generator', 'Blog Outlines', 'Lead Magnets', 'Competitor Analysis'].map((tool, i) => (
+                  <span key={i} className="px-3 py-1.5 bg-muted rounded-full text-sm font-medium">
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <AILabCTACard onOpenLab={() => setShowAILab(true)} />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* ChatGPT Ads Section */}
       <ChatGPTAdsSection />
 
