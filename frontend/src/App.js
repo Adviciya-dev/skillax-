@@ -13,6 +13,7 @@ import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
+import PublicProfile from "./pages/PublicProfile";
 import { Toaster } from "./components/ui/sonner";
 
 // Scroll to top on route change
@@ -34,6 +35,9 @@ function App() {
         <Routes>
           {/* Admin route without Layout */}
           <Route path="/admin" element={<Admin />} />
+          
+          {/* Public Profile route without Layout */}
+          <Route path="/profile/:profileCode" element={<PublicProfile />} />
           
           {/* Public routes with Layout */}
           <Route path="/" element={<Layout><Home /></Layout>} />
