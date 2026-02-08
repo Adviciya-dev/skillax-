@@ -30,6 +30,15 @@ const labTools = [
     example: 'How to use ChatGPT for digital marketing in 2026'
   },
   { 
+    id: 'lead-magnet',
+    title: '🔥 AI Lead Magnet Generator',
+    desc: 'Create irresistible lead magnets for any niche',
+    icon: Lightbulb,
+    gradient: 'from-amber-500 to-red-500',
+    placeholder: 'Enter your business type or target audience...',
+    example: 'Digital marketing agency targeting small businesses in Kerala'
+  },
+  { 
     id: 'social-post',
     title: 'AI Social Media Generator',
     desc: 'Create posts for all platforms',
@@ -43,9 +52,18 @@ const labTools = [
     title: 'AI SEO Keyword Analyzer',
     desc: 'Get keyword suggestions & strategy',
     icon: TrendingUp,
-    gradient: 'from-amber-500 to-orange-600',
+    gradient: 'from-purple-500 to-violet-600',
     placeholder: 'Enter your main topic or niche...',
     example: 'Digital marketing training Kerala'
+  },
+  { 
+    id: 'competitor-analyzer',
+    title: '🚀 AI Competitor Analyzer',
+    desc: 'Get insights on competitor strategies',
+    icon: BarChart3,
+    gradient: 'from-cyan-500 to-blue-600',
+    placeholder: 'Enter your competitor website or business name...',
+    example: 'DigitalVidya, Simplilearn digital marketing courses'
   },
 ];
 
