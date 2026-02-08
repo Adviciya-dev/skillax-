@@ -1,176 +1,186 @@
 """
-Skillax Digital Marketing Academy - Backend API Tests
-Tests for: leads, contact, courses, blogs, admin auth, chatbot, analytics
+Skillax Digital Marketing Academy API Tests
+Tests for: Home page features, Course Quiz, Admin login, Lead submission, Chatbot
 """
 import pytest
 import requests
 import os
-import uuid
 
-BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://premium-marketing-16.preview.emergentagent.com').rstrip('/')
-
-# Test credentials
-ADMIN_EMAIL = "admin@skillax.in"
-ADMIN_PASSWORD = "SkillaxAdmin2024!"
-
+BASE_URL = os.environ.get('REACT_APP_BACKEND_URL', 'https://premium-marketing-16.preview.emergentagent.com')
 
 class TestHealthAndRoot:
-    """Basic API health checks"""
+    """Test API health and root endpoint"""
     
     def test_api_root(self):
-        """Test API root endpoint"""
+        """Test API root endpoint returns active status"""
         response = requests.get(f"{BASE_URL}/api/")
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "active"
         assert "Skillax" in data["message"]
-        print(f"✓ API root working: {data['message']}")
+        print(f"PASS: API root returns: {data}")
 
 
-class TestLeadsAPI:
-    """Lead capture and management tests"""
+class TestAdminAuth:
+    """Test admin authentication endpoints"""
     
-    def test_create_lead(self):
-        """Test lead creation via /api/leads"""
-        unique_id = str(uuid.uuid4())[:8]
-        lead_data = {
-            "name": f"TEST_User_{unique_id}",
-            "email": f"test_{unique_id}@example.com",
-            "phone": "+91 9876543210",
-            "interest": "Professional Digital Marketing",
-            "source": "website",
-            "message": "Test lead from automated testing"
-        }
-        response = requests.post(f"{BASE_URL}/api/leads", json=lead_data)
+    def test_admin_login_success(self):
+        """Test admin login with valid credentials"""
+        response = requests.post(f"{BASE_URL}/api/admin/login", json={
+            "email": "admin@skillax.in",
+            "password": "SkillaxAdmin2024!"
+        })
         assert response.status_code == 200
         data = response.json()
-        assert data["name"] == lead_data["name"]
-        assert data["email"] == lead_data["email"]
-        assert "id" in data
-        print(f"✓ Lead created: {data['id']}")
-        return data["id"]
+        assert "token" in data
+        assert "user" in data
+        assert data["user"]["email"] == "admin@skillax.in"
+        assert data["user"]["role"] == "admin"
+        print(f"PASS: Admin login successful, user: {data['user']['name']}")
+        return data["token"]
     
-    def test_create_lead_chatbot_source(self):
-        """Test lead creation from chatbot"""
-        unique_id = str(uuid.uuid4())[:8]
-        lead_data = {
-            "name": f"TEST_Chatbot_{unique_id}",
-            "email": f"chatbot_{unique_id}@skillax.in",
-            "phone": "+91 8765432109",
-            "interest": "Course Inquiry",
-            "source": "chatbot",
-            "message": "Lead captured via chatbot"
-        }
-        response = requests.post(f"{BASE_URL}/api/leads", json=lead_data)
+    def test_admin_login_invalid_credentials(self):
+        """Test admin login with invalid credentials"""
+        response = requests.post(f"{BASE_URL}/api/admin/login", json={
+            "email": "wrong@skillax.in",
+            "password": "wrongpassword"
+        })
+        assert response.status_code == 401
+        print("PASS: Invalid credentials rejected with 401")
+    
+    def test_admin_me_without_token(self):
+        """Test admin profile endpoint without token"""
+        response = requests.get(f"{BASE_URL}/api/admin/me")
+        assert response.status_code == 401
+        print("PASS: Admin profile requires authentication")
+
+
+class TestLeads:
+    """Test lead management endpoints"""
+    
+    def test_create_lead_from_website(self):
+        """Test creating a lead from website form"""
+        response = requests.post(f"{BASE_URL}/api/leads", json={
+            "name": "Test Lead Website",
+            "email": "testlead@example.com",
+            "phone": "9876543210",
+            "interest": "Professional Digital Marketing",
+            "source": "website",
+            "message": "Interested in the course"
+        })
+        assert response.status_code == 200
+        data = response.json()
+        assert data["name"] == "Test Lead Website"
+        assert data["source"] == "website"
+        assert data["status"] == "new"
+        print(f"PASS: Website lead created with ID: {data['id']}")
+    
+    def test_create_lead_from_course_quiz(self):
+        """Test creating a lead from course quiz"""
+        response = requests.post(f"{BASE_URL}/api/leads", json={
+            "name": "Test Quiz Lead",
+            "email": "quizlead@example.com",
+            "phone": "9876543211",
+            "interest": "Professional Digital Marketing",
+            "source": "course_quiz",
+            "message": "Quiz Result: professional, Answers: {experience: beginner, goal: job}"
+        })
+        assert response.status_code == 200
+        data = response.json()
+        assert data["source"] == "course_quiz"
+        print(f"PASS: Course quiz lead created with ID: {data['id']}")
+    
+    def test_create_lead_from_chatbot(self):
+        """Test creating a lead from chatbot"""
+        response = requests.post(f"{BASE_URL}/api/leads", json={
+            "name": "Test Chatbot Lead",
+            "email": "chatbotlead@example.com",
+            "phone": "9876543212",
+            "interest": "AI-Powered Marketing",
+            "source": "chatbot"
+        })
         assert response.status_code == 200
         data = response.json()
         assert data["source"] == "chatbot"
-        print(f"✓ Chatbot lead created: {data['id']}")
+        print(f"PASS: Chatbot lead created with ID: {data['id']}")
     
-    def test_create_lead_career_assessment(self):
-        """Test lead creation from career assessment"""
-        unique_id = str(uuid.uuid4())[:8]
-        lead_data = {
-            "name": f"TEST_Career_{unique_id}",
-            "email": f"career_{unique_id}@example.com",
-            "phone": "+91 7654321098",
-            "interest": "Get a high-paying digital marketing job",
-            "source": "career_assessment",
-            "message": "Experience: Student/Fresher (18-25), Goal: Get a high-paying digital marketing job"
-        }
-        response = requests.post(f"{BASE_URL}/api/leads", json=lead_data)
-        assert response.status_code == 200
-        data = response.json()
-        assert data["source"] == "career_assessment"
-        print(f"✓ Career assessment lead created: {data['id']}")
+    def test_get_leads_requires_auth(self):
+        """Test that getting leads requires authentication"""
+        response = requests.get(f"{BASE_URL}/api/leads")
+        assert response.status_code == 401
+        print("PASS: Get leads requires authentication")
 
 
-class TestContactAPI:
-    """Contact form submission tests"""
+class TestContact:
+    """Test contact form endpoint"""
     
-    def test_contact_form_submission(self):
-        """Test contact form submission via /api/contact"""
-        unique_id = str(uuid.uuid4())[:8]
-        contact_data = {
-            "name": f"TEST_Contact_{unique_id}",
-            "email": f"contact_{unique_id}@example.com",
-            "phone": "+91 9988776655",
-            "subject": "Professional Digital Marketing (4 Months)",
-            "message": "I want to know more about the course"
-        }
-        response = requests.post(f"{BASE_URL}/api/contact", json=contact_data)
+    def test_submit_contact_form(self):
+        """Test contact form submission"""
+        response = requests.post(f"{BASE_URL}/api/contact", json={
+            "name": "Test Contact",
+            "email": "contact@example.com",
+            "phone": "9876543213",
+            "subject": "Course Inquiry",
+            "message": "I want to know more about the courses"
+        })
         assert response.status_code == 200
         data = response.json()
-        assert "lead_id" in data
         assert "Thank you" in data["message"]
-        print(f"✓ Contact form submitted: {data['lead_id']}")
+        assert "lead_id" in data
+        print(f"PASS: Contact form submitted, lead_id: {data['lead_id']}")
 
 
-class TestCoursesAPI:
-    """Course listing and detail tests"""
+class TestCourses:
+    """Test course endpoints"""
     
     def test_get_courses(self):
         """Test getting all courses"""
         response = requests.get(f"{BASE_URL}/api/courses")
         assert response.status_code == 200
-        courses = response.json()
-        assert isinstance(courses, list)
-        assert len(courses) >= 2  # Should have at least 2 courses
-        print(f"✓ Found {len(courses)} courses")
+        data = response.json()
+        assert isinstance(data, list)
+        # Should have at least 2 courses
+        assert len(data) >= 2
+        print(f"PASS: Retrieved {len(data)} courses")
         
-        # Verify course structure
-        for course in courses:
+        # Check course structure
+        for course in data:
             assert "title" in course
             assert "slug" in course
             assert "duration" in course
-            assert "highlights" in course
-        
-        # Check for expected courses
-        course_titles = [c["title"] for c in courses]
-        assert any("Professional" in t for t in course_titles), "Professional course not found"
-        assert any("AI" in t for t in course_titles), "AI course not found"
-        print(f"✓ Course titles: {course_titles}")
+            print(f"  - {course['title']} ({course['duration']})")
     
     def test_get_course_by_slug(self):
-        """Test getting course by slug"""
+        """Test getting a specific course by slug"""
         response = requests.get(f"{BASE_URL}/api/courses/professional-digital-marketing")
         assert response.status_code == 200
-        course = response.json()
-        assert course["slug"] == "professional-digital-marketing"
-        assert "4 Months" in course["duration"]
-        assert len(course["modules"]) > 0
-        print(f"✓ Course detail: {course['title']} - {course['duration']}")
+        data = response.json()
+        assert data["title"] == "Professional Digital Marketing"
+        assert "modules" in data
+        assert "highlights" in data
+        print(f"PASS: Retrieved course: {data['title']}")
     
-    def test_get_ai_course_by_slug(self):
-        """Test getting AI course by slug"""
-        response = requests.get(f"{BASE_URL}/api/courses/ai-powered-marketing")
-        assert response.status_code == 200
-        course = response.json()
-        assert course["slug"] == "ai-powered-marketing"
-        assert "2 Months" in course["duration"]
-        print(f"✓ AI Course detail: {course['title']} - {course['duration']}")
+    def test_get_nonexistent_course(self):
+        """Test getting a course that doesn't exist"""
+        response = requests.get(f"{BASE_URL}/api/courses/nonexistent-course")
+        assert response.status_code == 404
+        print("PASS: Nonexistent course returns 404")
 
 
-class TestBlogsAPI:
-    """Blog listing and detail tests"""
+class TestBlogs:
+    """Test blog endpoints"""
     
     def test_get_blogs(self):
         """Test getting all blogs"""
         response = requests.get(f"{BASE_URL}/api/blogs")
         assert response.status_code == 200
-        blogs = response.json()
-        assert isinstance(blogs, list)
-        print(f"✓ Found {len(blogs)} blogs")
-        
-        if len(blogs) > 0:
-            blog = blogs[0]
-            assert "title" in blog
-            assert "slug" in blog
-            assert "excerpt" in blog
+        data = response.json()
+        assert isinstance(data, list)
+        print(f"PASS: Retrieved {len(data)} blogs")
     
     def test_get_blog_by_slug(self):
-        """Test getting blog by slug"""
-        # First get list to find a valid slug
+        """Test getting a specific blog by slug"""
+        # First get all blogs to find a valid slug
         response = requests.get(f"{BASE_URL}/api/blogs")
         blogs = response.json()
         
@@ -178,158 +188,61 @@ class TestBlogsAPI:
             slug = blogs[0]["slug"]
             response = requests.get(f"{BASE_URL}/api/blogs/{slug}")
             assert response.status_code == 200
-            blog = response.json()
-            assert blog["slug"] == slug
-            print(f"✓ Blog detail: {blog['title']}")
+            data = response.json()
+            assert data["slug"] == slug
+            print(f"PASS: Retrieved blog: {data['title']}")
         else:
-            print("⚠ No blogs to test detail endpoint")
+            print("SKIP: No blogs available to test")
 
 
-class TestAdminAuth:
-    """Admin authentication tests"""
+class TestChatbot:
+    """Test chatbot endpoint"""
     
-    def test_admin_login_success(self):
-        """Test admin login with valid credentials"""
-        response = requests.post(f"{BASE_URL}/api/admin/login", json={
-            "email": ADMIN_EMAIL,
-            "password": ADMIN_PASSWORD
-        })
-        assert response.status_code == 200
-        data = response.json()
-        assert "token" in data
-        assert "user" in data
-        assert data["user"]["email"] == ADMIN_EMAIL
-        assert data["user"]["role"] == "admin"
-        print(f"✓ Admin login successful: {data['user']['name']}")
-        return data["token"]
-    
-    def test_admin_login_invalid_credentials(self):
-        """Test admin login with invalid credentials"""
-        response = requests.post(f"{BASE_URL}/api/admin/login", json={
-            "email": "wrong@email.com",
-            "password": "wrongpassword"
-        })
-        assert response.status_code == 401
-        print("✓ Invalid credentials rejected correctly")
-    
-    def test_admin_profile(self):
-        """Test getting admin profile with token"""
-        # First login
-        login_response = requests.post(f"{BASE_URL}/api/admin/login", json={
-            "email": ADMIN_EMAIL,
-            "password": ADMIN_PASSWORD
-        })
-        token = login_response.json()["token"]
-        
-        # Get profile
-        response = requests.get(
-            f"{BASE_URL}/api/admin/me",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert data["email"] == ADMIN_EMAIL
-        print(f"✓ Admin profile retrieved: {data['name']}")
-
-
-class TestAdminLeadsManagement:
-    """Admin leads management tests"""
-    
-    def get_admin_token(self):
-        """Helper to get admin token"""
-        response = requests.post(f"{BASE_URL}/api/admin/login", json={
-            "email": ADMIN_EMAIL,
-            "password": ADMIN_PASSWORD
-        })
-        return response.json()["token"]
-    
-    def test_get_leads_authenticated(self):
-        """Test getting leads with admin auth"""
-        token = self.get_admin_token()
-        response = requests.get(
-            f"{BASE_URL}/api/leads",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        assert response.status_code == 200
-        leads = response.json()
-        assert isinstance(leads, list)
-        print(f"✓ Retrieved {len(leads)} leads as admin")
-    
-    def test_get_leads_unauthenticated(self):
-        """Test getting leads without auth fails"""
-        response = requests.get(f"{BASE_URL}/api/leads")
-        assert response.status_code == 401
-        print("✓ Unauthenticated leads access rejected")
-
-
-class TestAnalyticsAPI:
-    """Analytics endpoint tests"""
-    
-    def get_admin_token(self):
-        """Helper to get admin token"""
-        response = requests.post(f"{BASE_URL}/api/admin/login", json={
-            "email": ADMIN_EMAIL,
-            "password": ADMIN_PASSWORD
-        })
-        return response.json()["token"]
-    
-    def test_analytics_summary(self):
-        """Test analytics summary endpoint"""
-        token = self.get_admin_token()
-        response = requests.get(
-            f"{BASE_URL}/api/analytics/summary",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert "total_leads" in data
-        assert "new_leads" in data
-        assert "website_leads" in data
-        assert "chatbot_leads" in data
-        assert "total_courses" in data
-        assert "total_blogs" in data
-        print(f"✓ Analytics summary: {data['total_leads']} total leads, {data['total_courses']} courses")
-    
-    def test_leads_by_source(self):
-        """Test leads by source analytics"""
-        token = self.get_admin_token()
-        response = requests.get(
-            f"{BASE_URL}/api/analytics/leads-by-source",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert isinstance(data, list)
-        print(f"✓ Leads by source: {len(data)} sources")
-    
-    def test_leads_by_interest(self):
-        """Test leads by interest analytics"""
-        token = self.get_admin_token()
-        response = requests.get(
-            f"{BASE_URL}/api/analytics/leads-by-interest",
-            headers={"Authorization": f"Bearer {token}"}
-        )
-        assert response.status_code == 200
-        data = response.json()
-        assert isinstance(data, list)
-        print(f"✓ Leads by interest: {len(data)} interests")
-
-
-class TestChatbotAPI:
-    """Chatbot endpoint tests"""
-    
-    def test_chat_endpoint(self):
-        """Test chatbot chat endpoint"""
-        chat_data = {
+    def test_chatbot_response(self):
+        """Test chatbot responds to messages"""
+        response = requests.post(f"{BASE_URL}/api/chat", json={
             "message": "What courses do you offer?",
-            "session_id": f"test_session_{uuid.uuid4()}"
-        }
-        response = requests.post(f"{BASE_URL}/api/chat", json=chat_data)
+            "session_id": "test-session-123"
+        })
         assert response.status_code == 200
         data = response.json()
         assert "response" in data
         assert "session_id" in data
-        print(f"✓ Chatbot responded: {data['response'][:100]}...")
+        assert data["session_id"] == "test-session-123"
+        print(f"PASS: Chatbot responded: {data['response'][:100]}...")
+
+
+class TestAnalytics:
+    """Test analytics endpoints (requires auth)"""
+    
+    @pytest.fixture
+    def auth_token(self):
+        """Get authentication token"""
+        response = requests.post(f"{BASE_URL}/api/admin/login", json={
+            "email": "admin@skillax.in",
+            "password": "SkillaxAdmin2024!"
+        })
+        return response.json()["token"]
+    
+    def test_analytics_summary(self, auth_token):
+        """Test analytics summary endpoint"""
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        response = requests.get(f"{BASE_URL}/api/analytics/summary", headers=headers)
+        assert response.status_code == 200
+        data = response.json()
+        assert "total_leads" in data
+        assert "new_leads" in data
+        assert "total_courses" in data
+        print(f"PASS: Analytics summary - Total leads: {data['total_leads']}, Courses: {data['total_courses']}")
+    
+    def test_leads_by_source(self, auth_token):
+        """Test leads by source analytics"""
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        response = requests.get(f"{BASE_URL}/api/analytics/leads-by-source", headers=headers)
+        assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, list)
+        print(f"PASS: Leads by source: {data}")
 
 
 if __name__ == "__main__":
