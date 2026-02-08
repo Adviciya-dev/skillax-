@@ -1520,6 +1520,9 @@ export default function Home() {
 
       {/* Course Quiz Modal */}
       <CourseQuizModal isOpen={showQuiz} onClose={() => setShowQuiz(false)} />
+      
+      {/* AI Marketing Lab Modal */}
+      <AIMarketingLab isOpen={showAILab} onClose={() => setShowAILab(false)} />
     </div>
   );
 }
