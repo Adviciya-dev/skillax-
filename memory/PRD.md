@@ -4,42 +4,63 @@
 - **Frontend:** React, Tailwind CSS, Framer Motion
 - **Backend:** FastAPI (Python)
 - **Database:** MongoDB
+- **AI:** OpenAI GPT-4 via Emergent LLM Key
 
 ## Latest Update (Feb 8, 2026)
 
-### Ultra-Premium Courses Page Overhaul
-- **Floating Elements:** Particles, icons (Rocket, Brain, Trophy, Crown, Target), glowing orbs
-- **3D Tilt Cards:** Interactive cards with perspective effect on hover
-- **Rich Hero:** Animated gradient background with mesh overlays, floating particles
-- **Interactive Curriculum:** Accordion with colorful module cards (8 modules)
-- **Course Features:**
-  - What You'll Learn (8 highlights with colored icons)
-  - Certifications (8+ with badges)
-  - Perfect For section
-  - Talk to Counselor button
-- **Comparison Table:** Side-by-side Professional vs AI-Powered
-- **Why Choose Section:** 8 animated feature cards with gradients
-- **Testimonials:** 3 success stories
-- **Final CTA:** Gradient background with floating icons
+### NEW: AI Marketing Lab 🧪
+Interactive AI experience where students can generate real marketing content:
+- **AI Ad Copy Generator** - Creates Google Ads & Meta Ads copies
+- **AI Blog Outline Creator** - SEO-optimized blog structures
+- **AI Social Media Generator** - Posts for Instagram, Facebook, Twitter, LinkedIn, YouTube
+- **AI SEO Keyword Analyzer** - Keywords, long-tail, question keywords, AEO tips
+
+Features:
+- Generation counter to track usage
+- "Powered by GPT-4" badge
+- "Free Demo" indicator
+- Regenerate & Copy buttons
+- Example inputs for each tool
+- CTA to enroll after experiencing AI
+
+### NEW: Floating Action Buttons
+- **Rocket toggle button** with pulsing ring and blinking notification dot
+- **"AI Marketing Lab"** - Purple gradient button with sparkles
+- **"Find Your Course"** - Orange gradient quiz button
+- Expandable menu near chat and WhatsApp buttons
+
+### Ultra-Premium Courses Page
+- Floating particles, icons, glowing orbs
+- 3D tilt cards with perspective effect
+- Interactive curriculum accordion (8 modules)
+- Side-by-side comparison table
+- Why Choose section (8 cards)
+- Testimonials section
 
 ### Home Page Features
-- **Rotating Hero Text:** 8 hooks (SEO AEO GEO, Google Ads, ChatGPT Ads, AI Tools, etc.)
-- **AI Search Demo:** Typing animation showing "Skillax Academy, Mananthavady, Wayanad"
-- **Core Digital Marketing Skills:** 8 cards (SEO, AEO, GEO, GMB, Google Ads, Meta Ads, ChatGPT Ads, Performance)
-- **ChatGPT Ads Section:** "The Next Big Trend" with green gradient
-- **Course Quiz:** Interactive 4-question quiz with lead capture
-- **Student Roadmap:** 6-phase transformation journey
+- Rotating hero text (8 hooks)
+- AI Search Demo with typing animation
+- Core Digital Marketing Skills (8 cards)
+- ChatGPT Ads section
+- Course Quiz with lead capture
+- Student Roadmap (6 phases)
 
 ### Technical SEO
 - robots.txt, sitemap.xml
-- Canonical tags, geo targeting
 - Schema.org markup
 - Open Graph & Twitter cards
 
 ## Test Credentials
 - Admin: admin@skillax.in / SkillaxAdmin2024!
 
+## Key Files
+- `/app/frontend/src/components/AIMarketingLab.js` - AI Lab modal
+- `/app/frontend/src/components/FloatingActions.js` - Floating buttons + Quiz
+- `/app/frontend/src/components/Layout.js` - Includes FloatingActions
+- `/app/frontend/src/pages/Courses.js` - Premium courses page
+- `/app/frontend/src/pages/Home.js` - Home with all sections
+
 ## P2 - Future Tasks
 1. Full Admin CMS
-2. GA4 Analytics Dashboard
+2. GA4 Analytics Dashboard  
 3. Blog Management with categories/tags
