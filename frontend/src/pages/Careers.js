@@ -308,7 +308,7 @@ export default function Careers() {
             </h1>
             <p className="text-lg text-white/80 mb-8">
               With Infopark internship, 30+ certifications, and dedicated placement support, 
-              your dream career starts here at Askillax.
+              your dream career starts here at Skillax.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4">
@@ -552,7 +552,7 @@ export default function Careers() {
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Why Askillax?
+              Why Skillax?
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               What Sets Us Apart
@@ -594,7 +594,7 @@ export default function Careers() {
               Your Dream Career Awaits
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-8">
-              Join Askillax and transform your career with in-demand digital skills, 
+              Join Skillax and transform your career with in-demand digital skills, 
               industry certifications, and guaranteed placement support.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

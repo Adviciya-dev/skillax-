@@ -43,7 +43,7 @@ export default function Blog() {
             slug: 'digital-marketing-trends-2026',
             excerpt: 'Stay ahead of the curve with these emerging digital marketing trends that will shape the industry in 2026.',
             category: 'Industry Insights',
-            author: 'Askillax Team',
+            author: 'Skillax Team',
             featured_image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
             created_at: '2026-01-15T10:00:00Z',
             tags: ['trends', '2026', 'digital marketing'],
@@ -54,7 +54,7 @@ export default function Blog() {
             slug: 'career-digital-marketing-kerala',
             excerpt: 'A complete guide to launching your digital marketing career in Kerala with tips from industry experts.',
             category: 'Career Guide',
-            author: 'Askillax Team',
+            author: 'Skillax Team',
             featured_image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800',
             created_at: '2026-01-10T10:00:00Z',
             tags: ['career', 'kerala', 'jobs'],
@@ -65,7 +65,7 @@ export default function Blog() {
             slug: 'seo-vs-social-media-marketing',
             excerpt: 'Understanding the differences between SEO and social media marketing to make informed decisions.',
             category: 'Marketing Strategy',
-            author: 'Askillax Team',
+            author: 'Skillax Team',
             featured_image: 'https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=800',
             created_at: '2026-01-05T10:00:00Z',
             tags: ['seo', 'social media', 'strategy'],
@@ -76,7 +76,7 @@ export default function Blog() {
             slug: 'google-ads-beginners-guide',
             excerpt: 'Learn how to set up and run your first Google Ads campaign with this step-by-step tutorial.',
             category: 'Tutorial',
-            author: 'Askillax Team',
+            author: 'Skillax Team',
             featured_image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800',
             created_at: '2026-01-01T10:00:00Z',
             tags: ['google ads', 'tutorial', 'ppc'],
@@ -239,7 +239,7 @@ export default function Blog() {
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
               Our comprehensive courses cover everything from these blog topics in depth.
-              Join Askillax and master digital marketing.
+              Join Skillax and master digital marketing.
             </p>
             <Link to="/courses">
               <Button 

@@ -60,7 +60,7 @@ const benefits = [
 
 const testimonials = [
   { name: 'Rahul K.', role: 'Digital Marketer', text: 'Best decision I made! Got placed at Infopark company.' },
-  { name: 'Priya M.', role: 'Freelancer', text: 'Earning 3x my previous salary now. Thank you Askillax!' },
+  { name: 'Priya M.', role: 'Freelancer', text: 'Earning 3x my previous salary now. Thank you Skillax!' },
 ];
 
 function AnimatedSection({ children, className = '', delay = 0 }) {
@@ -429,7 +429,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <a
-                    href="https://wa.me/919876543210?text=Hi!%20I'm%20interested%20in%20digital%20marketing%20course%20at%20Askillax.%20March%202026%20batch."
+                    href="https://wa.me/919876543210?text=Hi!%20I'm%20interested%20in%20digital%20marketing%20course%20at%20Skillax.%20March%202026%20batch."
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="contact-whatsapp"
@@ -481,7 +481,7 @@ export default function Contact() {
                     allowFullScreen=""
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Askillax Academy Location"
+                    title="Skillax Academy Location"
                     className="grayscale hover:grayscale-0 transition-all"
                   />
                   <div className="p-4 flex items-center gap-3">
@@ -489,7 +489,7 @@ export default function Contact() {
                       <MapPin className="h-5 w-5 text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-sm">Askillax Academy</div>
+                      <div className="font-semibold text-sm">Skillax Academy</div>
                       <div className="text-xs text-muted-foreground">Mananthavady, Wayanad, Kerala</div>
                     </div>
                   </div>

@@ -45,9 +45,9 @@ const certificationPrograms = [
   // Government & Industry
   { name: 'Skill India Certificate', category: 'Government', icon: '🇮🇳' },
   { name: 'NSDC Recognition', category: 'Government', icon: '🏛️' },
-  // Askillax Certifications
-  { name: 'Askillax Professional', category: 'Askillax', icon: '⭐' },
-  { name: 'Askillax AI Expert', category: 'Askillax', icon: '🤖' },
+  // Skillax Certifications
+  { name: 'Skillax Professional', category: 'Skillax', icon: '⭐' },
+  { name: 'Skillax AI Expert', category: 'Skillax', icon: '🤖' },
 ];
 
 // Group certifications by category
@@ -312,7 +312,7 @@ export default function Certifications() {
               >
                 All ({certificationPrograms.length})
               </button>
-              {['Google', 'Meta', 'HubSpot', 'SEO', 'Social', 'Design', 'Askillax'].map((cat) => (
+              {['Google', 'Meta', 'HubSpot', 'SEO', 'Social', 'Design', 'Skillax'].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat.toLowerCase())}
@@ -457,7 +457,7 @@ export default function Certifications() {
                   [Your Name Here]
                 </motion.p>
                 <p className="text-muted-foreground text-sm mb-6">
-                  has successfully completed all coursework and examinations at Askillax Academy
+                  has successfully completed all coursework and examinations at Skillax Academy
                 </p>
                 <div className="flex justify-center gap-8 text-sm text-muted-foreground border-t border-border pt-4">
                   <div>

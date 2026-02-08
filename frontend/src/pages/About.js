@@ -57,7 +57,7 @@ const keralaDigitalInfo = [
   { city: 'Kochi', area: 'Infopark', type: 'IT Hub', desc: 'Kerala\'s largest IT park with major MNCs. Our students intern here!' },
   { city: 'Trivandrum', area: 'Technopark', type: 'Technology Capital', desc: 'India\'s first IT park with thriving tech ecosystem.' },
   { city: 'Kozhikode', area: 'Cyberpark', type: 'Emerging Hub', desc: 'Fast-growing tech destination in North Kerala.' },
-  { city: 'Wayanad', area: 'Askillax HQ', type: 'Training Hub', desc: 'Our home! Learn in peaceful hills, intern in Infopark.' },
+  { city: 'Wayanad', area: 'Skillax HQ', type: 'Training Hub', desc: 'Our home! Learn in peaceful hills, intern in Infopark.' },
 ];
 
 const values = [
@@ -72,7 +72,7 @@ const milestones = [
   { year: '2020', title: 'IT Company Founded', desc: 'Started as a global IT services company serving international clients' },
   { year: '2021', title: 'Digital Solutions', desc: 'Expanded to provide comprehensive digital marketing services worldwide' },
   { year: '2022', title: 'AI Integration', desc: 'Pioneered AI-powered marketing solutions for enterprise clients' },
-  { year: '2023', title: 'Education Vision', desc: 'Launched Askillax Academy to share our expertise with aspiring marketers' },
+  { year: '2023', title: 'Education Vision', desc: 'Launched Skillax Academy to share our expertise with aspiring marketers' },
   { year: '2024', title: 'Training Excellence', desc: 'First batch graduated with 90%+ placement rate at top companies' },
   { year: '2025', title: 'AI Leadership', desc: 'Became Kerala\'s first academy with 30+ AI tools curriculum' },
   { year: '2026', title: 'Expansion', desc: 'Opening new batches with ChatGPT Ads, AEO, GEO specializations' },
@@ -203,7 +203,7 @@ function KeralaDigitalMap() {
             ))}
           </div>
           
-          {/* Special Askillax callout */}
+          {/* Special Skillax callout */}
           <motion.div 
             className="mt-6 p-6 bg-gradient-to-r from-primary to-brand-indigo text-white rounded-2xl"
             whileHover={{ scale: 1.02 }}
@@ -213,7 +213,7 @@ function KeralaDigitalMap() {
                 <Sparkles className="h-8 w-8" />
               </div>
               <div>
-                <h4 className="font-heading font-bold text-lg">Askillax Academy - Wayanad</h4>
+                <h4 className="font-heading font-bold text-lg">Skillax Academy - Wayanad</h4>
                 <p className="text-white/80 text-sm">
                   Train in the serene hills of Wayanad, intern at top Infopark companies. Best of both worlds!
                 </p>
@@ -235,7 +235,7 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedSection>
               <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-                About Askillax
+                About Skillax
               </span>
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6" data-testid="about-title">
                 From Global IT to{' '}
@@ -243,7 +243,7 @@ export default function About() {
               </h1>
               <p className="text-lg text-muted-foreground mb-8">
                 Born from a successful IT company serving global clients since 2020, 
-                Askillax Academy brings real-world digital marketing expertise to aspiring marketers in Kerala. 
+                Skillax Academy brings real-world digital marketing expertise to aspiring marketers in Kerala. 
                 We don't just teach theory – we share what works in the real business world.
               </p>
               <div className="flex items-center gap-6">
@@ -268,7 +268,7 @@ export default function About() {
               <div className="relative">
                 <img
                   src={images.teamMeeting}
-                  alt="Askillax Team"
+                  alt="Skillax Team"
                   className="rounded-3xl shadow-2xl"
                   loading="lazy"
                 />
@@ -454,7 +454,7 @@ export default function About() {
               Leadership
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              The Minds Behind Askillax
+              The Minds Behind Skillax
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Industry veterans with global experience, now dedicated to nurturing Kerala's digital talent.
@@ -597,7 +597,7 @@ export default function About() {
         <div className="container-custom text-center">
           <AnimatedSection>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
-              Ready to Join the Askillax Family?
+              Ready to Join the Skillax Family?
             </h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
               Take the first step towards your digital marketing career. 

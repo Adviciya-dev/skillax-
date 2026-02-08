@@ -45,7 +45,7 @@ const faqs = [
   },
   {
     question: 'Will I get a certificate after completion?',
-    answer: 'Yes, upon successful completion, you will receive an Askillax certification along with industry-recognized certifications from Google, HubSpot, or Meta depending on the course you choose.',
+    answer: 'Yes, upon successful completion, you will receive an Skillax certification along with industry-recognized certifications from Google, HubSpot, or Meta depending on the course you choose.',
   },
 ];
 
@@ -90,7 +90,7 @@ export default function CourseDetail() {
               { title: 'SEO Basics', topics: ['On-Page SEO', 'Keyword Research', 'Google Analytics'] },
             ],
             highlights: ['100% Practical Training', 'Real Projects', 'Internship Certificate', 'Placement Assistance'],
-            certification: 'Askillax Foundation Certificate + Google Analytics Certification',
+            certification: 'Skillax Foundation Certificate + Google Analytics Certification',
           },
           'advanced-seo-performance': {
             title: 'Advanced SEO & Performance',

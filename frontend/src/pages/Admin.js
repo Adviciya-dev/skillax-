@@ -172,7 +172,7 @@ function Dashboard({ user, onLogout }) {
     <div className="min-h-screen bg-background">
       {/* Mobile Header */}
       <div className="lg:hidden flex items-center justify-between p-4 border-b border-border">
-        <h1 className="font-heading font-bold text-lg">Askillax Admin</h1>
+        <h1 className="font-heading font-bold text-lg">Skillax Admin</h1>
         <button onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -189,7 +189,7 @@ function Dashboard({ user, onLogout }) {
               className="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-card border-r border-border p-6 flex flex-col"
             >
               <div className="mb-8">
-                <h1 className="font-heading font-bold text-xl">Askillax Admin</h1>
+                <h1 className="font-heading font-bold text-xl">Skillax Admin</h1>
                 <p className="text-sm text-muted-foreground">{user?.name}</p>
               </div>
 

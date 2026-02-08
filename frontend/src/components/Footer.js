@@ -41,7 +41,7 @@ export default function Footer() {
           {/* Brand Section */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src={LOGO_URL} alt="Askillax Logo" className="h-12 w-auto" />
+              <img src={LOGO_URL} alt="Skillax Logo" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
               Empowering the next generation of digital marketers in Wayanad, Kerala. 
@@ -168,7 +168,7 @@ export default function Footer() {
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Askillax Digital Marketing Academy. All rights reserved.
+              © {currentYear} Skillax Digital Marketing Academy. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm">
               <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">

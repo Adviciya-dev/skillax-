@@ -35,7 +35,7 @@ const courses = [
     certifications: [
       'Google Ads Search', 'Google Ads Display', 'Google Analytics 4',
       'Meta Blueprint', 'HubSpot Inbound', 'HubSpot Content',
-      'SEMrush SEO', 'Askillax Professional'
+      'SEMrush SEO', 'Skillax Professional'
     ],
     modules: [
       { title: 'Digital Marketing Fundamentals', weeks: '2 weeks', topics: ['Marketing Basics', 'Customer Journey', 'Digital Channels', 'Analytics Setup'] },
@@ -71,7 +71,7 @@ const courses = [
       'Weekend Batches Available',
     ],
     certifications: [
-      'Askillax AI Expert', 'HubSpot Automation', 
+      'Skillax AI Expert', 'HubSpot Automation', 
       'Google AI Marketing', 'AI Content Specialist', 'Prompt Engineering'
     ],
     modules: [
@@ -330,7 +330,7 @@ export default function Courses() {
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Why Askillax
+              Why Skillax
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               What Sets Us Apart

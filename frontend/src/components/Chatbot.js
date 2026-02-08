@@ -22,11 +22,11 @@ const predefinedQA = {
   },
   internship: {
     question: "Tell me about the internship",
-    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery Professional course student gets:\n- Real work experience at IT companies\n- Live project portfolio building\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 **Infopark, Kochi** - Kerala's premier IT hub with 400+ companies!\n\nThis is what makes Askillax different from others!"
+    answer: "🏢 **Guaranteed Internship at Infopark!**\n\nEvery Professional course student gets:\n- Real work experience at IT companies\n- Live project portfolio building\n- Industry mentor guidance\n- Performance-based job conversion\n\n📍 **Infopark, Kochi** - Kerala's premier IT hub with 400+ companies!\n\nThis is what makes Skillax different from others!"
   },
   certifications: {
     question: "What certifications will I get?",
-    answer: "🏆 **30+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics 4\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n- Mailchimp\n\n**AI & More:**\n- Askillax AI Expert\n- Skill India Certificate\n\nAll globally recognized!"
+    answer: "🏆 **30+ Industry Certifications:**\n\n**Google Certifications:**\n- Google Ads Search & Display\n- Google Analytics 4\n- Google Tag Manager\n\n**Meta/Facebook:**\n- Meta Blueprint Certification\n\n**Marketing Tools:**\n- HubSpot Inbound & Content\n- SEMrush SEO Toolkit\n- Canva Pro\n- Mailchimp\n\n**AI & More:**\n- Skillax AI Expert\n- Skill India Certificate\n\nAll globally recognized!"
   },
   placement: {
     question: "Do you provide placement support?",
@@ -34,11 +34,11 @@ const predefinedQA = {
   },
   location: {
     question: "Where is the academy located?",
-    answer: "📍 **Askillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@askillax.in"
+    answer: "📍 **Skillax Digital Marketing Academy**\n\nMananthavady, Wayanad, Kerala 670645\n\n**Why Wayanad?**\n- Peaceful learning environment\n- Away from city distractions\n- Modern facilities\n- Easy accessibility\n\n**Also Available:**\n- Online live classes\n- Hybrid mode option\n\n📧 contact@askillax.in"
   },
   ai: {
     question: "What AI tools will I learn?",
-    answer: "🤖 **30+ AI Tools:**\n\n**Conversational AI:**\n- ChatGPT (OpenAI)\n- Perplexity\n- Google Gemini\n- Microsoft Copilot\n- X/Twitter Grok\n- Claude (Anthropic)\n\n**Automation:**\n- ManyChat\n- Zoho CRM\n- GitHub Copilot\n\n**Image Generation:**\n- Midjourney, DALL-E, Canva AI\n\n**Plus:** Our proprietary Askillax tools for lead gen, SEO, and content!\n\nBe future-ready with cutting-edge AI skills!"
+    answer: "🤖 **30+ AI Tools:**\n\n**Conversational AI:**\n- ChatGPT (OpenAI)\n- Perplexity\n- Google Gemini\n- Microsoft Copilot\n- X/Twitter Grok\n- Claude (Anthropic)\n\n**Automation:**\n- ManyChat\n- Zoho CRM\n- GitHub Copilot\n\n**Image Generation:**\n- Midjourney, DALL-E, Canva AI\n\n**Plus:** Our proprietary Skillax tools for lead gen, SEO, and content!\n\nBe future-ready with cutting-edge AI skills!"
   },
   batch: {
     question: "When is the next batch?",
@@ -60,7 +60,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "👋 Hi! I'm Askillax AI Assistant.\n\n**March 2026 batch** enrolling now!\n\nI can help you with:\n• Course details (2 programs)\n• 30+ Certifications\n• Infopark Internship\n• 30+ AI Tools (ChatGPT, Perplexity, etc.)\n\nTap a quick question or type below!",
+      content: "👋 Hi! I'm Skillax AI Assistant.\n\n**March 2026 batch** enrolling now!\n\nI can help you with:\n• Course details (2 programs)\n• 30+ Certifications\n• Infopark Internship\n• 30+ AI Tools (ChatGPT, Perplexity, etc.)\n\nTap a quick question or type below!",
     },
   ]);
   const [input, setInput] = useState('');
@@ -167,7 +167,7 @@ export default function Chatbot() {
     } else if (userMessage.includes('batch') || userMessage.includes('start') || userMessage.includes('when') || userMessage.includes('timing')) {
       response = predefinedQA.batch.answer;
     } else if (userMessage.includes('hi') || userMessage.includes('hello') || userMessage.includes('hey')) {
-      response = "Hello! 👋 Welcome to Askillax Academy!\n\n**March 2026 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 30+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
+      response = "Hello! 👋 Welcome to Skillax Academy!\n\n**March 2026 batch** is now open!\n\nI can tell you about:\n- Our 2 courses (4 months & 2 months)\n- 30+ certifications\n- Infopark internship\n- AI tools we teach\n\nWhat would you like to know?";
     } else if (userMessage.includes('thank')) {
       response = "You're welcome! 😊\n\nIf you have more questions, feel free to ask.\n\nOr you can:\n📞 Request a callback\n💬 Chat on WhatsApp\n📧 Email: contact@askillax.in\n\nGood luck with your digital marketing journey!";
     } else if (userMessage.includes('seo') || userMessage.includes('aeo') || userMessage.includes('geo')) {
@@ -247,7 +247,7 @@ export default function Chatbot() {
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-white flex items-center gap-2">
-                    Askillax AI
+                    Skillax AI
                     <Sparkles className="h-4 w-4" />
                   </h3>
                   <p className="text-xs text-white/80">Online • Instant replies</p>

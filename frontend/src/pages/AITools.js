@@ -114,28 +114,28 @@ const toolCategories = [
   },
 ];
 
-// Askillax Proprietary Tools
+// Skillax Proprietary Tools
 const askillaxTools = [
   {
-    name: 'Askillax Lead Gen',
+    name: 'Skillax Lead Gen',
     icon: Users,
     desc: 'Our proprietary AI-powered lead generation system that identifies and nurtures high-quality prospects.',
     color: 'from-primary to-brand-indigo',
   },
   {
-    name: 'Askillax Review AI',
+    name: 'Skillax Review AI',
     icon: Star,
     desc: 'Automated review generation and reputation management tool for businesses.',
     color: 'from-brand-amber to-orange-500',
   },
   {
-    name: 'Askillax SEO AEO Suite',
+    name: 'Skillax SEO AEO Suite',
     icon: Search,
     desc: 'Complete SEO and Answer Engine Optimization toolkit for modern search visibility.',
     color: 'from-green-500 to-emerald-500',
   },
   {
-    name: 'Askillax Content Engine',
+    name: 'Skillax Content Engine',
     icon: FileText,
     desc: 'AI-powered content creation platform for blogs, social media, and marketing copy.',
     color: 'from-purple-500 to-pink-500',
@@ -360,7 +360,7 @@ export default function AITools() {
         </div>
       </section>
 
-      {/* Askillax Proprietary Tools */}
+      {/* Skillax Proprietary Tools */}
       <section className="section-padding">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-12">
@@ -369,7 +369,7 @@ export default function AITools() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              🚀 EXCLUSIVE - Askillax Tools
+              🚀 EXCLUSIVE - Skillax Tools
             </motion.span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               Our Proprietary AI Tools
@@ -396,7 +396,7 @@ export default function AITools() {
                     <p className="text-muted-foreground text-sm">{tool.desc}</p>
                     <div className="mt-4 pt-4 border-t border-border">
                       <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
-                        Exclusive to Askillax Students
+                        Exclusive to Skillax Students
                       </span>
                     </div>
                   </motion.div>
@@ -558,7 +558,7 @@ export default function AITools() {
               Ready to Master AI Marketing?
             </h2>
             <p className="text-white/80 max-w-2xl mx-auto mb-8">
-              Join Askillax and learn 30+ AI tools that will define marketing in 2026 and beyond.
+              Join Skillax and learn 30+ AI tools that will define marketing in 2026 and beyond.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/courses">

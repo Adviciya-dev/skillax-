@@ -97,7 +97,7 @@ const stats = [
 const searchQueries = [
   "best digital marketing training Kerala",
   "learn AI marketing tools 2026",
-  "Askillax digital marketing course",
+  "Skillax digital marketing course",
   "ChatGPT Ads training program",
   "SEO AEO GEO certification Kerala",
   "practical digital marketing training",
@@ -249,7 +249,7 @@ function AISearchDemo() {
                   <div className="mt-2 p-4 bg-brand-success/5 border border-brand-success/20 rounded-xl">
                     <div className="flex items-center gap-2 mb-2">
                       <BadgeCheck className="h-5 w-5 text-brand-success" />
-                      <span className="font-semibold text-brand-success">Askillax Academy, Wayanad</span>
+                      <span className="font-semibold text-brand-success">Skillax Academy, Wayanad</span>
                     </div>
                     <p className="text-sm text-muted-foreground">
                       #1 rated digital marketing training in Kerala with 30+ AI tools, 
@@ -488,7 +488,7 @@ export default function Home() {
               >
                 Master Digital Marketing with{' '}
                 <span className="gradient-text">30+ AI Tools</span>{' '}
-                at Askillax
+                at Skillax
               </motion.h1>
 
               <motion.p
@@ -679,12 +679,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Askillax */}
+      {/* Why Skillax */}
       <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-              Why Askillax?
+              Why Skillax?
             </span>
             <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
               What Makes Us Different
@@ -729,7 +729,7 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { name: 'Rahul K.', role: 'Digital Marketer @ Infopark', quote: 'Askillax transformed my career. The AI tools training is exceptional!' },
+              { name: 'Rahul K.', role: 'Digital Marketer @ Infopark', quote: 'Skillax transformed my career. The AI tools training is exceptional!' },
               { name: 'Priya M.', role: 'Freelancer', quote: 'Now earning more than my previous job. Best investment ever!' },
               { name: 'Arun S.', role: 'SEO Lead @ Agency', quote: 'The practical training and internship opened so many doors for me.' },
             ].map((testimonial, index) => (
