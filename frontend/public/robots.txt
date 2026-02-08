@@ -1,0 +1,30 @@
+# Skillax Digital Marketing Academy - robots.txt
+# https://skillax.in
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /admin
+Disallow: /api/
+
+# Disallow query strings
+Disallow: /*?*
+
+# Allow search engines to crawl all public pages
+Allow: /
+Allow: /about
+Allow: /courses
+Allow: /courses/*
+Allow: /certifications
+Allow: /ai-tools
+Allow: /careers
+Allow: /blog
+Allow: /blog/*
+Allow: /contact
+
+# Sitemap location
+Sitemap: https://skillax.in/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
