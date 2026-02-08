@@ -62,7 +62,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-3 group" data-testid="navbar-logo">
             <img 
               src={LOGO_URL} 
-              alt="Skillax Logo" 
+              alt="Askillax Logo" 
               className="h-12 w-auto object-contain group-hover:scale-105 transition-transform"
             />
           </Link>
