@@ -429,7 +429,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <a
-                    href="https://wa.me/919876543210?text=Hi!%20I'm%20interested%20in%20digital%20marketing%20course%20at%20Skillax.%20March%202025%20batch."
+                    href="https://wa.me/919876543210?text=Hi!%20I'm%20interested%20in%20digital%20marketing%20course%20at%20Askillax.%20March%202026%20batch."
                     target="_blank"
                     rel="noopener noreferrer"
                     data-testid="contact-whatsapp"
