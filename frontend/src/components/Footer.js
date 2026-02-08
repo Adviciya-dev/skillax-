@@ -177,13 +177,14 @@ export default function Footer() {
               <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">
                 Terms of Service
               </Link>
-              {/* Hidden Admin Link */}
+              {/* Hidden Admin Link as Settings Icon */}
               <Link 
                 to="/admin" 
-                className="text-muted-foreground/50 hover:text-primary transition-colors text-xs"
+                className="p-1.5 text-muted-foreground/30 hover:text-muted-foreground/60 transition-colors rounded"
                 data-testid="footer-admin-link"
+                title="Admin"
               >
-                •
+                <Settings className="h-4 w-4" />
               </Link>
             </div>
           </div>
