@@ -12,7 +12,8 @@ import uuid
 from datetime import datetime, timezone
 import jwt
 import bcrypt
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+from openai import AsyncOpenAI
+import json
 
 ROOT_DIR = Path(__file__).parent
 env_path = ROOT_DIR / '.env'
@@ -536,27 +537,18 @@ async def chat_with_bot(chat_data: ChatMessage):
         session_doc = await db.chat_sessions.find_one({"session_id": session_id})
         previous_messages = session_doc["messages"] if session_doc else []
 
-        # Build full message list: system + previous + new user message
+        # Build full message list for OpenAI
         messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
         messages.extend(previous_messages)
         messages.append({"role": "user", "content": chat_data.message})
 
-        # Create a fresh LlmChat instance per request
-        chat = LlmChat(
-            api_key=EMERGENT_LLM_KEY,
-            session_id=session_id,
-        ).with_model("openai", "gpt-4o")
-
-        user_message = UserMessage(text=chat_data.message)
-
-        # Replay previous context so the LLM sees the full conversation
-        for msg in previous_messages:
-            if msg["role"] == "user":
-                chat.messages.append(UserMessage(text=msg["content"]))
-            else:
-                chat.messages.append(msg["content"])
-
-        response = await chat.send_message(user_message)
+        # Call OpenAI directly
+        openai_client = AsyncOpenAI(api_key=EMERGENT_LLM_KEY)
+        completion = await openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=messages,
+        )
+        response = completion.choices[0].message.content
 
         # Save updated message history to MongoDB
         previous_messages.append({"role": "user", "content": chat_data.message})
@@ -885,9 +877,7 @@ async def create_student_profile(profile_data: StudentProfileCreate):
     
     # Generate AI content for the profile
     try:
-        llm = LlmChat(api_key=EMERGENT_LLM_KEY)
-        
-        ai_prompt = f"""You are a career counselor and professional profile writer for a digital marketing academy. 
+        ai_prompt = f"""You are a career counselor and professional profile writer for a digital marketing academy.
 Create content for a student profile based on this information:
 
 Name: {profile.full_name}
@@ -917,14 +907,14 @@ Generate the following in JSON format:
 
 Return ONLY valid JSON, no other text."""
 
-        response = await llm.send_message_async(
+        openai_client = AsyncOpenAI(api_key=EMERGENT_LLM_KEY)
+        completion = await openai_client.chat.completions.create(
             model="gpt-4o",
-            messages=[UserMessage(content=ai_prompt)]
+            messages=[{"role": "user", "content": ai_prompt}],
         )
-        
-        import json
+
         # Extract JSON from response
-        response_text = response.content
+        response_text = completion.choices[0].message.content
         if "```json" in response_text:
             response_text = response_text.split("```json")[1].split("```")[0]
         elif "```" in response_text:
