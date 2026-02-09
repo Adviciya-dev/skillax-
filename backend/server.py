@@ -15,11 +15,20 @@ import bcrypt
 from emergentintegrations.llm.chat import LlmChat, UserMessage
 
 ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
+env_path = ROOT_DIR / '.env'
+if env_path.exists():
+    load_dotenv(env_path)
 
 # MongoDB connection
 mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
-client = AsyncIOMotorClient(mongo_url)
+client = AsyncIOMotorClient(
+    mongo_url,
+    maxPoolSize=10,
+    minPoolSize=0,
+    maxIdleTimeMS=45000,
+    connectTimeoutMS=5000,
+    serverSelectionTimeoutMS=5000,
+)
 db = client[os.environ.get('DB_NAME', 'skillax_academy')]
 
 # JWT Configuration
@@ -483,9 +492,6 @@ async def get_admin_profile(admin: dict = Depends(get_current_admin)):
 
 # ==================== CHATBOT ENDPOINT ====================
 
-# Store chat sessions in memory (for demo - in production, store in DB)
-chat_sessions: Dict[str, LlmChat] = {}
-
 CHATBOT_SYSTEM_PROMPT = """You are Skillax AI Assistant, a friendly and knowledgeable chatbot for Skillax Digital Marketing Academy located in Mananthavady, Wayanad, Kerala.
 
 About Skillax Academy:
@@ -524,20 +530,44 @@ Keep responses concise and helpful. Use a friendly, professional tone."""
 @api_router.post("/chat")
 async def chat_with_bot(chat_data: ChatMessage):
     session_id = chat_data.session_id
-    
+
     try:
-        # Get or create chat session
-        if session_id not in chat_sessions:
-            chat_sessions[session_id] = LlmChat(
-                api_key=EMERGENT_LLM_KEY,
-                session_id=session_id,
-                system_message=CHATBOT_SYSTEM_PROMPT
-            ).with_model("openai", "gpt-4o")
-        
-        chat = chat_sessions[session_id]
+        # Load previous messages from MongoDB
+        session_doc = await db.chat_sessions.find_one({"session_id": session_id})
+        previous_messages = session_doc["messages"] if session_doc else []
+
+        # Build full message list: system + previous + new user message
+        messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
+        messages.extend(previous_messages)
+        messages.append({"role": "user", "content": chat_data.message})
+
+        # Create a fresh LlmChat instance per request
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=session_id,
+        ).with_model("openai", "gpt-4o")
+
         user_message = UserMessage(text=chat_data.message)
+
+        # Replay previous context so the LLM sees the full conversation
+        for msg in previous_messages:
+            if msg["role"] == "user":
+                chat.messages.append(UserMessage(text=msg["content"]))
+            else:
+                chat.messages.append(msg["content"])
+
         response = await chat.send_message(user_message)
-        
+
+        # Save updated message history to MongoDB
+        previous_messages.append({"role": "user", "content": chat_data.message})
+        previous_messages.append({"role": "assistant", "content": response})
+
+        await db.chat_sessions.update_one(
+            {"session_id": session_id},
+            {"$set": {"session_id": session_id, "messages": previous_messages, "updated_at": datetime.now(timezone.utc).isoformat()}},
+            upsert=True,
+        )
+
         return {
             "response": response,
             "session_id": session_id
