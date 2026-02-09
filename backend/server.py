@@ -12,7 +12,7 @@ import uuid
 from datetime import datetime, timezone
 import jwt
 import bcrypt
-from openai import AsyncOpenAI
+# from openai import AsyncOpenAI
 import json
 
 ROOT_DIR = Path(__file__).parent
@@ -36,8 +36,8 @@ db = client[os.environ.get('DB_NAME', 'skillax_academy')]
 JWT_SECRET = os.environ.get('JWT_SECRET', 'skillax-secret-key-2024')
 JWT_ALGORITHM = "HS256"
 
-# OpenAI Configuration
-EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
+# OpenAI Configuration (disabled for now)
+# EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY', '')
 
 # Create the main app
 app = FastAPI(title="Skillax Digital Marketing Academy API")
@@ -532,45 +532,45 @@ Keep responses concise and helpful. Use a friendly, professional tone."""
 async def chat_with_bot(chat_data: ChatMessage):
     session_id = chat_data.session_id
 
-    try:
-        # Load previous messages from MongoDB
-        session_doc = await db.chat_sessions.find_one({"session_id": session_id})
-        previous_messages = session_doc["messages"] if session_doc else []
+    # GPT integration disabled for now — return static fallback
+    return {
+        "response": "Thank you for reaching out! Our AI assistant is currently being set up. Please contact us directly at contact@skillax.in or call our office for any questions about courses, fees, or enrollment. We'd be happy to help you!",
+        "session_id": session_id
+    }
 
-        # Build full message list for OpenAI
-        messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
-        messages.extend(previous_messages)
-        messages.append({"role": "user", "content": chat_data.message})
-
-        # Call OpenAI directly
-        openai_client = AsyncOpenAI(api_key=EMERGENT_LLM_KEY)
-        completion = await openai_client.chat.completions.create(
-            model="gpt-4o",
-            messages=messages,
-        )
-        response = completion.choices[0].message.content
-
-        # Save updated message history to MongoDB
-        previous_messages.append({"role": "user", "content": chat_data.message})
-        previous_messages.append({"role": "assistant", "content": response})
-
-        await db.chat_sessions.update_one(
-            {"session_id": session_id},
-            {"$set": {"session_id": session_id, "messages": previous_messages, "updated_at": datetime.now(timezone.utc).isoformat()}},
-            upsert=True,
-        )
-
-        return {
-            "response": response,
-            "session_id": session_id
-        }
-    except Exception as e:
-        logger.error(f"Chatbot error: {str(e)}")
-        return {
-            "response": "I apologize, but I'm having trouble connecting right now. Please contact us directly at contact@skillax.in or call our office. We'd be happy to help you!",
-            "session_id": session_id,
-            "error": True
-        }
+    # TODO: Uncomment below when OpenAI key is configured
+    # try:
+    #     session_doc = await db.chat_sessions.find_one({"session_id": session_id})
+    #     previous_messages = session_doc["messages"] if session_doc else []
+    #
+    #     messages = [{"role": "system", "content": CHATBOT_SYSTEM_PROMPT}]
+    #     messages.extend(previous_messages)
+    #     messages.append({"role": "user", "content": chat_data.message})
+    #
+    #     openai_client = AsyncOpenAI(api_key=EMERGENT_LLM_KEY)
+    #     completion = await openai_client.chat.completions.create(
+    #         model="gpt-4o",
+    #         messages=messages,
+    #     )
+    #     response = completion.choices[0].message.content
+    #
+    #     previous_messages.append({"role": "user", "content": chat_data.message})
+    #     previous_messages.append({"role": "assistant", "content": response})
+    #
+    #     await db.chat_sessions.update_one(
+    #         {"session_id": session_id},
+    #         {"$set": {"session_id": session_id, "messages": previous_messages, "updated_at": datetime.now(timezone.utc).isoformat()}},
+    #         upsert=True,
+    #     )
+    #
+    #     return {"response": response, "session_id": session_id}
+    # except Exception as e:
+    #     logger.error(f"Chatbot error: {str(e)}")
+    #     return {
+    #         "response": "I apologize, but I'm having trouble connecting right now. Please contact us directly at contact@skillax.in or call our office. We'd be happy to help you!",
+    #         "session_id": session_id,
+    #         "error": True
+    #     }
 
 # ==================== ANALYTICS ENDPOINTS ====================
 
@@ -875,66 +875,10 @@ async def create_student_profile(profile_data: StudentProfileCreate):
     
     profile = StudentProfile(**profile_data.model_dump())
     
-    # Generate AI content for the profile
-    try:
-        ai_prompt = f"""You are a career counselor and professional profile writer for a digital marketing academy.
-Create content for a student profile based on this information:
-
-Name: {profile.full_name}
-Education: {profile.education_level} in {profile.field_of_study or 'General'}
-Career Stage: {profile.career_stage}
-Current Role: {profile.current_role or 'Student/Fresher'}
-Target Role: {profile.target_role}
-Career Goals: {profile.career_goals}
-Current Skills: {', '.join(profile.current_skills) if profile.current_skills else 'None specified'}
-Interests: {', '.join(profile.interests) if profile.interests else 'Digital Marketing'}
-Why Digital Marketing: {profile.why_digital_marketing}
-
-Generate the following in JSON format:
-{{
-    "ai_bio": "A compelling 3-4 sentence professional bio highlighting their potential and goals",
-    "ai_linkedin_headline": "A catchy LinkedIn headline (under 120 chars)",
-    "ai_strengths": ["strength1", "strength2", "strength3", "strength4"],
-    "ai_skill_gaps": ["skill1", "skill2", "skill3", "skill4", "skill5"],
-    "ai_course_recommendation": "Either 'Professional Digital Marketing' or 'Advanced AI-Powered Marketing' with 2-sentence justification",
-    "ai_career_roadmap": [
-        {{"phase": "Month 1-2", "title": "Foundation", "goals": ["goal1", "goal2"]}},
-        {{"phase": "Month 3-4", "title": "Skill Building", "goals": ["goal1", "goal2"]}},
-        {{"phase": "Month 5-6", "title": "Specialization", "goals": ["goal1", "goal2"]}},
-        {{"phase": "Month 7-12", "title": "Career Launch", "goals": ["goal1", "goal2"]}}
-    ]
-}}
-
-Return ONLY valid JSON, no other text."""
-
-        openai_client = AsyncOpenAI(api_key=EMERGENT_LLM_KEY)
-        completion = await openai_client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": ai_prompt}],
-        )
-
-        # Extract JSON from response
-        response_text = completion.choices[0].message.content
-        if "```json" in response_text:
-            response_text = response_text.split("```json")[1].split("```")[0]
-        elif "```" in response_text:
-            response_text = response_text.split("```")[1].split("```")[0]
-        
-        ai_content = json.loads(response_text.strip())
-        
-        profile.ai_bio = ai_content.get("ai_bio")
-        profile.ai_linkedin_headline = ai_content.get("ai_linkedin_headline")
-        profile.ai_strengths = ai_content.get("ai_strengths", [])
-        profile.ai_skill_gaps = ai_content.get("ai_skill_gaps", [])
-        profile.ai_course_recommendation = ai_content.get("ai_course_recommendation")
-        profile.ai_career_roadmap = ai_content.get("ai_career_roadmap", [])
-        
-    except Exception as e:
-        logger.error(f"AI generation error: {e}")
-        # Set default values if AI fails
-        profile.ai_bio = f"{profile.full_name} is an aspiring digital marketing professional with a passion for {profile.target_role}."
-        profile.ai_linkedin_headline = f"Aspiring {profile.target_role} | Digital Marketing Enthusiast"
-        profile.ai_course_recommendation = "Professional Digital Marketing - Perfect foundation for your career goals"
+    # AI profile generation disabled for now — use defaults
+    profile.ai_bio = f"{profile.full_name} is an aspiring digital marketing professional with a passion for {profile.target_role}."
+    profile.ai_linkedin_headline = f"Aspiring {profile.target_role} | Digital Marketing Enthusiast"
+    profile.ai_course_recommendation = "Professional Digital Marketing - Perfect foundation for your career goals"
     
     # Save to database
     doc = profile.model_dump()
