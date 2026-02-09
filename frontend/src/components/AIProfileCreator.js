@@ -10,7 +10,7 @@ import {
 import { Button } from './ui/button';
 import { toast } from 'sonner';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 // Multi-step form steps
 const formSteps = [

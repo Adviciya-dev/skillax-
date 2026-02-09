@@ -4,7 +4,7 @@ import { Send, Loader2, CheckCircle } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import axios from 'axios';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 const interests = [
   'Professional Digital Marketing (4 Months)',

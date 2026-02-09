@@ -547,7 +547,7 @@ function CourseQuizModal({ isOpen, onClose }) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/leads`, {
+      await fetch("https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api/leads", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

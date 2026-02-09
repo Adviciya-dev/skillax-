@@ -6,7 +6,7 @@ import Chatbot from './Chatbot';
 import WhatsAppButton from './WhatsAppButton';
 import FloatingActions from './FloatingActions';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 // Generate or get session ID for visitor tracking
 const getSessionId = () => {

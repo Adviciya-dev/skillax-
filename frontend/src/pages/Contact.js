@@ -8,7 +8,7 @@ import {
 import { Button } from '../components/ui/button';
 import axios from 'axios';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 const images = {
   wayanad: "https://images.unsplash.com/photo-1619020905969-ba8d47f8c7cf?w=800&q=80",

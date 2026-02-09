@@ -366,7 +366,7 @@ Long-term Dominance:
 5. [SEO opportunity they're missing]`
       };
 
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/chat`, {
+      const response = await fetch("https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api/chat", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

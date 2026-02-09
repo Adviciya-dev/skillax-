@@ -11,7 +11,7 @@ import { Button } from '../components/ui/button';
 import SEO from '../components/SEO';
 import { toast } from 'sonner';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 export default function PublicProfile() {
   const { profileCode } = useParams();

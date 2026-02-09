@@ -11,7 +11,7 @@ import {
 import { Button } from '../components/ui/button';
 import LeadForm from '../components/LeadForm';
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const API = "https://ltz6k4u2e5.execute-api.ap-south-1.amazonaws.com/api";
 
 // Course data with full details
 const courseData = {
